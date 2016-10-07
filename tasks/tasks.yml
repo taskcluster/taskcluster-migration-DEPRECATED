@@ -1,0 +1,47 @@
+seta-in-tree:
+  # in-tree taskgraph generation correctly skips low-value tests
+  title: "SETA support in tree"
+
+win-tests-via-BBB:
+  title: "run win tests against TC builds via TC/BBB, disable in Buildbot"
+
+tc-worker-linux-talos:
+  title: "implement a tc-worker engine that can support linux talos on hardware"
+
+linux32-debug-builds-tier2:
+  title: "run linux32 debug builds at tier 2"
+
+stop-bb-schedulers:
+  # NOTE: by this time, the schedulers should not be creating any build requests (everything
+  # should already be disabled)
+  title: "Shut off BB Schedulers"
+  dependencies:
+    - seta-in-tree
+    - win-tests-via-BBB
+
+linux-talos-on-hardware-10pct:
+  title: "run linux* talos on TC on 10% of hardware"
+  dependencies:
+    - tc-worker-linux-talos
+    - linux32-debug-builds-tier2
+
+linux-talos-on-hardware-100pct:
+  title: "run linux* talos on TC on 100% of hardware"
+  dependencies:
+    - linux-talos-on-hardware-10pct
+
+linux32-debug-builds-tier1:
+  title: "run linux32 debug builds at tier 1"
+  dependencies:
+    - linux32-debug-builds-tier2 
+    - linux-talos-on-hardware-100pct
+
+linux-opt-builds-tier2:
+  title: "run linux* opt builds at tier 2"
+  dependencies:
+    - linux32-debug-builds-tier1  # so we have the bugs worked out of linux32
+
+linux-opt-build-signing:
+  title: "sign linux* opt builds"
+  dependencies:
+    - linux-opt-builds-tier2
