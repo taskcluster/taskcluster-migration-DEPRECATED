@@ -42,7 +42,6 @@ tasks:
           - push
         branches:
           - master
-          - hook-test
     payload:
       maxRunTime: 3600
       image: "djmitche/tc-migration:1.0"
