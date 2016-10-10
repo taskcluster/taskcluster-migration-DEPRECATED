@@ -2,6 +2,7 @@ from graphviz import Digraph
 
 def make_graph(workgraph):
     dot = Digraph(comment="Work Graph")
+    dot.body.append('rankdir=LR')
 
     for name in workgraph:
         dot.node(name, name)
