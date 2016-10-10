@@ -23,4 +23,4 @@ def parse_workgraph():
             if dep not in workgraph:
                 raise Exception('workitem {} not found'.format(dep))
 
-    return {name: WorkItem(workitem) for name, workitem in workgraph.iteritems()}
+    return {name: WorkItem(name, workitem) for name, workitem in workgraph.iteritems()}
