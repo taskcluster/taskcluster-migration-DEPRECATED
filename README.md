@@ -1,2 +1,5 @@
-# migration
-Graphs and organization around the BB-to-TC migration
+# Buildbot-to-TaskCluster Migration
+
+## Work Graph
+
+![Latest Work Graph](https://index.taskcluster.net/v1/task/project.taskcluster.migration.latest/artifacts/public/output/task-dependencies.dot.svg)
