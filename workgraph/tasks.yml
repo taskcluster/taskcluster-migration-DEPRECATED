@@ -1,47 +1,41 @@
-seta-in-tree:
-  # in-tree taskgraph generation correctly skips low-value tests
-  title: "SETA support in tree"
-
-win-tests-via-BBB:
-  title: "run win tests against TC builds via TC/BBB, disable in Buildbot"
-
-tc-worker-linux-talos:
-  title: "implement a tc-worker engine that can support linux talos on hardware"
-
-linux32-debug-builds-tier2:
-  title: "run linux32 debug builds at tier 2"
-
 stop-bb-schedulers:
   # NOTE: by this time, the schedulers should not be creating any build requests (everything
   # should already be disabled)
-  title: "Shut off BB Schedulers"
-  dependencies:
-    - seta-in-tree
-    - win-tests-via-BBB
+    title: "Shut off BB Schedulers"
+    dependencies:
+        - seta-in-tree
+        - win-talos-via-bbb
+        - linux-talos-via-bbb
+        - android-talos-via-bbb
+        - macosx-talos-via-bbb
+        - macosx-test-via-bbb
 
-linux-talos-on-hardware-10pct:
-  title: "run linux* talos on TC on 10% of hardware"
-  dependencies:
-    - tc-worker-linux-talos
-    - linux32-debug-builds-tier2
+stop-bb-build-masters:
+    title: "Turn off the Build Buildmasters"
+    dependencies:
+        # TODO: is there more to do to get OS X builds to Tier 1?
+        - macosx-universal-builds
 
-linux-talos-on-hardware-100pct:
-  title: "run linux* talos on TC on 100% of hardware"
-  dependencies:
-    - linux-talos-on-hardware-10pct
+seta-in-tree:
+    # in-tree taskgraph generation correctly skips low-value tests
+    title: "SETA support in tree"
+    bug: 1287018
 
-linux32-debug-builds-tier1:
-  title: "run linux32 debug builds at tier 1"
-  dependencies:
-    - linux32-debug-builds-tier2 
-    - linux-talos-on-hardware-100pct
+beetmover-worker-impl:
+    # "beetworker"?
+    title: "Implement a Beetmoover Worker"
+    bug: 1282188
 
-linux-opt-builds-tier2:
-  title: "run linux* opt builds at tier 2"
-  dependencies:
-    - linux32-debug-builds-tier1  # so we have the bugs worked out of linux32
+balrog-worker-migrate-funsize:
+    title: "Migrate existing funsize balrog worker to use new script worker functionality"
+    bug: 1277871
+    assigned: mtabara
 
-linux-opt-build-signing:
-  title: "sign linux* opt builds"
-  dependencies:
-    - linux-opt-builds-tier2
+automatic-retry-android-jobs:
+    title: "Automatically retry Android jobs with specific kinds of failures"
+    dependencies:
+        - docker-worker-retry-on
+
+docker-worker-retry-on:
+    title: "Support automatically retrying on some failures in docker-worker"
+    done: true

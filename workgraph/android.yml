@@ -1,0 +1,9 @@
+android-talos-via-bbb:
+    title: "Run Android talos against TC builds via TC/BBB, disable in Buildbot"
+    dependencies:
+        - android-opt-builds-tier-1
+
+android-opt-builds-tier-1:
+    title: "Promote Android opt builds to tier 1"
+    dependencies:
+        - automatic-retry-android-jobs

@@ -1,0 +1,2 @@
+win-talos-via-bbb:
+    title: "Run win talos against TC builds via TC/BBB, disable in Buildbot"

@@ -1,0 +1,46 @@
+stop-bb-macosx-test-masters:
+    title: "Turn off the MacOS X Test Buildmasters"
+    dependencies:
+        - macosx-talos-on-hardware-100pct
+        - macosx-test-on-hardware-100pct
+
+macosx-talos-via-bbb:
+    title: "Run MacOS X talos against TC builds via TC/BBB, disable in Buildbot"
+
+macosx-test-via-bbb:
+    title: "Run MacOS X tests against TC builds via TC/BBB, disable in Buildbot"
+
+macosx-universal-builds:
+    # NOTE: we may decide not to do this if it turns out to be difficult
+    # and we can just drop universal support
+    title: "Support cross-compiler generation of universal builds"
+    bug: 1183613
+    assigned: mshal
+
+macosx-test-on-hardware-10pct:
+    title: "Run MacOS X tests on TC on 10% of hardware"
+    dependencies:
+        - macosx-universal-builds  # unless we decide to drop this
+        - macosx-worker-deployment-hardware
+        - macosx-test-via-bbb
+
+macosx-talos-on-hardware-10pct:
+    title: "Run MacOS X talos on TC on 10% of hardware"
+    dependencies:
+        - macosx-universal-builds  # unless we decide to drop this
+        - macosx-worker-deployment-hardware
+        - macosx-talos-via-bbb
+
+macosx-test-on-hardware-100pct:
+    title: "Run MacOS X tests on TC on 100% of hardware (at tier 1)"
+    dependencies:
+        - macosx-test-on-hardware-10pct
+
+macosx-talos-on-hardware-100pct:
+    title: "Run MacOS X talos on TC on 100% of hardware (at tier 1)"
+    dependencies:
+        - macosx-talos-on-hardware-10pct
+
+macosx-worker-deployment-hardware:
+    title: "build a method of deploying a worker for Mac OS X on hardware"
+

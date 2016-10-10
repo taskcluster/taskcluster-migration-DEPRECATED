@@ -1,0 +1,18 @@
+# Milestones are work items that don't actually involve any work,
+# but represent a major reference point in the work graph
+
+no-buildbot-schedulers:
+    title: "Buildbot schedulers are disabled"
+    milestone: true
+    dependencies:
+        - stop-bb-schedulers
+
+no-buildbot:
+    title: "Buildbot completely turned off"
+    milestone: true
+    dependencies:
+        - no-buildbot-schedulers
+        - stop-bb-build-masters
+        - stop-bb-macosx-test-masters
+        - stop-bb-linux-test-masters
+        - linux-talos-on-hardware-100pct
