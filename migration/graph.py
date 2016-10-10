@@ -1,12 +1,12 @@
 from graphviz import Digraph
 
-def make_graph(tasks):
-    dot = Digraph(comment="Task Dependencies")
+def make_graph(workgraph):
+    dot = Digraph(comment="Work Graph")
 
-    for name in tasks:
+    for name in workgraph:
         dot.node(name, name)
 
-    for name, task in tasks.iteritems():
-        dot.edges((name, dep) for dep in task.dependencies)
+    for name, workitem in workgraph.iteritems():
+        dot.edges((name, dep) for dep in workitem.dependencies)
 
     return dot

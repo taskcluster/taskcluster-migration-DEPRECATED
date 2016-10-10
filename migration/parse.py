@@ -1,24 +1,26 @@
 import yaml
 import os
 
-from .task import Task
+from .workitem import WorkItem
 
-def parse_tasks():
-    tasks = {}
+def parse_workgraph():
+    workgraph = {}
 
-    for filename in os.listdir("tasks"):
-        with open(os.path.join('tasks', filename), "rb") as f:
-            tasks.update(yaml.load(f))
+    for filename in os.listdir("workgraph"):
+        if not filename.endswith('.yml'):
+            continue
+        with open(os.path.join('workgraph', filename), "rb") as f:
+            workgraph.update(yaml.load(f))
 
-    # normalize the tasks
-    for name in tasks:
-        if not tasks[name]:
-            tasks[name] = {}
-        task = tasks[name]
-        if 'dependencies' not in task:
-            task['dependencies'] = []
-        for dep in task['dependencies']:
-            if dep not in tasks:
-                raise Exception('task {} not found'.format(dep))
+    # normalize the workgraph
+    for name in workgraph:
+        if not workgraph[name]:
+            workgraph[name] = {}
+        workitem = workgraph[name]
+        if 'dependencies' not in workitem:
+            workitem['dependencies'] = []
+        for dep in workitem['dependencies']:
+            if dep not in workgraph:
+                raise Exception('workitem {} not found'.format(dep))
 
-    return {name: Task(taskdict) for name, taskdict in tasks.iteritems()}
+    return {name: WorkItem(workitem) for name, workitem in workgraph.iteritems()}
