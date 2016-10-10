@@ -2,7 +2,7 @@
 
 ## Work Graph
 
-![Latest Work Graph](https://index.taskcluster.net/v1/task/project.taskcluster.migration.latest/artifacts/public/output/workgraph.dot.svg)
+See the [Latest Work Graph SVG](https://index.taskcluster.net/v1/task/project.taskcluster.migration.latest/artifacts/public/output/workgraph.dot.svg) (it's big!)
 
 ## Open Questions
 
