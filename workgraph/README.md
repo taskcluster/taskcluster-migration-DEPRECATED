@@ -1,5 +1,14 @@
 # TODO
 
+## Work Items
+
+ * dep signing
+ * symbol uploads for windows?
+ * other parity items
+ * other scheduler activities
+ * nightlies
+ * release tasks on BB?
+
 ## Work Item Attributes
 
  * duration?
@@ -12,5 +21,9 @@
 ## Implementation stuff
 
  * strip unnecessary paths (given "A -> B -> C" and "A -> C", drop the latter)
- * enumerate items with no deps, sorted by the maximum path length (or duration) from that item
  * cycle detection
+ * subgraphs for milestones?
+ * other outputs:
+   * enumerate items with no deps, sorted by the maximum path length (or duration) from that item
+   * predicted completion for each milestone assuming maximum parallelization
+   * a few rooted graphs, one for each milestone

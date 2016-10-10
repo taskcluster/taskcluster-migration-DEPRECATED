@@ -15,6 +15,9 @@ stop-bb-build-masters:
     dependencies:
         # TODO: is there more to do to get OS X builds to Tier 1?
         - macosx-universal-builds
+        # TODO: win builds tier 1
+        # TODO: linux builds tier 1
+        # TODO: android builds tier 1
 
 seta-in-tree:
     # in-tree taskgraph generation correctly skips low-value tests

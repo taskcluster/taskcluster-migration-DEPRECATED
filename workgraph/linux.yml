@@ -2,7 +2,7 @@ stop-bb-linux-test-masters:
     title: "Turn off the MacOS X Test Buildmasters"
     dependencies:
         - linux-talos-on-hardware-100pct
-        # TODO: all tests at tier 1
+        # TODO: model linux* tests at tier1
 
 linux-talos-via-bbb:
     title: "Run linux talos against TC builds via TC/BB, disable in Buildbot"

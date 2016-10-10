@@ -1,2 +1,24 @@
+stop-bb-win-test-masters:
+    title: "Turn off the Windows Test Buildmasters"
+    dependencies:
+        - win-talos-on-hardware-100pct
+
 win-talos-via-bbb:
     title: "Run win talos against TC builds via TC/BBB, disable in Buildbot"
+    # TODO: depends on win builds tier 1
+
+win-talos-on-hardware-10pct:
+    title: "Run win* talos on TC on 10% of hardware"
+    dependencies:
+        # TODO: depends on win builds tier 1
+        - win-talos-via-bbb
+        - worker-deployment-win-hardware
+
+win-talos-on-hardware-100pct:
+    title: "Run win* talos on TC on 100% of hardware (at tier 1)"
+    dependencies:
+        - win-talos-on-hardware-10pct
+
+worker-deployment-win-hardware:
+    title: "build a method of deploying generic-worker for Windows on hardware"
+
