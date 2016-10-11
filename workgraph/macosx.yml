@@ -1,14 +1,38 @@
-stop-bb-macosx-test-masters:
-    title: "Turn off the MacOS X Test Buildmasters"
+# The overall plan for OS X is this:
+#
+#  * Get all builds, including opt, running in TC at tier 2
+#  * Using try or date, green up tests/talos on those builds via BBB
+#  * Switch the TC builds and BB-via-BBB tests to tier 1; this starts the
+#    6-12 week beta clock
+#  * Deploy a taskcluster worker to a small portion of the buildslaves
+#  * Using try or date, green up tests using those taskcluster workers
+#  * Deploy to the remainder of the buildslaves, converting suite by suite
+#    to manage the load across the split pool of hardware, until 100% TC
+#
+# Tests and Talos travel together here.  Although they may present different
+# problems, from the deployment perspective they are the same and share the
+# same hardware pool.
+
+macosx-test-talos-via-bbb-green:
+    title: "Green up MacOS X test and talos on TC builds via BBB"
     dependencies:
-        - macosx-talos-on-hardware-100pct
-        - macosx-test-on-hardware-100pct
+        - in-tree-bbb-support
 
-macosx-talos-via-bbb:
-    title: "Run MacOS X talos against TC builds via TC/BBB, disable in Buildbot"
+macosx-test-talos-via-bbb:
+    # This is a "flag-day" moment where we simultaneously:
+    #  * enable in-tree scheduling of test/talos tasks via BBB
+    #  * disable sendchanges from Buildbot builds and demote to Tier 2
+    #  * promote TC builds to tier 1
+    title: "Run MacOS X test and talos against TC builds via TC/BBB, disable in Buildbot"
+    dependencies:
+        - macosx-universal-builds  # unless we decide to drop this
+        - ok-to-proceed-opt-tier1
+        - macosx-test-talos-via-bbb-green
 
-macosx-test-via-bbb:
-    title: "Run MacOS X tests against TC builds via TC/BBB, disable in Buildbot"
+macosx-disable-bb-builds:
+    title: "Turn off the MacOS X builds on Buildbot"
+    dependencies:
+        - macosx-test-talos-via-bbb
 
 macosx-universal-builds:
     # NOTE: we may decide not to do this if it turns out to be difficult
@@ -17,30 +41,31 @@ macosx-universal-builds:
     bug: 1183613
     assigned: mshal
 
-macosx-test-on-hardware-10pct:
-    title: "Run MacOS X tests on TC on 10% of hardware"
-    dependencies:
-        - macosx-universal-builds  # unless we decide to drop this
-        - macosx-worker-deployment-hardware
-        - macosx-test-via-bbb
+macosx-worker-deployment-hardware:
+    title: "Build a method of deploying a worker for Mac OS X on hardware"
+    assigned: wcosta
 
-macosx-talos-on-hardware-10pct:
+macosx-test-talos-on-hardware-10pct:
     title: "Run MacOS X talos on TC on 10% of hardware"
     dependencies:
-        - macosx-universal-builds  # unless we decide to drop this
         - macosx-worker-deployment-hardware
-        - macosx-talos-via-bbb
+        - macosx-test-talos-via-bbb
 
-macosx-test-on-hardware-100pct:
-    title: "Run MacOS X tests on TC on 100% of hardware (at tier 1)"
+macosx-test-talos-on-hardware-green:
+    title: "Green up MacOS X tests and talos on TC"
     dependencies:
-        - macosx-test-on-hardware-10pct
+        - macosx-test-talos-on-hardware-10pct
 
-macosx-talos-on-hardware-100pct:
-    title: "Run MacOS X talos on TC on 100% of hardware (at tier 1)"
+macosx-test-talos-on-hardware-100pct:
+    # This involves a gradual reimage while landing patches to switch
+    # suite by suite to the taskcluster workers.  This will also require
+    # jumping the trains to land this support on long-term branches, and
+    # maybe holding a small number of hosts in reserve for ESR.
+    title: "Run MacOS X tests and talos on TC on 100% of hardware"
     dependencies:
-        - macosx-talos-on-hardware-10pct
+        - macosx-test-talos-on-hardware-green
 
-macosx-worker-deployment-hardware:
-    title: "build a method of deploying a worker for Mac OS X on hardware"
-
+stop-bb-macosx-test-masters:
+    title: "Turn off the MacOS X Test Buildmasters"
+    dependencies:
+        - macosx-test-talos-on-hardware-100pct

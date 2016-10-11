@@ -1,24 +1,60 @@
-stop-bb-win-test-masters:
-    title: "Turn off the Windows Test Buildmasters"
+# The overall plan for Windows is this:
+#
+# Tests are easy and basically already done.  The tricky bit is Talos, since it
+# is tied to hardware.
+#
+# * Using try or date, green up talos for (existing) opt and debug TC builds via BBB
+# * Switch the TC builds and BB-via-BBB tests to tier 1; this starts the
+#   6-12 week beta clock
+# * Deploy a taskcluster worker to a small portion of linux buildslaves
+# * Using try or date, green up talos using those taskcluster workers
+# * Deploy to the remainder of the buildslaves, converting suite by suite
+#   to manage teh load across teh split pool of hardware, until 100% TC
+#
+# This moves all Windows build platforms together, all Windows test platforms together,
+# That is, we will not get Win10 to the finish line and then go back to start over with
+# Win7.  Similarly, opt and debug builds will be handled simultaneously.
+
+win-builds-tier2:
+    title: "Run all Windows builds at Tier 2"
+    done: true  # TODO: I think??
+
+win-tests-tier2:
+    title: "Run Windows tests on all platforms at Tier 2"
+
+win-talos-via-bbb-green:
+    title: "Green up Windows talos on TC builds via BBB"
     dependencies:
-        - win-talos-on-hardware-100pct
+        - in-tree-bbb-support
+        - win-builds-tier2
+        - win-tests-tier2  # because they go to Tier 1 at this time!
 
 win-talos-via-bbb:
-    title: "Run win talos against TC builds via TC/BBB, disable in Buildbot"
-    # TODO: depends on win builds tier 1
-
-win-talos-on-hardware-10pct:
-    title: "Run win* talos on TC on 10% of hardware"
+    title: "Run Windows talos against TC builds via TC/BBB, disable in Buildbot"
     dependencies:
-        # TODO: depends on win builds tier 1
-        - win-talos-via-bbb
-        - worker-deployment-win-hardware
-
-win-talos-on-hardware-100pct:
-    title: "Run win* talos on TC on 100% of hardware (at tier 1)"
-    dependencies:
-        - win-talos-on-hardware-10pct
+        - ok-to-proceed-opt-tier1
+        - win-talos-via-bbb-green
 
 worker-deployment-win-hardware:
     title: "build a method of deploying generic-worker for Windows on hardware"
 
+win-talos-on-hardware-10pct:
+    title: "Run win* talos on TC on 10% of hardware"
+    dependencies:
+        - win-talos-via-bbb
+        - worker-deployment-win-hardware
+
+win-talos-on-hardware-green:
+    title: "Green up Windows Talos on TC"
+    dependencies:
+        - win-talos-on-hardware-10pct
+
+win-talos-on-hardware-100pct:
+    title: "Run win* talos on TC on 100% of hardware"
+    dependencies:
+        - win-talos-on-hardware-green
+
+stop-bb-win-test-masters:
+    title: "Turn off the Windows Test Buildmasters"
+    dependencies:
+        - win-talos-on-hardware-100pct

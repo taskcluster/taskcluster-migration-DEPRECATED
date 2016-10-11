@@ -1,49 +1,67 @@
-stop-bb-linux-test-masters:
-    title: "Turn off the MacOS X Test Buildmasters"
-    dependencies:
-        - linux-talos-on-hardware-100pct
-        # TODO: model linux* tests at tier1
+# The overall plan for Linux is this:
+#
+# Tests are easy and basically already done.  The tricky bit is Talos, since it
+# is tied to hardware.
+#
+# * Using try or date, green up talos for (existing) opt and debug TC builds via BBB
+# * Switch the TC builds and BB-via-BBB tests to tier 1; this starts the
+#   6-12 week beta clock
+# * Deploy a taskcluster worker to a small portion of linux buildslaves
+# * Using try or date, green up talos using those taskcluster workers
+# * Deploy to the remainder of the buildslaves, converting suite by suite
+#   to manage teh load across teh split pool of hardware, until 100% TC
+#
+# This begins by getting linux32 caught up to linux64.  Once that's done, the two
+# travel together ("linux" should be taken to mean both).  Similarly, opt and debug
+# move together.
 
-linux-talos-via-bbb:
-    title: "Run linux talos against TC builds via TC/BB, disable in Buildbot"
-
-tc-worker-linux-talos:
-    title: "implement a tc-worker engine that can support linux talos on hardware"
-
-linux32-debug-builds-tier2:
-    title: "Land config for linux32 debug builds at tier 2"
+linux32-builds-tier2:
+    title: "Land config for linux32 debug and opt builds at tier 2"
     bug: 1267426
     assigned: mtabara
+
+linux-talos-via-bbb-green:
+    title: "Green up Linux talos on TC builds via BBB"
+    dependencies:
+        - in-tree-bbb-support
+        - linux32-builds-tier2
+
+linux-talos-via-bbb:
+    title: "Run linux talos against TC builds via TC/BBB, disable in Buildbot"
+    dependencies:
+        - ok-to-proceed-opt-tier1
+        - linux-talos-via-bbb-green
+
+linux-disable-bb-builds:
+    title: "Turn off the Linux builds on Buildbot"
+    dependencies:
+        - linux-talos-via-bbb
+
+linux-tc-worker-engine:
+    title: "implement a tc-worker engine that can support linux talos on hardware"
+
+linux-worker-deployment-hardware:
+    title: "build a method of deploying a worker for linux on hardware"
+    dependencies:
+        - linux-tc-worker-engine
 
 linux-talos-on-hardware-10pct:
     title: "Run linux* talos on TC on 10% of hardware"
     dependencies:
-        - tc-worker-linux-talos
-        - linux32-debug-builds-tier1
+        - linux-worker-deployment-hardware
         - linux-talos-via-bbb
-        - worker-deployment-linux-hardware
 
-linux-talos-on-hardware-100pct:
-    title: "Run linux* talos on TC on 100% of hardware (at tier 1)"
+linux-talos-on-hardware-green:
+    title: "Green up Linux talos on TC"
     dependencies:
         - linux-talos-on-hardware-10pct
 
-linux32-debug-builds-tier1:
-    title: "Promote linux32 debug builds to tier 1"
+linux-talos-on-hardware-100pct:
+    title: "Run linux* talos on TC on 100% of hardware"
     dependencies:
-        - linux32-debug-builds-tier2 
+        - linux-talos-on-hardware-green
+
+stop-bb-linux-test-masters:
+    title: "Turn off the MacOS X Test Buildmasters"
+    dependencies:
         - linux-talos-on-hardware-100pct
-
-linux-opt-builds-tier2:
-    title: "Land configuration for linux* opt builds at tier 2"
-    dependencies:
-        - linux32-debug-builds-tier1  # so we have the bugs worked out of linux32
-
-linux-opt-build-signing:
-    title: "sign linux* opt builds"
-    dependencies:
-        - linux-opt-builds-tier2
-
-worker-deployment-linux-hardware:
-    title: "build a method of deploying tc-worker for linux on hardware"
-

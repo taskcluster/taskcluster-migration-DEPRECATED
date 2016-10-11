@@ -8,6 +8,13 @@
  * other scheduler activities
  * nightlies
  * release tasks on BB?
+ * "queue monitoring" -- aki, blocking tier 1
+ * "nagios" -- aki, blocking tier 1
+ * "chain of trust verification" -- aki, blocking tier 1
+ * l10n
+
+### Details
+
 
 ## Work Item Attributes
 

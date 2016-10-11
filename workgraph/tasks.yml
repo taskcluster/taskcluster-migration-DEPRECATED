@@ -7,16 +7,14 @@ stop-bb-schedulers:
         - win-talos-via-bbb
         - linux-talos-via-bbb
         - android-talos-via-bbb
-        - macosx-talos-via-bbb
-        - macosx-test-via-bbb
+        - macosx-test-talos-via-bbb
 
 stop-bb-build-masters:
     title: "Turn off the Build Buildmasters"
     dependencies:
-        # TODO: is there more to do to get OS X builds to Tier 1?
-        - macosx-universal-builds
+        - macosx-disable-bb-builds
+        - linux-disable-bb-builds
         # TODO: win builds tier 1
-        # TODO: linux builds tier 1
         # TODO: android builds tier 1
 
 seta-in-tree:
