@@ -36,6 +36,7 @@ win-xp-via-bbb-green:
     title: "Green up Windows XP tests on TC builds via BBB"
     bug: 1285576
     dependencies:
+        - in-tree-bbb-support
         - win-builds-tier2
 
 win-talos-xp-via-bbb:
