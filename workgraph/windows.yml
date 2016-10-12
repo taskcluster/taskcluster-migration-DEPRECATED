@@ -14,13 +14,17 @@
 # This moves all Windows build platforms together, all Windows test platforms together,
 # That is, we will not get Win10 to the finish line and then go back to start over with
 # Win7.  Similarly, opt and debug builds will be handled simultaneously.
+#
+# Except Windows XP.  XP Can't run in the cloud, and we will not try to run it
+# via Generic-Worker,  Instead, it will run via BBB until the platform is no longer
+# supported (Firefox 53, for reals this time)
 
 win-builds-tier2:
     title: "Run all Windows builds at Tier 2"
     done: true  # TODO: I think??
 
 win-tests-tier2:
-    title: "Run Windows tests on all platforms at Tier 2"
+    title: "Run Windows tests on TC for all platforms but XP at Tier 2"
 
 win-talos-via-bbb-green:
     title: "Green up Windows talos on TC builds via BBB"
@@ -29,11 +33,18 @@ win-talos-via-bbb-green:
         - win-builds-tier2
         - win-tests-tier2  # because they go to Tier 1 at this time!
 
-win-talos-via-bbb:
-    title: "Run Windows talos against TC builds via TC/BBB, disable in Buildbot"
+win-xp-via-bbb-green:
+    title: "Green up Windows XP tests on TC builds via BBB"
+    bug: 1285576
+    dependencies:
+        - win-builds-tier2
+
+win-talos-xp-via-bbb:
+    title: "Run Windows talos and XP tests against TC builds via TC/BBB, disable in Buildbot"
     dependencies:
         - ok-to-proceed-opt-tier1
-        - win-talos-via-bbb-green
+        - win-xp-via-bbb-green
+        - win-talos-xp-via-bbb-green
 
 worker-deployment-win-hardware:
     title: "build a method of deploying generic-worker for Windows on hardware"
@@ -41,7 +52,7 @@ worker-deployment-win-hardware:
 win-talos-on-hardware-10pct:
     title: "Run win* talos on TC on 10% of hardware"
     dependencies:
-        - win-talos-via-bbb
+        - win-talos-xp-via-bbb
         - worker-deployment-win-hardware
 
 win-talos-on-hardware-green:
@@ -49,12 +60,23 @@ win-talos-on-hardware-green:
     dependencies:
         - win-talos-on-hardware-10pct
 
-win-talos-on-hardware-100pct:
-    title: "Run win* talos on TC on 100% of hardware"
+win-talos-on-hardware-90pct:
+    title: "Run win* talos on TC on 90% of hardware (leaving XP)"
     dependencies:
         - win-talos-on-hardware-green
+
+win-xp-deprecated:
+    title: "Windows XP is no longer a supported Firefox platform"
+    external: true
+
+win-xp-removed:
+    title: "Remove support for Windows XP and reimage freed machines"
+    dependencies:
+        - win-talos-xp-via-bbb
+        - win-xp-deprecated
 
 stop-bb-win-test-masters:
     title: "Turn off the Windows Test Buildmasters"
     dependencies:
-        - win-talos-on-hardware-100pct
+        - win-talos-on-hardware-90pct
+        - win-xp-removed

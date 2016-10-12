@@ -5,6 +5,7 @@ ALLOWED_KEYS = [
     'assigned',
     'done',
     'milestone',
+    "external",  # this is an external dependency
 ]
 
 class WorkItem(object):
