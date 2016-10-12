@@ -67,6 +67,7 @@ windows-opt-tier1:
     title: "Promote all windows builds to tier1; turn off windows buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
         - windows-nightlies-tier2-green
+        - windows-debug-tier1
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts.  remove if that's only docker-worker
         - taskcluster-worker-cot-gpg-keys-in-repo

@@ -82,6 +82,7 @@ linux32-opt-tier1:
     title: "Promote all linux32 builds to tier1; turn off linux32 buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
         - linux32-nightlies-tier2-green
+        - linux32-debug-tier1
         - scriptworker-tier1
 
 linux32-beta-capable:

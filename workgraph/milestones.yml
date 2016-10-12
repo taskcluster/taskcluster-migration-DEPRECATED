@@ -16,3 +16,13 @@ no-buildbot:
         - stop-bb-macosx-test-masters
         - stop-bb-linux-test-masters
         - stop-bb-windows-test-masters
+
+all-releases:
+    title: "Everything has been released at least once from TC (except ESR)"
+    milestone: true
+    dependencies:
+        - android-release
+        - linux32-release
+        - linux64-release
+        - macosx-release
+        - windows-release
