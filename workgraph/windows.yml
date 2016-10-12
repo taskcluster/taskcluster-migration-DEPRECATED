@@ -13,7 +13,7 @@
 #
 # This moves all Windows build platforms together, all Windows test platforms together,
 # That is, we will not get Win10 to the finish line and then go back to start over with
-# Win7.  Similarly, opt and debug builds will be handled simultaneously.
+# Win7.
 #
 # Except Windows XP.  XP Can't run in the cloud, and we will not try to run it
 # via Generic-Worker,  Instead, it will run via BBB until the platform is no longer
@@ -27,6 +27,48 @@ win-tests-tier2:
     title: "Run Windows tests on TC for all platforms but XP at Tier 2"
     dependencies:
         - win-builds-tier2
+
+windows-single-locale-tier2:
+    title: "Support single locale repacks for windows"
+    dependencies:
+        - win-builds-tier2
+
+windows-mach-repackage:
+    title: "Support exploding/[re-]signing pre-built windows installers"
+
+windows-signing-tier2:
+    title: "sign windows builds in tc"
+    dependencies:
+        - windows-mach-repackage
+
+windows-balrog-tier2:
+    title: "support for balrog in staging"
+
+windows-nightlies-tier2:
+    title: "Land config for windows nightly builds at tier2"
+    dependencies:
+        - windows-single-locale-tier2
+        - windows-signing-tier2
+        - windows-balrog-tier2
+        - balrog-worker-migrate-funsize
+
+windows-nightlies-tier2-green:
+    title: "Green up windows nightlies"
+    dependencies:
+        - windows-nightlies-tier2
+
+windows-debug-tier1:
+    title: "Run windows debug builds and tests at tier1"
+    dependencies:
+        - windows-builds-tier2
+
+windows-opt-tier1:
+    title: "Promote all windows builds to tier1; turn off windows buildbot builds and nightlies; commit for beta in 6-12 weeks"
+    dependencies:
+        - windows-nightlies-tier2-green
+        - scriptworker-tier1
+        - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts.  remove if that's only docker-worker
+        - taskcluster-worker-cot-gpg-keys-in-repo
 
 win-talos-via-bbb-green:
     title: "Green up Windows talos on TC builds via BBB"
@@ -88,3 +130,19 @@ stop-bb-win-test-masters:
     dependencies:
         - win-talos-on-hardware-90pct
         - win-xp-removed
+
+windows-beta-capable:
+    title: "Build shippable windows beta release builds"
+    dependencies:
+        - windows-nightlies-tier2-green
+
+windows-beta-release:
+    title: "Ship windows beta release"
+    dependencies:
+        - windows-beta-capable
+        - windows-opt-tier1
+
+windows-release:
+    title: "Ship windows release"
+    dependencies:
+        - windows-beta-release
