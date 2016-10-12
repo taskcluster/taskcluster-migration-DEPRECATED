@@ -25,6 +25,8 @@ win-builds-tier2:
 
 win-tests-tier2:
     title: "Run Windows tests on TC for all platforms but XP at Tier 2"
+    dependencies:
+        - win-builds-tier2
 
 win-talos-via-bbb-green:
     title: "Green up Windows talos on TC builds via BBB"
