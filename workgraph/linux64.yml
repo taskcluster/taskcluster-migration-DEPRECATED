@@ -21,6 +21,10 @@ linux64-balrog-tier2:
 linux64-single-locale-tier2:
     title: "Single locale repacks tier2"
 
+linux64-builds-tier2:
+    title: "Linux64 builds at tier2"
+    done: true
+
 linux64-nightlies-tier2:
     title: "Land config for linux64 nightly builds at tier 2"
     dependencies:
