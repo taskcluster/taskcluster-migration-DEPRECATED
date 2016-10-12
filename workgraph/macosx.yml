@@ -83,6 +83,9 @@ macosx-opt-tier1:
     title: "Promote all macosx builds to tier1; turn off macosx buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
         - macosx-nightlies-tier2-green
+        - scriptworker-tier1
+        - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts. remove if that's only docker-worker
+        - taskcluster-worker-cot-gpg-keys-in-repo
 
 macosx-worker-deployment-hardware:
     title: "Build a method of deploying a worker for Mac OS X on hardware"
