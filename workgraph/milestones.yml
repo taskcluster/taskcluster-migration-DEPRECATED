@@ -11,6 +11,7 @@ no-buildbot:
     title: "Buildbot completely turned off (except ESR)"
     milestone: true
     dependencies:
+        - all-releases
         - no-buildbot-schedulers
         - stop-bb-build-masters
         - stop-bb-macosx-test-masters
