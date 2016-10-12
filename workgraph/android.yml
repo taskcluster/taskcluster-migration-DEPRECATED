@@ -5,19 +5,60 @@ android-opt-tier2:
     title: "Run Android opt builds and tests at tier 2"
     done: true
 
+android-multilocale-tier2:
+    title: "Android multilocale builds, tier2"
+
+android-single-locale-tier2:
+    title: "Android single locale repacks, tier2"
+
+android-signing-tier2:
+    title: "Android taskcluster signing, tier2"
+    done: true
+
+android-balrog-tier2:
+    title: "Android single locale repacks, tier2"
+
+android-google-play-tier2:
+    title: "Google Play submitter, tier2"
+
+android-nightlies-tier2:
+    title: "Run Android opt nightlies and tests at tier 2"
+    dependencies:
+        - android-multilocale-tier2
+        - android-single-locale-tier2
+        - android-signing-tier2
+        - android-balrog-tier2
+        - android-google-play-tier2
+
 android-debug-tier1:
     title: "Run Android debug builds and tests at tier 1"
     done: true
 
 android-opt-tier1:
-    title: "Promote Android opt builds and tests to tier 1, demote in buildbot"
+    title: "Promote Android opt builds and tests to tier 1, demote in buildbot; 6-12 weeks before beta"
     dependencies:
         - automatic-retry-android-jobs
         - android-opt-tier2
+        - android-nightlies-tier2
+
+android-beta-capable:
+    title: "Build shippable android beta release builds"
+    dependencies:
+        - android-nightlies-tier2
+
+android-beta-release:
+    title: "Ship android beta releases"
+    dependencies:
+        - android-beta-capable
+        - android-opt-tier1
+
+android-release:
+    title: "Ship android release"
+    dependencies:
+        - android-beta-release
 
 android-disable-bb-builds:
-    title: "Turn off the Linux builds on Buildbot (except one for ESR)"
+    title: "Turn off the Linux builds on Buildbot (except one for ESR) - will ride trains"
     dependencies:
         - android-debug-tier1
         - android-opt-tier1
-
