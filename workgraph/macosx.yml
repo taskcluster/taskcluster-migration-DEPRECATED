@@ -66,6 +66,6 @@ macosx-test-talos-on-hardware-100pct:
         - macosx-test-talos-on-hardware-green
 
 stop-bb-macosx-test-masters:
-    title: "Turn off the MacOS X Test Buildmasters"
+    title: "Turn off the MacOS X Test Buildmasters (except one for ESR)"
     dependencies:
         - macosx-test-talos-on-hardware-100pct

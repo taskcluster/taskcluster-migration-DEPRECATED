@@ -2,13 +2,13 @@
 # but represent a major reference point in the work graph
 
 no-buildbot-schedulers:
-    title: "Buildbot schedulers are disabled"
+    title: "Buildbot schedulers are disabled (except ESR)"
     milestone: true
     dependencies:
         - stop-bb-schedulers
 
 no-buildbot:
-    title: "Buildbot completely turned off"
+    title: "Buildbot completely turned off (except ESR)"
     milestone: true
     dependencies:
         - no-buildbot-schedulers

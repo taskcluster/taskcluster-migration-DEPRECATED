@@ -1,3 +1,10 @@
+# ESR
+
+We will "finish" the migration with a small pool of Buildbot still running just
+to service ESR releases.  Aside from some "except ESR" notes, ESR is largely
+ignored in this work plan as it doesn't materially change the work that must be
+done.
+
 # 6-12 Week Counter
 
 Turning on Tier-1 opt builds requires releasing a beta within 12 weeks, so we

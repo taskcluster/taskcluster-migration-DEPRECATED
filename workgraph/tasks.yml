@@ -1,7 +1,7 @@
 stop-bb-schedulers:
   # NOTE: by this time, the schedulers should not be creating any build requests (everything
   # should already be disabled)
-    title: "Shut off BB Schedulers"
+    title: "Shut off BB Schedulers (except one for ESR)"
     dependencies:
         - seta-in-tree
         - win-talos-xp-via-bbb
@@ -10,7 +10,7 @@ stop-bb-schedulers:
         - stop-bb-build-masters
 
 stop-bb-build-masters:
-    title: "Turn off the Build Buildmasters"
+    title: "Turn off the Build Buildmasters (except one of each for ESR)"
     dependencies:
         - macosx-disable-bb-builds
         - linux-disable-bb-builds

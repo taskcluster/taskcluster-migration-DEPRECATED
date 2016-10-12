@@ -66,7 +66,7 @@ win-talos-on-hardware-green:
         - win-talos-on-hardware-10pct
 
 win-talos-on-hardware-90pct:
-    title: "Run win* talos on TC on 90% of hardware (leaving XP)"
+    title: "Run win* talos on TC on 90% of hardware (leaving XP and a few for ESR)"
     dependencies:
         - win-talos-on-hardware-green
 
@@ -75,13 +75,13 @@ win-xp-deprecated:
     external: true
 
 win-xp-removed:
-    title: "Remove support for Windows XP and reimage freed machines"
+    title: "Remove support for Windows XP and reimage freed machines (except a few for ESR)"
     dependencies:
         - win-talos-xp-via-bbb
         - win-xp-deprecated
 
 stop-bb-win-test-masters:
-    title: "Turn off the Windows Test Buildmasters"
+    title: "Turn off the Windows Test Buildmasters (except one for ESR)"
     dependencies:
         - win-talos-on-hardware-90pct
         - win-xp-removed
