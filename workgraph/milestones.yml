@@ -15,8 +15,4 @@ no-buildbot:
         - stop-bb-build-masters
         - stop-bb-macosx-test-masters
         - stop-bb-linux-test-masters
-        - stop-bb-win-test-masters
-
-ok-to-proceed-opt-tier1:
-    title: "Commit that opt builds can be promoted to tier 1, and we will be ready to do a beta in 6-12 weeks"
-    milestone: true
+        - stop-bb-windows-test-masters

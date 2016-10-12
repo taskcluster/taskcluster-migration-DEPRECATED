@@ -4,8 +4,9 @@ stop-bb-schedulers:
     title: "Shut off BB Schedulers (except one for ESR)"
     dependencies:
         - seta-in-tree
-        - win-talos-xp-via-bbb
-        - linux-talos-via-bbb
+        - windows-talos-xp-via-bbb
+        - linux32-talos-via-bbb
+        - linux64-talos-via-bbb
         - macosx-test-talos-via-bbb
         - stop-bb-build-masters
 
@@ -13,8 +14,9 @@ stop-bb-build-masters:
     title: "Turn off the Build Buildmasters (except one of each for ESR)"
     dependencies:
         - macosx-disable-bb-builds
-        - linux-disable-bb-builds
-        - win-disable-bb-builds
+        - linux32-disable-bb-builds
+        - linux64-disable-bb-builds
+        - windows-disable-bb-builds
         - android-disable-bb-builds
 
 seta-in-tree:

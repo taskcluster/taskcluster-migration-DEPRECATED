@@ -26,7 +26,7 @@ macosx-test-talos-via-bbb:
     title: "Run MacOS X test and talos against TC builds via TC/BBB, disable in Buildbot"
     dependencies:
         - macosx-universal-builds  # unless we decide to drop this
-        - ok-to-proceed-opt-tier1
+        - macosx-nightlies-tier2
         - macosx-test-talos-via-bbb-green
 
 macosx-disable-bb-builds:
@@ -34,12 +34,60 @@ macosx-disable-bb-builds:
     dependencies:
         - macosx-test-talos-via-bbb
 
+macosx-builds-tier2:
+    title: "Support macosx builds, tier2"
+
 macosx-universal-builds:
     # NOTE: we may decide not to do this if it turns out to be difficult
     # and we can just drop universal support
-    title: "Support cross-compiler generation of universal builds"
+    title: "Support cross-compiler generation of universal builds.  Or drop need for universal builds"
     bug: 1183613
     assigned: mshal
+
+macosx-single-locale-tier2:
+    title: "Support single locale repacks for macosx"
+    dependencies:
+        - macosx-universal-builds
+
+macosx-mach-repackage:
+    title: "Support exploding/[re-]signing pre-built DMGs"
+
+macosx-signing-tier2:
+    title: "sign macosx builds in tc"
+    dependencies:
+        - macosx-mach-repackage
+
+macosx-balrog-tier2:
+    title: "support for balrog in staging"
+
+macosx-nightlies-tier2:
+    title: "Land config for macosx nightly builds at tier2"
+    dependencies:
+        - macosx-universal-builds
+        - macosx-single-locale-tier2
+        - macosx-signing-tier2
+        - macosx-balrog-tier2
+        - balrog-worker-migrate-funsize
+        - nightly-beetmover-tier2
+
+macosx-nightlies-tier2-green:
+    title: "Green up macosx nightlies"
+    dependencies:
+        - macosx-nightlies-tier2
+
+macosx-debug-tier1:
+    title: "Run macosx debug builds and tests at tier1"
+    dependencies:
+        - macosx-builds-tier2
+
+macosx-opt-tier1:
+    title: "Promote all macosx builds to tier1; turn off macosx buildbot builds and nightlies; commit for beta in 6-12 weeks"
+    dependencies:
+        - macosx-nightlies-tier2-green
+        - scriptworker-tier1
+        - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts. remove if that's only docker-worker
+        - taskcluster-worker-cot-gpg-keys-in-repo
+        - macosx-debug-tier1
 
 macosx-worker-deployment-hardware:
     title: "Build a method of deploying a worker for Mac OS X on hardware"
@@ -69,3 +117,19 @@ stop-bb-macosx-test-masters:
     title: "Turn off the MacOS X Test Buildmasters (except one for ESR)"
     dependencies:
         - macosx-test-talos-on-hardware-100pct
+
+macosx-beta-capable:
+    title: "Build shippable macosx beta release builds"
+    dependencies:
+        - macosx-nightlies-tier2-green
+
+macosx-beta-release:
+    title: "Ship macosx beta release"
+    dependencies:
+        - macosx-beta-capable
+        - macosx-opt-tier1
+
+macosx-release:
+    title: "Ship macosx release"
+    dependencies:
+        - macosx-beta-release

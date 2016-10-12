@@ -1,0 +1,55 @@
+nightly-beetmover-tier2:
+    title: "beetmover in-tree for tier2 platforms"
+    dependencies:
+        - beetmover-worker-impl
+
+linux-tc-worker-engine:
+    title: "implement a tc-worker engine that can support linux talos on hardware"
+
+linux-worker-deployment-hardware:
+    title: "build a method of deploying a worker for linux on hardware"
+    dependencies:
+        - linux-tc-worker-engine
+
+stop-bb-linux-test-masters:
+    title: "Turn off the Linux Test Buildmasters (except one for ESR)"
+    dependencies:
+        - linux32-talos-on-hardware-100pct
+        - linux64-talos-on-hardware-100pct
+        # android tests use the same test masters
+        - android-opt-tier1
+
+docker-worker-cot-gpg-keys-in-repo:
+    title: "docker-worker chain of trust gpg keys in repo, with ongoing process per ami-regen"
+
+generic-worker-cot-gpg-keys-in-repo:
+    title: "generic-worker chain of trust gpg keys in repo, with ongoing process per reimage"
+
+taskcluster-worker-cot-gpg-keys-in-repo:
+    title: "taskcluster-worker chain of trust gpg keys in repo, with ongoing process per reimage/ami-regen"
+
+scriptworker-chain-of-trust:
+    title: "Enable chain of trust verification, and block on it before scriptworker jobs"
+    dependencies:
+        - docker-worker-cot-gpg-keys-in-repo
+
+scriptworker-queue-monitoring:
+    title: "Monitor scriptworker queues and alert when too large"
+
+scriptworker-nagios:
+    title: "Monitor scriptworker instances and alert on issues"
+
+scriptworker-iptables:
+    title: "Block non-required scriptworker ports/traffic"
+
+scriptworker-ssh-alerts:
+    title: "Alerts on ssh to scriptworker instances"
+
+scriptworker-tier1:
+    title: "Scriptworker is tier1-ready"
+    dependencies:
+        - scriptworker-chain-of-trust
+        - scriptworker-queue-monitoring
+        - scriptworker-nagios
+        - scriptworker-ssh-alerts
+        - scriptworker-iptables
