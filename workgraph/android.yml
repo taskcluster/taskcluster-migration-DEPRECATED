@@ -18,5 +18,6 @@ android-opt-tier1:
 android-disable-bb-builds:
     title: "Turn off the Linux builds on Buildbot (except one for ESR)"
     dependencies:
+        - android-debug-tier1
         - android-opt-tier1
 
