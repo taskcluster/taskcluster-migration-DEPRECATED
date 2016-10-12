@@ -15,4 +15,4 @@ no-buildbot:
         - stop-bb-build-masters
         - stop-bb-macosx-test-masters
         - stop-bb-linux-test-masters
-        - stop-bb-win-test-masters
+        - stop-bb-windows-test-masters

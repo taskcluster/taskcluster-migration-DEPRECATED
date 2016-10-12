@@ -26,7 +26,7 @@ macosx-test-talos-via-bbb:
     title: "Run MacOS X test and talos against TC builds via TC/BBB, disable in Buildbot"
     dependencies:
         - macosx-universal-builds  # unless we decide to drop this
-        - ok-to-proceed-opt-tier1
+        - macosx-nightlies-tier2
         - macosx-test-talos-via-bbb-green
 
 macosx-disable-bb-builds:

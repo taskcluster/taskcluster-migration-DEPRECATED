@@ -11,6 +11,10 @@
 # * Deploy to the remainder of the test bb workers, converting suite by suite
 #   to manage the load across the split pool of hardware, until 100% TC
 
+linux32-builds-tier2:
+    title: "linux32 builds, tier2"
+    done: true
+
 linux32-signing-tier2:
     title: "Support for signing linux32 tier2"
     done: true
@@ -44,7 +48,7 @@ linux32-talos-via-bbb-green:
 linux32-talos-via-bbb:
     title: "Run linux32 talos against TC builds via TC/BBB, demote in Buildbot"
     dependencies:
-        - linux32-opt-tier1
+        - linux32-nightlies-tier2
         - linux32-talos-via-bbb-green
 
 linux32-disable-bb-builds:

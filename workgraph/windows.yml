@@ -74,7 +74,7 @@ windows-talos-via-bbb-green:
     title: "Green up Windows talos on TC builds via BBB"
     dependencies:
         - in-tree-bbb-support
-        - windows-builds-tier2
+        - windows-nightlies-tier2
 
 windows-xp-via-bbb-green:
     title: "Green up Windows XP tests on TC builds via BBB"
@@ -86,7 +86,7 @@ windows-xp-via-bbb-green:
 windows-talos-xp-via-bbb:
     title: "Run Windows talos and XP tests against TC builds via TC/BBB, demote in Buildbot"
     dependencies:
-        - ok-to-proceed-opt-tier1
+        - windows-nightlies-tier2
         - windows-tests-tier2  # because they go to Tier 1 along with the builds at this time!
         - windows-xp-via-bbb-green
         - windows-talos-via-bbb-green

@@ -48,7 +48,7 @@ linux64-talos-via-bbb-green:
 linux64-talos-via-bbb:
     title: "Run linux64 talos against TC builds via TC/BBB, demote in Buildbot"
     dependencies:
-        - linux64-opt-tier1
+        - linux64-nightlies-tier2
         - linux64-talos-via-bbb-green
 
 linux64-disable-bb-builds:
