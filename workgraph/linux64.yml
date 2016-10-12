@@ -1,0 +1,95 @@
+# The overall plan for Linux64 is this:
+#
+# Tests are easy and basically already done.  The tricky bit is Talos, since it
+# is tied to hardware.
+#
+# * Using try or date, green up talos for (existing) opt and debug TC builds via BBB
+# * Switch the TC builds and BB-via-BBB tests to tier 1; this starts the
+#   6-12 week beta clock
+# * Deploy a taskcluster worker to a small portion of linux test bb workers
+# * Using try or date, green up talos using those taskcluster workers
+# * Deploy to the remainder of the test bb workers, converting suite by suite
+#   to manage the load across the split pool of hardware, until 100% TC
+
+linux64-signing-tier2:
+    title: "Support for signing linux64 tier2"
+    done: true
+
+linux64-balrog-tier2:
+    title: "Support for balrog in staging"
+
+linux64-single-locale-tier2:
+    title: "Single locale repacks tier2"
+
+linux64-nightlies-tier2:
+    title: "Land config for linux64 nightly builds at tier 2"
+    dependencies:
+        - linux64-builds-tier2
+        - linux64-signing-tier2
+        - linux64-balrog-tier2
+        - linux64-single-locale-tier2
+        - balrog-worker-migrate-funsize
+
+linux64-nightlies-tier2-green:
+    title: "Green up linux64 nightlies"
+    dependencies:
+        - linux64-nightlies-tier2
+
+linux64-talos-via-bbb-green:
+    title: "Green up Linux64 talos on TC builds via BBB"
+    dependencies:
+        - in-tree-bbb-support
+        - linux64-builds-tier2
+
+linux64-talos-via-bbb:
+    title: "Run linux64 talos against TC builds via TC/BBB, demote in Buildbot"
+    dependencies:
+        - linux64-opt-tier1
+        - linux64-talos-via-bbb-green
+
+linux64-disable-bb-builds:
+    title: "Turn off the Linux64 builds on Buildbot"
+    dependencies:
+        - linux64-talos-via-bbb
+
+linux64-talos-on-hardware-10pct:
+    title: "Run linux* talos on TC on 10% of hardware"
+    dependencies:
+        - linux-worker-deployment-hardware
+        - linux64-talos-via-bbb
+
+linux64-talos-on-hardware-green:
+    title: "Green up Linux talos on TC"
+    dependencies:
+        - linux64-talos-on-hardware-10pct
+
+linux64-talos-on-hardware-100pct:
+    title: "Run linux* talos on TC on 100% of hardware (except a few for ESR)"
+    dependencies:
+        - linux64-talos-on-hardware-green
+
+linux64-debug-tier1:
+    title: "Run linux64 debug builds and tests at tier1"
+    dependencies:
+        - linux64-builds-tier2
+
+linux64-opt-tier1:
+    title: "Promote all linux64 builds to tier1; turn off linux64 buildbot builds and nightlies; commit for beta in 6-12 weeks"
+    dependencies:
+        - linux64-nightlies-tier2-green
+
+linux64-beta-capable:
+    title: "Build shippable linux64 beta release builds"
+    dependencies:
+        - linux64-nightlies-tier2-green
+
+linux64-beta-release:
+    title: "Ship linux64 beta release"
+    dependencies:
+        - linux64-beta-capable
+        - linux64-opt-tier1
+
+linux64-release:
+    title: "Ship linux64 release"
+    dependencies:
+        - linux64-beta-release
