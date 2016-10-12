@@ -19,19 +19,19 @@
 # via Generic-Worker,  Instead, it will run via BBB until the platform is no longer
 # supported (Firefox 53, for reals this time)
 
-win-builds-tier2:
+windows-builds-tier2:
     title: "Run all Windows builds at Tier 2"
     done: true  # TODO: I think??
 
-win-tests-tier2:
+windows-tests-tier2:
     title: "Run Windows tests on TC for all platforms but XP at Tier 2"
     dependencies:
-        - win-builds-tier2
+        - windows-builds-tier2
 
 windows-single-locale-tier2:
     title: "Support single locale repacks for windows"
     dependencies:
-        - win-builds-tier2
+        - windows-builds-tier2
 
 windows-mach-repackage:
     title: "Support exploding/[re-]signing pre-built windows installers"
@@ -59,7 +59,6 @@ windows-nightlies-tier2-green:
 
 windows-debug-tier1:
     title: "Run windows debug builds and tests at tier1"
-    dependencies:
         - windows-builds-tier2
 
 windows-opt-tier1:
@@ -70,66 +69,66 @@ windows-opt-tier1:
         - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts.  remove if that's only docker-worker
         - taskcluster-worker-cot-gpg-keys-in-repo
 
-win-talos-via-bbb-green:
+windows-talos-via-bbb-green:
     title: "Green up Windows talos on TC builds via BBB"
     dependencies:
         - in-tree-bbb-support
-        - win-builds-tier2
+        - windows-builds-tier2
 
-win-xp-via-bbb-green:
+windows-xp-via-bbb-green:
     title: "Green up Windows XP tests on TC builds via BBB"
     bug: 1285576
     dependencies:
         - in-tree-bbb-support
-        - win-builds-tier2
+        - windows-builds-tier2
 
-win-talos-xp-via-bbb:
+windows-talos-xp-via-bbb:
     title: "Run Windows talos and XP tests against TC builds via TC/BBB, demote in Buildbot"
     dependencies:
         - ok-to-proceed-opt-tier1
-        - win-tests-tier2  # because they go to Tier 1 along with the builds at this time!
-        - win-xp-via-bbb-green
-        - win-talos-via-bbb-green
+        - windows-tests-tier2  # because they go to Tier 1 along with the builds at this time!
+        - windows-xp-via-bbb-green
+        - windows-talos-via-bbb-green
 
-win-disable-bb-builds:
+windows-disable-bb-builds:
     title: "Turn off the Windows builds on Buildbot"
     dependencies:
-        - win-talos-xp-via-bbb
+        - windows-talos-xp-via-bbb
 
-worker-deployment-win-hardware:
+worker-deployment-windows-hardware:
     title: "build a method of deploying generic-worker for Windows on hardware"
 
-win-talos-on-hardware-10pct:
+windows-talos-on-hardware-10pct:
     title: "Run win* talos on TC on 10% of hardware"
     dependencies:
-        - win-talos-xp-via-bbb
-        - worker-deployment-win-hardware
+        - windows-talos-xp-via-bbb
+        - worker-deployment-windows-hardware
 
-win-talos-on-hardware-green:
+windows-talos-on-hardware-green:
     title: "Green up Windows Talos on TC"
     dependencies:
-        - win-talos-on-hardware-10pct
+        - windows-talos-on-hardware-10pct
 
-win-talos-on-hardware-90pct:
+windows-talos-on-hardware-90pct:
     title: "Run win* talos on TC on 90% of hardware (leaving XP and a few for ESR)"
     dependencies:
-        - win-talos-on-hardware-green
+        - windows-talos-on-hardware-green
 
-win-xp-deprecated:
+windows-xp-deprecated:
     title: "Windows XP is no longer a supported Firefox platform"
     external: true
 
-win-xp-removed:
+windows-xp-removed:
     title: "Remove support for Windows XP and reimage freed machines (except a few for ESR)"
     dependencies:
-        - win-talos-xp-via-bbb
-        - win-xp-deprecated
+        - windows-talos-xp-via-bbb
+        - windows-xp-deprecated
 
-stop-bb-win-test-masters:
+stop-bb-windows-test-masters:
     title: "Turn off the Windows Test Buildmasters (except one for ESR)"
     dependencies:
-        - win-talos-on-hardware-90pct
-        - win-xp-removed
+        - windows-talos-on-hardware-90pct
+        - windows-xp-removed
 
 windows-beta-capable:
     title: "Build shippable windows beta release builds"
