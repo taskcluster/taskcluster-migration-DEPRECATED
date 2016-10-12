@@ -40,6 +40,7 @@ android-opt-tier1:
         - automatic-retry-android-jobs
         - android-opt-tier2
         - android-nightlies-tier2
+        - scriptworker-tier1
 
 android-beta-capable:
     title: "Build shippable android beta release builds"
