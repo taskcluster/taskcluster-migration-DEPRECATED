@@ -59,6 +59,7 @@ windows-nightlies-tier2-green:
 
 windows-debug-tier1:
     title: "Run windows debug builds and tests at tier1"
+    dependencies:
         - windows-builds-tier2
 
 windows-opt-tier1:
