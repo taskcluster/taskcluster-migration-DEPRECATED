@@ -4,18 +4,18 @@ stop-bb-schedulers:
     title: "Shut off BB Schedulers"
     dependencies:
         - seta-in-tree
-        - win-talos-via-bbb
+        - win-talos-xp-via-bbb
         - linux-talos-via-bbb
-        - android-talos-via-bbb
         - macosx-test-talos-via-bbb
+        - stop-bb-build-masters
 
 stop-bb-build-masters:
     title: "Turn off the Build Buildmasters"
     dependencies:
         - macosx-disable-bb-builds
         - linux-disable-bb-builds
-        # TODO: win builds tier 1
-        # TODO: android builds tier 1
+        - win-disable-bb-builds
+        - android-disable-bb-builds
 
 seta-in-tree:
     # in-tree taskgraph generation correctly skips low-value tests

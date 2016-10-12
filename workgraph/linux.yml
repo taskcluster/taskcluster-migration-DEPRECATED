@@ -27,7 +27,7 @@ linux-talos-via-bbb-green:
         - linux32-builds-tier2
 
 linux-talos-via-bbb:
-    title: "Run linux talos against TC builds via TC/BBB, disable in Buildbot"
+    title: "Run linux talos against TC builds via TC/BBB, demote in Buildbot"
     dependencies:
         - ok-to-proceed-opt-tier1
         - linux-talos-via-bbb-green
@@ -65,3 +65,5 @@ stop-bb-linux-test-masters:
     title: "Turn off the MacOS X Test Buildmasters"
     dependencies:
         - linux-talos-on-hardware-100pct
+        # android tests use the same test masters
+        - android-opt-tier1

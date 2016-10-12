@@ -31,7 +31,6 @@ win-talos-via-bbb-green:
     dependencies:
         - in-tree-bbb-support
         - win-builds-tier2
-        - win-tests-tier2  # because they go to Tier 1 at this time!
 
 win-xp-via-bbb-green:
     title: "Green up Windows XP tests on TC builds via BBB"
@@ -40,11 +39,17 @@ win-xp-via-bbb-green:
         - win-builds-tier2
 
 win-talos-xp-via-bbb:
-    title: "Run Windows talos and XP tests against TC builds via TC/BBB, disable in Buildbot"
+    title: "Run Windows talos and XP tests against TC builds via TC/BBB, demote in Buildbot"
     dependencies:
         - ok-to-proceed-opt-tier1
+        - win-tests-tier2  # because they go to Tier 1 along with the builds at this time!
         - win-xp-via-bbb-green
-        - win-talos-xp-via-bbb-green
+        - win-talos-via-bbb-green
+
+win-disable-bb-builds:
+    title: "Turn off the Windows builds on Buildbot"
+    dependencies:
+        - win-talos-xp-via-bbb
 
 worker-deployment-win-hardware:
     title: "build a method of deploying generic-worker for Windows on hardware"

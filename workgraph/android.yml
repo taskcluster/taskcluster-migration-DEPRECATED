@@ -1,9 +1,22 @@
-android-talos-via-bbb:
-    title: "Run Android talos against TC builds via TC/BBB, disable in Buildbot"
-    dependencies:
-        - android-opt-builds-tier-1
+# Android consists only of build and test jobs (no Talos).  For both, it uses
+# the same hosts as Linux.
 
-android-opt-builds-tier-1:
-    title: "Promote Android opt builds to tier 1"
+android-opt-tier2:
+    title: "Run Android opt builds and tests at tier 2"
+    done: true
+
+android-debug-tier1:
+    title: "Run Android debug builds and tests at tier 1"
+    done: true
+
+android-opt-tier1:
+    title: "Promote Android opt builds and tests to tier 1, demote in buildbot"
     dependencies:
         - automatic-retry-android-jobs
+        - android-opt-tier2
+
+android-disable-bb-builds:
+    title: "Turn off the Linux builds on Buildbot"
+    dependencies:
+        - android-opt-tier1
+
