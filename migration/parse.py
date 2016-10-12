@@ -23,4 +23,23 @@ def parse_workgraph():
             if dep not in workgraph:
                 raise Exception('workitem {} not found'.format(dep))
 
-    return {name: WorkItem(name, workitem) for name, workitem in workgraph.iteritems()}
+    workitems = {name: WorkItem(name, workitem) for name, workitem in workgraph.iteritems()}
+
+    # detect cycles
+    unseen = set(workitems)
+    while unseen:
+        stack = []
+        def recurse(name):
+            if name in stack:
+                cycle = stack + [name]
+                while cycle[0] != name:
+                    cycle.pop(0)
+                cycle = " -> ".join(cycle)
+                raise Exception("Graph cycle found: " + cycle)
+            stack.append(name)
+            for dep in workitems[name].dependencies:
+                recurse(dep)
+            stack.pop()
+        recurse(unseen.pop())
+
+    return workitems
