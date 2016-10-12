@@ -33,6 +33,7 @@ linux64-nightlies-tier2:
         - linux64-balrog-tier2
         - linux64-single-locale-tier2
         - balrog-worker-migrate-funsize
+        - nightly-beetmover-tier2
 
 linux64-nightlies-tier2-green:
     title: "Green up linux64 nightlies"

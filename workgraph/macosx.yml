@@ -68,6 +68,7 @@ macosx-nightlies-tier2:
         - macosx-signing-tier2
         - macosx-balrog-tier2
         - balrog-worker-migrate-funsize
+        - nightly-beetmover-tier2
 
 macosx-nightlies-tier2-green:
     title: "Green up macosx nightlies"
@@ -86,6 +87,7 @@ macosx-opt-tier1:
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts. remove if that's only docker-worker
         - taskcluster-worker-cot-gpg-keys-in-repo
+        - macosx-debug-tier1
 
 macosx-worker-deployment-hardware:
     title: "Build a method of deploying a worker for Mac OS X on hardware"

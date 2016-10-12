@@ -29,6 +29,7 @@ android-nightlies-tier2:
         - android-signing-tier2
         - android-balrog-tier2
         - android-google-play-tier2
+        - nightly-beetmover-tier2
 
 android-debug-tier1:
     title: "Run Android debug builds and tests at tier 1"

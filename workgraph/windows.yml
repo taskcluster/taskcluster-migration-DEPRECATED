@@ -51,6 +51,7 @@ windows-nightlies-tier2:
         - windows-signing-tier2
         - windows-balrog-tier2
         - balrog-worker-migrate-funsize
+        - nightly-beetmover-tier2
 
 windows-nightlies-tier2-green:
     title: "Green up windows nightlies"

@@ -33,6 +33,7 @@ linux32-nightlies-tier2:
         - linux32-balrog-tier2
         - linux32-single-locale-tier2
         - balrog-worker-migrate-funsize
+        - nightly-beetmover-tier2
 
 linux32-nightlies-tier2-green:
     title: "Green up linux32 nightlies"
