@@ -11,6 +11,14 @@
 # * Deploy to the remainder of the test bb workers, converting suite by suite
 #   to manage the load across the split pool of hardware, until 100% TC
 
+linux32-docker-container:
+    title: "Create a docker container with a 32-bit Linux runtime"
+
+linux32-tests-tier2:
+    title: "Green up linux32 tests at tier 2"
+    dependencies:
+        - linux32-docker-container
+
 linux32-builds-tier2:
     title: "linux32 builds, tier2"
     done: true
@@ -77,6 +85,7 @@ linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
     dependencies:
         - linux32-builds-tier2
+        - linux32-tests-tier2
 
 linux32-opt-tier1:
     title: "Promote all linux32 builds to tier1; turn off linux32 buildbot builds and nightlies; commit for beta in 6-12 weeks"
