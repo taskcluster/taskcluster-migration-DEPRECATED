@@ -5,7 +5,7 @@ stop-bb-schedulers:
     dependencies:
         - seta-in-tree
         - windows-talos-xp-via-bbb
-        - linux32-talos-via-bbb
+        - linux32-opt-tier1
         - linux64-talos-via-bbb
         - macosx-test-talos-via-bbb
         - stop-bb-build-masters
@@ -59,9 +59,8 @@ linux-worker-deployment-hardware:
 stop-bb-linux-test-masters:
     title: "Turn off the Linux Test Buildmasters (except one for ESR)"
     dependencies:
-        - linux32-talos-on-hardware-100pct
         - linux64-talos-on-hardware-100pct
-        # android tests use the same test masters
+        # android tests use the linux test masters
         - android-opt-tier1
 
 docker-worker-cot-gpg-keys-in-repo:

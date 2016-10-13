@@ -1,40 +1,38 @@
-# The overall plan for Linux32 is this:
-#
-# Tests are easy and basically already done.  The tricky bit is Talos, since it
-# is tied to hardware.
-#
-# * Using try or date, green up talos for (existing) opt and debug TC builds via BBB
-# * Switch the TC builds and BB-via-BBB tests to tier 1; this starts the
-#   6-12 week beta clock
-# * Deploy a taskcluster worker to a small portion of linux test bb workers
-# * Using try or date, green up talos using those taskcluster workers
-# * Deploy to the remainder of the test bb workers, converting suite by suite
-#   to manage the load across the split pool of hardware, until 100% TC
+# We will not do Talos for linux32, which means that we do not need to navigate
+# around hardware.
 
 linux32-docker-container:
     title: "Create a docker container with a 32-bit Linux runtime"
-
-linux32-tests-tier2:
-    title: "Green up linux32 tests at tier 2"
-    dependencies:
-        - linux32-docker-container
+    bug:  1287099
 
 linux32-builds-tier2:
-    title: "linux32 builds, tier2"
+    title: "Green Linux32 builds in the tree"
     done: true
+
+linux32-tests-tier2:
+    title: "Green linux32 tests in the tree"
+    dependencies:
+        - linux32-docker-container
+        - linux32-builds-tier2
 
 linux32-signing-tier2:
-    title: "Support for signing linux32 tier2"
-    done: true
+    title: "Implement linux32 signing tasks for nightly builds on a project branch"
+    dependencies:
+        - linux32-builds-tier2
 
 linux32-balrog-tier2:
-    title: "Support for balrog in staging"
+    title: "Implement balrog submission tasks for nightly builds on a project branch"
+    # these will submit to a staging balrog instance
+    dependencies:
+        - linux32-builds-tier2
 
 linux32-single-locale-tier2:
-    title: "Single locale repacks tier2"
+    title: "Implement single locale repacks for nightly builds on a project branch"
+    dependencies:
+        - linux32-builds-tier2
 
 linux32-nightlies-tier2:
-    title: "Land config for linux32 nightly builds at tier 2"
+    title: "Complete and test end-to-end nightlies on a project branch"
     dependencies:
         - linux32-builds-tier2
         - linux32-signing-tier2
@@ -43,43 +41,10 @@ linux32-nightlies-tier2:
         - balrog-worker-migrate-funsize
         - nightly-beetmover-tier2
 
-linux32-nightlies-tier2-green:
-    title: "Green up linux32 nightlies"
+linux32-beta-capable:
+    title: "Build shippable linux32 beta release builds"
     dependencies:
         - linux32-nightlies-tier2
-
-linux32-talos-via-bbb-green:
-    title: "Green up Linux32 talos on TC builds via BBB"
-    dependencies:
-        - in-tree-bbb-support
-        - linux32-builds-tier2
-
-linux32-talos-via-bbb:
-    title: "Run linux32 talos against TC builds via TC/BBB, demote in Buildbot"
-    dependencies:
-        - linux32-nightlies-tier2
-        - linux32-talos-via-bbb-green
-
-linux32-disable-bb-builds:
-    title: "Turn off the Linux32 builds on Buildbot"
-    dependencies:
-        - linux32-talos-via-bbb
-
-linux32-talos-on-hardware-10pct:
-    title: "Run linux* talos on TC on 10% of hardware"
-    dependencies:
-        - linux-worker-deployment-hardware
-        - linux32-talos-via-bbb
-
-linux32-talos-on-hardware-green:
-    title: "Green up Linux talos on TC"
-    dependencies:
-        - linux32-talos-on-hardware-10pct
-
-linux32-talos-on-hardware-100pct:
-    title: "Run linux* talos on TC on 100% of hardware (except a few for ESR)"
-    dependencies:
-        - linux32-talos-on-hardware-green
 
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
@@ -88,19 +53,21 @@ linux32-debug-tier1:
         - linux32-tests-tier2
 
 linux32-opt-tier1:
-    title: "Promote all linux32 builds to tier1; turn off linux32 buildbot builds and nightlies; commit for beta in 6-12 weeks"
+    title: "Promote all linux32 opt and nightly tasks to tier1, demote Buildbot, start 6-12 week timer to linux32-beta-release"
+    # also disable sendchanges for BB builds to save resources
     dependencies:
-        - linux32-nightlies-tier2-green
+        - linux32-nightlies-tier2
         - linux32-debug-tier1
         - scriptworker-tier1
 
-linux32-beta-capable:
-    title: "Build shippable linux32 beta release builds"
+linux32-disable-bb-builds:
+    title: "Turn off all Linux32 builds on Buildbot"
     dependencies:
-        - linux32-nightlies-tier2-green
+        - linux32-debug-tier1
+        - linux32-opt-tier1
 
 linux32-beta-release:
-    title: "Ship linux32 beta release"
+    title: "Ship a real linux32 beta release"
     dependencies:
         - linux32-beta-capable
         - linux32-opt-tier1
