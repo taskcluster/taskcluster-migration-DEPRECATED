@@ -1,6 +1,12 @@
+stop-bbb:
+    title: "Turn off and decommission the Buildbot Bridge"
+    dependencies:
+        - stop-bb-build-masters
+        - stop-bb-test-masters
+
 stop-bb-schedulers:
-  # NOTE: by this time, the schedulers should not be creating any build requests (everything
-  # should already be disabled)
+    # NOTE: by this time, the schedulers should not be creating any build requests (everything
+    # should already be disabled)
     title: "Shut off BB Schedulers (except one for ESR)"
     dependencies:
         - seta-in-tree
@@ -10,9 +16,17 @@ stop-bb-schedulers:
         - macosx-test-talos-via-bbb
         - stop-bb-build-masters
 
+stop-bb-test-masters:
+    title: "Turn off the Test Buildmasters (except one of each for ESR)"
+    dependencies:
+        - stop-bb-macosx-test-masters
+        - stop-bb-linux-test-masters
+        - stop-bb-windows-test-masters
+
 stop-bb-build-masters:
     title: "Turn off the Build Buildmasters (except one of each for ESR)"
     dependencies:
+        - stop-relpromo-via-bbb
         - macosx-disable-bb-builds
         - linux32-disable-bb-builds
         - linux64-disable-bb-builds

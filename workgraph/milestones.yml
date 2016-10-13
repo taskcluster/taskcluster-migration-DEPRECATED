@@ -12,11 +12,10 @@ no-buildbot:
     milestone: true
     dependencies:
         - all-releases
-        - no-buildbot-schedulers
+        - stop-bb-schedulers
         - stop-bb-build-masters
-        - stop-bb-macosx-test-masters
-        - stop-bb-linux-test-masters
-        - stop-bb-windows-test-masters
+        - stop-bb-test-masters
+        - stop-bbb
 
 all-releases:
     title: "Everything has been released at least once from TC (except ESR)"

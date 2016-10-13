@@ -1,0 +1,5 @@
+# This is largely undefined for now; release promotion uses a lot of BBB tasks,
+# so those need to be disabled before we can turn off BuildBot.
+
+stop-relpromo-via-bbb:
+    title: "Stop using BBB in release promotion tasks"
