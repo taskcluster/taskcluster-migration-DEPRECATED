@@ -21,13 +21,13 @@ linux32-signing-tier2:
         - linux32-builds-tier2
 
 linux32-balrog-tier2:
-    title: "Implement balrog submission tasks for nightly builds on a project branch"
+    title: "Implement balrog submission tasks for nightly linux32 builds on a project branch"
     # these will submit to a staging balrog instance
     dependencies:
         - linux32-builds-tier2
 
 linux32-single-locale-tier2:
-    title: "Implement single locale repacks for nightly builds on a project branch"
+    title: "Implement single locale repacks for nightly linux32 builds on a project branch"
     dependencies:
         - linux32-builds-tier2
 
@@ -54,7 +54,7 @@ linux32-debug-tier1:
 
 linux32-opt-tier1:
     title: "Promote all linux32 opt and nightly tasks to tier1, demote Buildbot, start 6-12 week timer to linux32-beta-release"
-    # also disable sendchanges for BB builds to save resources
+    # also, disable sendchanges for BB builds to save resources
     dependencies:
         - linux32-nightlies-tier2
         - linux32-debug-tier1

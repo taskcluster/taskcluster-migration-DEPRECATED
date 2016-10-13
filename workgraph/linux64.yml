@@ -11,57 +11,75 @@
 # * Deploy to the remainder of the test bb workers, converting suite by suite
 #   to manage the load across the split pool of hardware, until 100% TC
 
-linux64-signing-tier2:
-    title: "Support for signing linux64 tier2"
-    done: true
-
-linux64-balrog-tier2:
-    title: "Support for balrog in staging"
-
-linux64-single-locale-tier2:
-    title: "Single locale repacks tier2"
-
 linux64-builds-tier2:
-    title: "Linux64 builds at tier2"
+    title: "Implement Linux64 builds at tier2"
     done: true
 
-linux64-nightlies-tier2:
-    title: "Land config for linux64 nightly builds at tier 2"
+linux64-debug-tier1:
+    title: "Run linux64 debug builds and tests at tier1"
+    done: true
     dependencies:
         - linux64-builds-tier2
+
+linux64-tests-tier2:
+    title: "Implement Linux64 tests at tier 2"
+    done: true
+    dependencies:
+        - linux64-builds-tier2
+
+linux64-signing-tier2:
+    title: "Implement linux64 signing tasks for nightly builds on a project branch"
+    done: true
+    dependencies:
+        - linux64-builds-tier2
+
+linux64-balrog-tier2:
+    title: "Implement balrog submission tasks for nightly linux64 builds on a project branch"
+    dependencies:
+        - linux64-builds-tier2
+
+linux64-single-locale-tier2:
+    title: "Implement single locale repacks for nightly linux64 builds on a project branch"
+    dependencies:
+        - linux64-builds-tier2
+
+linux64-nightlies-tier2:
+    title: "Complete and test end-to-end nightlies on a project branch"
+    dependencies:
+        - linux64-builds-tier2
+        - linux64-tests-tier2
         - linux64-signing-tier2
         - linux64-balrog-tier2
         - linux64-single-locale-tier2
         - balrog-worker-migrate-funsize
         - nightly-beetmover-tier2
 
-linux64-nightlies-tier2-green:
-    title: "Green up linux64 nightlies"
-    dependencies:
-        - linux64-nightlies-tier2
-
 linux64-talos-via-bbb-green:
-    title: "Green up Linux64 talos on TC builds via BBB"
+    title: "Green up Linux64 talos on TC builds via BBB in try or a project branch"
     dependencies:
         - in-tree-bbb-support
         - linux64-builds-tier2
 
-linux64-talos-via-bbb:
-    title: "Run linux64 talos against TC builds via TC/BBB, demote in Buildbot"
+linux64-opt-tier1:
+    title: "Promote all windows builds to tier 1, commit for beta in 6-12 weeks"
+    # NOTE: this involves:
+    #  - running all talos jobs via BBB
+    #  - turning off BB talos jobs, demoting builds to tier 2, and disabling sendchanges
     dependencies:
+        - linux64-debug-tier1
         - linux64-nightlies-tier2
         - linux64-talos-via-bbb-green
 
 linux64-disable-bb-builds:
     title: "Turn off the Linux64 builds on Buildbot"
     dependencies:
-        - linux64-talos-via-bbb
+        - linux64-opt-tier1
 
 linux64-talos-on-hardware-10pct:
     title: "Run linux* talos on TC on 10% of hardware"
     dependencies:
         - linux-worker-deployment-hardware
-        - linux64-talos-via-bbb
+        - linux64-opt-tier1
 
 linux64-talos-on-hardware-green:
     title: "Green up Linux talos on TC"
@@ -73,28 +91,16 @@ linux64-talos-on-hardware-100pct:
     dependencies:
         - linux64-talos-on-hardware-green
 
-linux64-debug-tier1:
-    title: "Run linux64 debug builds and tests at tier1"
-    dependencies:
-        - linux64-builds-tier2
-
-linux64-opt-tier1:
-    title: "Promote all linux64 builds to tier1; turn off linux64 buildbot builds and nightlies; commit for beta in 6-12 weeks"
-    dependencies:
-        - linux64-nightlies-tier2-green
-        - linux64-debug-tier1
-        - scriptworker-tier1
-
 linux64-beta-capable:
     title: "Build shippable linux64 beta release builds"
     dependencies:
-        - linux64-nightlies-tier2-green
+        - linux64-nightlies-tier2
 
 linux64-beta-release:
     title: "Ship linux64 beta release"
     dependencies:
         - linux64-beta-capable
-        - linux64-opt-tier1
+        - linux64-talos-via-bbb
 
 linux64-release:
     title: "Ship linux64 release"

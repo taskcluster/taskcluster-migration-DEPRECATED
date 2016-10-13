@@ -10,9 +10,9 @@ stop-bb-schedulers:
     title: "Shut off BB Schedulers (except one for ESR)"
     dependencies:
         - seta-in-tree
-        - windows-talos-xp-via-bbb
+        - windows-opt-tier1
         - linux32-opt-tier1
-        - linux64-talos-via-bbb
+        - linux64-opt-tier1
         - macosx-test-talos-via-bbb
         - stop-bb-build-masters
 

@@ -27,8 +27,7 @@
 
 ## Implementation stuff
 
- * strip unnecessary paths (given "A -> B -> C" and "A -> C", drop the latter)
- * cycle detection
+ * per-file defaults
  * subgraphs for milestones?
  * other outputs:
    * enumerate items with no deps, sorted by the maximum path length (or duration) from that item
