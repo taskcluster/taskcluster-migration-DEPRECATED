@@ -18,5 +18,7 @@ def main():
         for root in sorted(find_roots(workgraph)):
             f.write(root + "\n")
 
+    print("{} work items".format(len(workgraph)))
+
 if __name__ == "__main__":
     main()
