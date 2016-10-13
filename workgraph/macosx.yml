@@ -18,6 +18,7 @@ macosx-test-talos-via-bbb-green:
     dependencies:
         - in-tree-bbb-support
 
+# TODO: rename macosx-opt-tier1, etc.
 macosx-test-talos-via-bbb:
     # This is a "flag-day" moment where we simultaneously:
     #  * enable in-tree scheduling of test/talos tasks via BBB
