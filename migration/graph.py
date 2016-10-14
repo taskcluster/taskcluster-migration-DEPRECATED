@@ -1,3 +1,4 @@
+import networkx as nx
 from graphviz import Digraph
 
 def transitive_reduction(graph):
@@ -20,8 +21,6 @@ def transitive_reduction(graph):
             stack.pop()
         recur(name)
 
-    assert 'seta-in-tree' in paths['no-buildbot']
-
     # now omit any dependencies for which another dependency has a path
     for name, deps in graph.iteritems():
         omit = set()
@@ -38,18 +37,30 @@ def transitive_reduction(graph):
 
     return graph
 
+def transitive_reduction(g):
+    g = nx.DiGraph(g)
+    for n1 in g.nodes_iter():
+	if g.has_edge(n1, n1):
+	    g.remove_edge(n1, n1)
+	for n2 in g.successors(n1):
+	    for n3 in g.successors(n2):
+		for n4 in nx.dfs_preorder_nodes(g, n3):
+		    if g.has_edge(n1, n4):
+			g.remove_edge(n1, n4)
+    return g
+
 def make_graph(workgraph):
     # make a simpler copy of the workgraph
-    graph = {name: wi.dependencies[:] for name, wi in workgraph.iteritems()}
-    graph = transitive_reduction(graph)
+    #graph = {name: list(deps) for name, deps in workgraph.adjacency_iter()}
+    workgraph = transitive_reduction(workgraph)
 
     dot = Digraph(comment="Work Graph")
     dot.body.append('rankdir=LR')
 
-    for name, workitem in workgraph.iteritems():
-        dot.node(name, name, {'tooltip': workitem.title})
+    for node in workgraph:
+        dot.node(node, node, {'tooltip': workgraph.node[node]['title']})
 
-    for name, deps in graph.iteritems():
+    for name, deps in workgraph.adjacency_iter():
         dot.edges((name, dep) for dep in deps)
 
     return dot

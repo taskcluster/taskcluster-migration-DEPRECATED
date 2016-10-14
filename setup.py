@@ -12,6 +12,7 @@ setup(
     install_requires=[
         'pyyaml',
         'graphviz',
+        'networkx',
     ],
 )
 

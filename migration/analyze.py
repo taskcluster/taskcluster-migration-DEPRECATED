@@ -1,12 +1,4 @@
-def find_roots(workgraph):
-    deps = set()
-    for workitem in workgraph.itervalues():
-        for dep in workitem.dependencies:
-            deps.add(dep)
-    roots = set(workgraph) - deps
-
-    non_milestone = {r for r in roots if not workgraph[r].milestone}
-    if non_milestone:
-        raise Exception("Some graph roots are not milestones: " + ", ".join(non_milestone))
-
-    return roots
+def unblocked_items(workgraph):
+    # make a subgraph containing only un-completed items
+    subgraph = workgraph.subgraph(n for n in workgraph if not workgraph.node[n]['done'])
+    return [n for n in subgraph if not subgraph.successors(n)]
