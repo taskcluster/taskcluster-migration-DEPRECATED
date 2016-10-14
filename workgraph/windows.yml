@@ -73,6 +73,11 @@ windows-xp-via-bbb-green:
         - in-tree-bbb-support
         - windows-builds-tier2
 
+windows-nightlies-manual-test:
+    title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
+    dependencies:
+        - windows-nightlies-tier2
+
 windows-opt-tier1:
     title: "Promote all windows builds to tier1; turn off windows buildbot builds and nightlies; commit for beta in 6-12 weeks"
     # NOTE: this involves
@@ -83,9 +88,9 @@ windows-opt-tier1:
         - generic-worker-cot-gpg-keys-in-repo
         - taskcluster-worker-cot-gpg-keys-in-repo
         - windows-debug-tier1
-        - windows-nightlies-tier2
         - windows-talos-via-bbb-green
         - windows-tests-tier2
+        - windows-nightlies-manual-test
         - windows-xp-via-bbb-green
 
 windows-disable-bb-builds:
@@ -131,7 +136,7 @@ stop-bb-windows-test-masters:
 windows-beta-capable:
     title: "Build shippable windows beta release builds"
     dependencies:
-        - windows-nightlies-tier2
+        - windows-nightlies-manual-test
 
 windows-beta-release:
     title: "Ship windows beta release"

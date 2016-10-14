@@ -44,7 +44,7 @@ linux32-nightlies-tier2:
 linux32-beta-capable:
     title: "Build shippable linux32 beta release builds"
     dependencies:
-        - linux32-nightlies-tier2
+        - linux32-nightlies-manual-test
 
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
@@ -52,11 +52,16 @@ linux32-debug-tier1:
         - linux32-builds-tier2
         - linux32-tests-tier2
 
+linux32-nightlies-manual-test:
+    title: "Verify that the linux32 en-US+l10n nightlies and associated update methods work via manual testing"
+    dependencies:
+        - linux32-nightlies-tier2
+
 linux32-opt-tier1:
     title: "Promote all linux32 opt and nightly tasks to tier1, demote Buildbot, start 6-12 week timer to linux32-beta-release"
     # also, disable sendchanges for BB builds to save resources
     dependencies:
-        - linux32-nightlies-tier2
+        - linux32-nightlies-manual-test
         - linux32-debug-tier1
         - scriptworker-tier1
 
