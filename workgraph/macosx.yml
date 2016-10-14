@@ -76,6 +76,11 @@ macosx-nightlies-tier2-green:
     dependencies:
         - macosx-nightlies-tier2
 
+macosx-nightlies-manual-test:
+    title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
+    dependencies:
+        - macosx-nightlies-tier2
+
 macosx-debug-tier1:
     title: "Run macosx debug builds and tests at tier1"
     dependencies:
@@ -85,6 +90,7 @@ macosx-opt-tier1:
     title: "Promote all macosx builds to tier1; turn off macosx buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
         - macosx-nightlies-tier2-green
+        - macosx-nightlies-manual-test
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts. remove if that's only docker-worker
         - taskcluster-worker-cot-gpg-keys-in-repo
@@ -122,7 +128,7 @@ stop-bb-macosx-test-masters:
 macosx-beta-capable:
     title: "Build shippable macosx beta release builds"
     dependencies:
-        - macosx-nightlies-tier2-green
+        - macosx-nightlies-manual-test
 
 macosx-beta-release:
     title: "Ship macosx beta release"
