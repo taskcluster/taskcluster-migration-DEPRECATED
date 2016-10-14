@@ -12,6 +12,13 @@
  * l10n
  * release promotion (just a stub now)
  * thunderbird (nothing yet..)
+ * milestones as OKRs
+ * external drop-xp-support
+   * mdt upgrade; blocks win10 deployment on hw
+   * external ESR
+   * external tbird
+
+ * talk to rob about win versions
 
 ### Details
 
