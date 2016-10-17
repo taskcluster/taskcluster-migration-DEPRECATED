@@ -75,7 +75,6 @@ linux64-opt-tier1:
         - pulse-actions-missing-talos
         - pulse-actions-backfill
         - orange-builds
-        - logs-on-cancelled-tasks
         - linux64-nightlies-manual-test
         - linux64-debug-tier1
         - linux64-talos-via-bbb-green

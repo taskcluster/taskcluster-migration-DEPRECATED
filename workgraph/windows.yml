@@ -94,7 +94,6 @@ windows-opt-tier1:
         - taskcluster-worker-cot-gpg-keys-in-repo  # drop if tc-w isn't used on windows yet
         - pulse-actions-missing-talos
         - pulse-actions-backfill
-        - logs-on-cancelled-tasks
         - orange-builds
         - windows-debug-tier1
         - windows-talos-via-bbb-green

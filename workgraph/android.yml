@@ -46,7 +46,6 @@ android-opt-tier1:
     dependencies:
         - automatic-retry-android-jobs
         - pulse-actions-backfill
-        - logs-on-cancelled-tasks
         - orange-builds
         - android-opt-tier2
         - android-nightlies-manual-test

@@ -128,7 +128,3 @@ worker-priority-support:
 orange-builds:
     title: "Support turning some builds orange instead of red"
     bug: 1186848
-
-logs-on-cancelled-tasks:
-    title: "Provide logs and artifacts from cancelled builds, across all worker implementations"
-    bug: 1227883

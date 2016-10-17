@@ -76,7 +76,6 @@ macosx-all-tier1:
     #  * promote TC opt and nightly builds to tier 1
     title: "Promote all macosx builds to tier1; turn off macosx buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
-        - logs-on-cancelled-tasks
         - macosx-asan-tier2
         - macosx-builds-tier2
         - macosx-nightlies-manual-test
