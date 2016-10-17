@@ -54,6 +54,7 @@ macosx-nightlies-tier2:
 
 macosx-test-talos-via-bbb-green:
     title: "Green up MacOS X test and talos on TC builds via BBB in try"
+    bug: 1184122
     dependencies:
         - in-tree-bbb-support
 
