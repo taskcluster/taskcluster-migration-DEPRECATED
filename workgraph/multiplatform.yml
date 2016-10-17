@@ -113,6 +113,10 @@ scriptworker-tier1:
         - scriptworker-ssh-alerts
         - scriptworker-iptables
 
+separate-make-check:
+    title: "Run `make check` actions in a separate task from builds"
+    bug: 992323
+
 pulse-actions-backfill:
     title: "Add support for backfilling jobs"
     bug: 1289823

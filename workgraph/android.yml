@@ -35,6 +35,7 @@ android-nightlies-tier2:
 android-debug-tier1:
     title: "Run Android debug builds and tests at tier 1"
     bug: 1269003
+    done: true
 
 android-nightlies-manual-test:
     title: "Verify that the multilocale+en-US+l10n nightlies and associated update methods work via manual testing"

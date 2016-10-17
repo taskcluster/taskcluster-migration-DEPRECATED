@@ -15,6 +15,8 @@
 
 macosx-builds-tier2:
     title: "Support macosx builds, tier2"
+    dependencies:
+        - separate-make-check
 
 macosx-universal-builds:
     # NOTE: we may decide not to do this if it turns out to be difficult
