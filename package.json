@@ -5,6 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "http-server": "^0.9.0",
+    "js-yaml": "^3.6.1",
+    "lodash": "^4.16.4",
     "react": "^15.3.2",
     "react-dom": "^15.3.2"
   },
@@ -13,9 +15,9 @@
     "neutrino-preset-react": "^1.3.0"
   },
   "scripts": {
-    "start": "PORT=3000 neutrino start --preset neutrino-preset-react",
-    "test": "neutrino test --preset neutrino-preset-react",
-    "build": "neutrino build --preset neutrino-preset-react"
+    "start": "PORT=3000 neutrino start -p migration-preset",
+    "test": "neutrino test -p migration-preset",
+    "build": "neutrino build -p migration-preset"
   },
   "repository": {
     "type": "git",

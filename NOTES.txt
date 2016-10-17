@@ -1,0 +1,6 @@
+template.ejs isn't being used for whatever reason, so WORKGRAPH is not being
+loaded.
+
+Once that's set, write some generic graph-handling code in src/ and use that
+both in the build process (to assert well-formedness) and in the browser (to
+show important details).
