@@ -1,15 +1,8 @@
 # TODO
 
-## Work Items
-
- * rewrite macosx
-
-### Details
-
 ## Work Item Attributes
 
- * duration?
- * finished/unfinished
+ * duration? (in person-days, not used to calculate ETAs)
  * ¯\_(ツ)_/¯ item
  * "etc." to indicate there will be more dependencies
 

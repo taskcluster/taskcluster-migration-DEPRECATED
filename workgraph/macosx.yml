@@ -13,32 +13,6 @@
 # problems, from the deployment perspective they are the same and share the
 # same hardware pool.
 
-macosx-test-talos-via-bbb-green:
-    title: "Green up MacOS X test and talos on TC builds via BBB"
-    dependencies:
-        - in-tree-bbb-support
-
-# TODO: rename macosx-opt-tier1, etc.
-macosx-test-talos-via-bbb:
-    # This is a "flag-day" moment where we simultaneously:
-    #  * enable in-tree scheduling of test/talos tasks via BBB
-    #  * disable sendchanges from Buildbot builds and demote to Tier 2
-    #  * promote TC builds to tier 1
-    title: "Run MacOS X test and talos against TC builds via TC/BBB, disable in Buildbot"
-    dependencies:
-        - pulse-actions-missing-talos
-        - pulse-actions-backfill
-        - logs-on-cancelled-tasks
-        - orange-builds
-        - macosx-universal-builds  # unless we decide to drop this
-        - macosx-nightlies-tier2
-        - macosx-test-talos-via-bbb-green
-
-macosx-disable-bb-builds:
-    title: "Turn off the MacOS X builds on Buildbot"
-    dependencies:
-        - macosx-test-talos-via-bbb
-
 macosx-builds-tier2:
     title: "Support macosx builds, tier2"
 
@@ -53,17 +27,19 @@ macosx-single-locale-tier2:
     title: "Support single locale repacks for macosx"
     dependencies:
         - macosx-universal-builds
+        - macosx-builds-tier2
 
 macosx-mach-repackage:
     title: "Support exploding/[re-]signing pre-built DMGs"
 
 macosx-signing-tier2:
-    title: "sign macosx builds in tc"
+    title: "Implemnt macosx signing tasks for nightly builds on a project branch"
     dependencies:
+        - macosx-builds-tier2
         - macosx-mach-repackage
 
 macosx-balrog-tier2:
-    title: "support for balrog in staging"
+    title: "Implement balrog submission tasks for nightly Windows builds on a project branch"
 
 macosx-nightlies-tier2:
     title: "Land config for macosx nightly builds at tier2"
@@ -75,16 +51,6 @@ macosx-nightlies-tier2:
         - macosx-balrog-tier2
         - balrog-worker-migrate-funsize
         - nightly-beetmover-tier2
-
-macosx-nightlies-tier2-green:
-    title: "Green up macosx nightlies"
-    dependencies:
-        - macosx-nightlies-tier2
-
-macosx-nightlies-manual-test:
-    title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
-    dependencies:
-        - macosx-nightlies-tier2
 
 macosx-debug-tier1:
     title: "Run macosx debug builds and tests at tier1"
@@ -98,15 +64,40 @@ macosx-asan-tier1:
     depenencies:
         macosx-debug-tier1
 
+macosx-test-talos-via-bbb-green:
+    title: "Green up MacOS X test and talos on TC builds via BBB in try"
+    dependencies:
+        - in-tree-bbb-support
+
+macosx-nightlies-manual-test:
+    title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
+    dependencies:
+        - macosx-nightlies-tier2
+
 macosx-opt-tier1:
+    # This is a "flag-day" moment where we simultaneously:
+    #  * enable in-tree scheduling of test/talos tasks via BBB
+    #  * disable sendchanges from Buildbot builds and demote to Tier 2
+    #  * promote TC opt and nightly builds to tier 1
     title: "Promote all macosx builds to tier1; turn off macosx buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
-        - macosx-nightlies-tier2-green
+        - logs-on-cancelled-tasks
+        - macosx-asan-tier1
+        - macosx-debug-tier1
         - macosx-nightlies-manual-test
+        - macosx-nightlies-tier2
+        - macosx-test-talos-via-bbb-green
+        - macosx-universal-builds  # unless we decide to drop this
+        - orange-builds
+        - pulse-actions-backfill
+        - pulse-actions-missing-talos
         - scriptworker-tier1
         - taskcluster-worker-cot-gpg-keys-in-repo
-        - macosx-debug-tier1
-        - macosx-asan-tier1
+
+macosx-disable-bb-builds:
+    title: "Turn off the MacOS X builds on Buildbot"
+    dependencies:
+        - macosx-opt-tier1
 
 macosx-taskcluster-worker:
     title: "Build a tc-worker engine for OS X"
@@ -124,7 +115,7 @@ macosx-test-talos-on-hardware-10pct:
     dependencies:
         - macosx-worker-deployment-hardware
         - worker-priority-support
-        - macosx-test-talos-via-bbb
+        - macosx-opt-tier1
 
 macosx-test-talos-on-hardware-green:
     title: "Green up MacOS X tests and talos on TC"

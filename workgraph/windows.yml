@@ -66,13 +66,13 @@ windows-debug-tier1:
         - windows-symbol-uploads
 
 windows-talos-via-bbb-green:
-    title: "Green up Windows talos on TC builds via BBB"
+    title: "Green up Windows talos on TC builds via BBB in try"
     dependencies:
         - in-tree-bbb-support
         - windows-nightlies-tier2
 
 windows-xp-via-bbb-green:
-    title: "Green up Windows XP tests on TC builds via BBB"
+    title: "Green up Windows XP tests on TC builds via BBB in try"
     bug: 1285576
     dependencies:
         - in-tree-bbb-support
