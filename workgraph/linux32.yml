@@ -33,6 +33,7 @@ linux32-single-locale-tier2:
 
 linux32-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
+    milestone: true
     dependencies:
         - linux32-builds-tier2
         - linux32-signing-tier2
@@ -62,6 +63,9 @@ linux32-opt-tier1:
     # also, disable sendchanges for BB builds to save resources
     dependencies:
         - linux32-nightlies-manual-test
+        - pulse-actions-backfill
+        - logs-on-cancelled-tasks
+        - orange-builds
         - linux32-debug-tier1
         - scriptworker-tier1
 

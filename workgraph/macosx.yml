@@ -26,6 +26,10 @@ macosx-test-talos-via-bbb:
     #  * promote TC builds to tier 1
     title: "Run MacOS X test and talos against TC builds via TC/BBB, disable in Buildbot"
     dependencies:
+        - pulse-actions-missing-talos
+        - pulse-actions-backfill
+        - logs-on-cancelled-tasks
+        - orange-builds
         - macosx-universal-builds  # unless we decide to drop this
         - macosx-nightlies-tier2
         - macosx-test-talos-via-bbb-green
@@ -63,6 +67,7 @@ macosx-balrog-tier2:
 
 macosx-nightlies-tier2:
     title: "Land config for macosx nightly builds at tier2"
+    milestone: true
     dependencies:
         - macosx-universal-builds
         - macosx-single-locale-tier2
@@ -86,6 +91,13 @@ macosx-debug-tier1:
     dependencies:
         - macosx-builds-tier2
 
+macosx-asan-tier1:
+    title: "Run macosx ASAN builds, and tests on them, at tier 1"
+    # this encompasses running the builds at tier 2 for a while
+    bug: 1209937
+    depenencies:
+        macosx-debug-tier1
+
 macosx-opt-tier1:
     title: "Promote all macosx builds to tier1; turn off macosx buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
@@ -94,15 +106,24 @@ macosx-opt-tier1:
         - scriptworker-tier1
         - taskcluster-worker-cot-gpg-keys-in-repo
         - macosx-debug-tier1
+        - macosx-asan-tier1
+
+macosx-taskcluster-worker:
+    title: "Build a tc-worker engine for OS X"
+    assigned: wcosta
+    bug: 1171618
 
 macosx-worker-deployment-hardware:
     title: "Build a method of deploying a worker for Mac OS X on hardware"
     assigned: wcosta
+    dependencies:
+        - macosx-taskcluster-worker
 
 macosx-test-talos-on-hardware-10pct:
     title: "Run MacOS X talos on TC on 10% of hardware"
     dependencies:
         - macosx-worker-deployment-hardware
+        - worker-priority-support
         - macosx-test-talos-via-bbb
 
 macosx-test-talos-on-hardware-green:

@@ -7,7 +7,7 @@ stop-bbb:
 stop-bb-schedulers:
     # NOTE: by this time, the schedulers should not be creating any build requests (everything
     # should already be disabled)
-    title: "Shut off BB Schedulers (except one for ESR)"
+    title: "Shut off BB Schedulers (except one for ESR et al.)"
     dependencies:
         - seta-in-tree
         - windows-opt-tier1
@@ -17,14 +17,14 @@ stop-bb-schedulers:
         - stop-bb-build-masters
 
 stop-bb-test-masters:
-    title: "Turn off the Test Buildmasters (except one of each for ESR)"
+    title: "Turn off the Test Buildmasters (except one of each for ESR et al.)"
     dependencies:
         - stop-bb-macosx-test-masters
         - stop-bb-linux-test-masters
         - stop-bb-windows-test-masters
 
 stop-bb-build-masters:
-    title: "Turn off the Build Buildmasters (except one of each for ESR)"
+    title: "Turn off the Build Buildmasters (except one of each for ESR et al.)"
     dependencies:
         - stop-relpromo-via-bbb
         - macosx-disable-bb-builds
@@ -64,6 +64,7 @@ nightly-beetmover-tier2:
 
 linux-tc-worker-engine:
     title: "implement a tc-worker engine that can support linux talos on hardware"
+    bug: 1282011
 
 linux-worker-deployment-hardware:
     title: "build a method of deploying a worker for linux on hardware"
@@ -71,7 +72,7 @@ linux-worker-deployment-hardware:
         - linux-tc-worker-engine
 
 stop-bb-linux-test-masters:
-    title: "Turn off the Linux Test Buildmasters (except one for ESR)"
+    title: "Turn off the Linux Test Buildmasters (except one for ESR et al.)"
     dependencies:
         - linux64-talos-on-hardware-100pct
         # android tests use the linux test masters
@@ -111,3 +112,23 @@ scriptworker-tier1:
         - scriptworker-nagios
         - scriptworker-ssh-alerts
         - scriptworker-iptables
+
+pulse-actions-backfill:
+    title: "Add support for backfilling jobs"
+    bug: 1289823
+
+pulse-actions-missing-talos:
+    title: "Add support for backfilling all talos jobs on a push"
+    bug: 1289824
+
+worker-priority-support:
+    title: "Support for priorities in TaskCluster workers"
+    bug: 1231781
+
+orange-builds:
+    title: "Support turning some builds orange instead of red"
+    bug: 1186848
+
+logs-on-cancelled-tasks:
+    title: "Provide logs and artifacts from cancelled builds, across all worker implementations"
+    bug: 1227883

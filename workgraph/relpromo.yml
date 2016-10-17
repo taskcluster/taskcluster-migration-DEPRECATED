@@ -3,3 +3,7 @@
 
 stop-relpromo-via-bbb:
     title: "Stop using BBB in release promotion tasks"
+    dependencies:
+        # there's probably an intermediate step here, involving actually *using*
+        # proirities for releases..
+        - worker-priority-support

@@ -1,0 +1,14 @@
+# These are external work items -- basically events that we do not control
+# which must occur at some point during the migration.
+
+windows-xp-deprecated:
+    title: "Windows XP is no longer a supported Firefox platform"
+    external: true
+
+esr-on-bb-desupported:
+    title: "Final ESR built on Buildbot is no longer supported"
+    external: true
+
+thunderbird-off-bb:
+    title: "Thunderbird is no longer built on the releng Buildbot system"
+    external: true

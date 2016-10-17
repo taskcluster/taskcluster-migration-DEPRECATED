@@ -28,6 +28,9 @@ windows-tests-tier2:
     dependencies:
         - windows-builds-tier2
 
+windows-symbol-uploads:
+    title: "Symbols from Windows builds uploadd to Socorro"
+
 windows-single-locale-tier2:
     title: "Support single locale repacks for windows"
     dependencies:
@@ -47,6 +50,7 @@ windows-balrog-tier2:
 
 windows-nightlies-tier2:
     title: "Land config for windows nightly builds at tier2"
+    milestone: true
     dependencies:
         - windows-single-locale-tier2
         - windows-signing-tier2
@@ -59,6 +63,7 @@ windows-debug-tier1:
     dependencies:
         - windows-tests-tier2
         - windows-builds-tier2
+        - windows-symbol-uploads
 
 windows-talos-via-bbb-green:
     title: "Green up Windows talos on TC builds via BBB"
@@ -87,6 +92,10 @@ windows-opt-tier1:
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo
         - taskcluster-worker-cot-gpg-keys-in-repo  # drop if tc-w isn't used on windows yet
+        - pulse-actions-missing-talos
+        - pulse-actions-backfill
+        - logs-on-cancelled-tasks
+        - orange-builds
         - windows-debug-tier1
         - windows-talos-via-bbb-green
         - windows-tests-tier2
@@ -105,6 +114,7 @@ windows-talos-on-hardware-10pct:
     title: "Run win* talos on TC on 10% of hardware"
     dependencies:
         - windows-opt-tier1
+        - worker-priority-support
         - worker-deployment-windows-hardware
 
 windows-talos-on-hardware-green:
@@ -116,10 +126,6 @@ windows-talos-on-hardware-90pct:
     title: "Run win* talos on TC on 90% of hardware (leaving XP and a few for ESR)"
     dependencies:
         - windows-talos-on-hardware-green
-
-windows-xp-deprecated:
-    title: "Windows XP is no longer a supported Firefox platform"
-    external: true
 
 windows-xp-removed:
     title: "Remove support for Windows XP and reimage freed machines (except a few for ESR)"

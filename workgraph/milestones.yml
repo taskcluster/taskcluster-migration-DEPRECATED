@@ -8,7 +8,16 @@ no-buildbot-schedulers:
         - stop-bb-schedulers
 
 no-buildbot:
-    title: "Buildbot completely turned off (except ESR)"
+    title: "Buildbot completely turned off"
+    milestone: true
+    dependencies:
+        - almost-no-buildbot
+        - thunderbird-off-bb
+        - esr-on-bb-desupported
+        - windows-xp-deprecated
+
+almost-no-buildbot:
+    title: "Turn off Buildbot except for ESR and Thunderbird"
     milestone: true
     dependencies:
         - all-releases

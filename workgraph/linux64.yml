@@ -45,6 +45,7 @@ linux64-single-locale-tier2:
 
 linux64-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
+    milestone: true
     dependencies:
         - linux64-builds-tier2
         - linux64-tests-tier2
@@ -71,6 +72,10 @@ linux64-opt-tier1:
     #  - running all talos jobs via BBB
     #  - turning off BB talos jobs, demoting builds to tier 2, and disabling sendchanges
     dependencies:
+        - pulse-actions-missing-talos
+        - pulse-actions-backfill
+        - orange-builds
+        - logs-on-cancelled-tasks
         - linux64-nightlies-manual-test
         - linux64-debug-tier1
         - linux64-talos-via-bbb-green
