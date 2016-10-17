@@ -4,6 +4,7 @@
 android-opt-tier2:
     title: "Run Android opt builds and tests at tier 2"
     bug: 1277645
+    done: true
 
 android-multilocale-tier2:
     title: "Android multilocale builds, tier2"
