@@ -1,0 +1,11 @@
+include:
+    - android.yml
+    - external.yml
+    - in-tree.yml
+    - linux32.yml
+    - linux64.yml
+    - macosx.yml
+    - milestones.yml
+    - multiplatform.yml
+    - relpromo.yml
+    - windows.yml
