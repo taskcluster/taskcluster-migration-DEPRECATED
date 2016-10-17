@@ -92,7 +92,6 @@ macosx-opt-tier1:
         - macosx-nightlies-tier2-green
         - macosx-nightlies-manual-test
         - scriptworker-tier1
-        - generic-worker-cot-gpg-keys-in-repo  # any workers that affect artifacts. remove if that's only docker-worker
         - taskcluster-worker-cot-gpg-keys-in-repo
         - macosx-debug-tier1
 

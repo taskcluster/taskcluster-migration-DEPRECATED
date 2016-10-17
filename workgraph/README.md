@@ -8,7 +8,6 @@
  * other scheduler activities
  * "queue monitoring" -- aki, blocking tier 1
  * "nagios" -- aki, blocking tier 1
- * "chain of trust verification" -- aki, blocking tier 1
  * l10n
  * release promotion (just a stub now)
  * thunderbird (nothing yet..)
@@ -19,11 +18,11 @@
    * mdt upgrade; blocks win10 deployment on hw
    * external ESR
    * external tbird
- * talk to rob about win versions
- * talk to rail about "beta-capable" and any other operational/relpromo dependencies
- * talk to rail about "beta-capable" and any other operational/relpromo dependencies
- * talk to mihai about funsize worker - need new workers? for mac, windows
- * talk to kim about `mach repackage` and what it does -- repackage for resigning, but also l10n?
+ * [scheduled] talk to rob about win versions
+ * [scheduled] talk to rail about "beta-capable" and any other operational/relpromo dependencies
+ * [scheduled] talk to rail about "beta-capable" and any other operational/relpromo dependencies
+ * [scheduled] talk to mihai about funsize worker - need new workers? for mac, windows
+ * [scheduled] talk to kim about `mach repackage` and what it does -- repackage for resigning, but also l10n?
 
 ### Details
 

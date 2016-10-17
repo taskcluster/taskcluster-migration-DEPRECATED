@@ -86,7 +86,7 @@ windows-opt-tier1:
     dependencies:
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo
-        - taskcluster-worker-cot-gpg-keys-in-repo
+        - taskcluster-worker-cot-gpg-keys-in-repo  # drop if tc-w isn't used on windows yet
         - windows-debug-tier1
         - windows-talos-via-bbb-green
         - windows-tests-tier2
