@@ -2,6 +2,9 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <div>
+    <h1>Full Work Graph</h1>
+    <img src="/data/workgraph.dot.svg" />
+  </div>,
   document.getElementById('root')
 );
