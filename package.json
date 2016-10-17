@@ -1,0 +1,30 @@
+{
+  "name": "migration",
+  "version": "1.0.0",
+  "description": "## Work Graph",
+  "main": "index.js",
+  "dependencies": {
+    "http-server": "^0.9.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
+  },
+  "devDependencies": {
+    "neutrino": "^2.2.0",
+    "neutrino-preset-react": "^1.3.0"
+  },
+  "scripts": {
+    "start": "PORT=3000 neutrino start --preset neutrino-preset-react",
+    "test": "neutrino test --preset neutrino-preset-react",
+    "build": "neutrino build --preset neutrino-preset-react"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taskcluster/migration.git"
+  },
+  "author": "Dustin J. Mitchell <dustin@mozilla.com>",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/taskcluster/migration/issues"
+  },
+  "homepage": "https://github.com/taskcluster/migration#readme"
+}
