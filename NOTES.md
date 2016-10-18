@@ -1,9 +1,13 @@
 # ESR
 
 We will "finish" the migration with a small pool of Buildbot still running just
-to service ESR releases.  Aside from some "except ESR" notes, ESR is largely
-ignored in this work plan as it doesn't materially change the work that must be
-done.
+to service ESR releases.
+
+# XP
+
+Similarly, Windows XP will last as long as it lasts, and we will not attempt to
+do anything to change the Windows XP buildslaves.  So Buildbot itself cannot be
+shut off until Windows XP is no longer supported on any branch.
 
 # 6-12 Week Counter
 
