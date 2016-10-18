@@ -10,6 +10,7 @@ stop-bb-schedulers:
     title: "Shut off BB Schedulers (except one for ESR et al.)"
     dependencies:
         - seta-in-tree
+        - periodic-update-service
         - windows-opt-tier1
         - linux32-opt-tier1
         - linux64-opt-tier1
@@ -132,3 +133,13 @@ worker-priority-support:
 orange-builds:
     title: "Support turning some builds orange instead of red"
     bug: 1186848
+
+scriptworker-update-service:
+    title: "Implement and deploy an update service scriptworkerinstance"
+
+periodic-update-service:
+    title: "Implement the periodic update service"
+    bug: 1171193
+    dependencies:
+        - scriptworker-tier1
+        - scriptworker-update-service
