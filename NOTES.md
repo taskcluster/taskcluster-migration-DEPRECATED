@@ -14,11 +14,10 @@ shut off until Windows XP is no longer supported on any branch.
 Turning on Tier-1 opt builds requires releasing a beta within 12 weeks, so we
 need to time that carefully.
 
-Betas are promoted from nightlies on the mozilla-beta branch, and nightlies are
-built with the same CI system as opt builds (so that we're testing what we
-ship), so once the tier-1 opt promotion lands, six weeks after it is promoted
-we will need to have nightlies functional enough to form the basis of a beta
-release.
+Betas are promoted from CI builds on the mozilla-beta branch -- the opt builds
+(so that we're testing what we ship).  So once the tier-1 opt promotion lands,
+six weeks after it is promoted we will need to have releases functional enough
+to form the basis of a beta release.
 
 # Tiering Up
 
