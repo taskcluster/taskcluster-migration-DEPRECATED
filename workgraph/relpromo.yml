@@ -1,33 +1,56 @@
-# This is largely undefined for now; release promotion uses a lot of BBB tasks,
-# so those need to be disabled before we can turn off BuildBot.
+# Release tasks currently use BBB for a number of operations, so these must be
+# moved to use TaskCluster instead.
+#
+# Note that modifying releasetasks to be defined in-tree is *not* part of the
+# migration.
 
-stop-relpromo-via-bbb:
-    title: "Stop using BBB in release promotion tasks"
-    dependencies: []
-        # there's probably an intermediate step here, involving actually *using*
-        # proirities for releases..
+releasetasks-l10n-repacks:
+    title: "Implement l10n repack tasks using TC only in releasetasks"
 
-#Release Tasks = relpromo
-#
-#  pushes a task graph
-#  reuse existing binaries from CI
-#  create l10n repacks - done via BBB, needs to be ported after Callek finishes **
-#  port partner repacks - done via BBB, currently on mac workers
-#    both l10n and partner need a pool of macosx workers, or to port to do cross-compile **
-#    (windows partner repacks will rework on linux)
-#  funsize stuff runs in docker-worker
-#  update-verification needs to run on testers
-#    port for mac and for windows **
-#  source tarballs, etc. runs in docker-worker
-#  bouncer client -- requires VPN access to cloudops amz account **
-#    solve with scriptworker
-#  bumper to bump in-tree fx version - can use common infra with periodic updates **
-#    solve with same scriptowrker as periodic updates
-#
-#Scriptworker deployment??
-#
-#manual-nightly-test = whimboo stuff, but done in a project branch
-#
-#beta-capable = remove
-#
-#keep the rest
+releasetasks-partner-repacks-linux:
+    title: "Implement partner repacks for Windows and Linux builds on linux"
+
+partner-repacks-macosx-select-strategy:
+    title: "Select a strategy for MacOS X partner repacks"
+    # one of:
+    #  - run on a dedicated pool of macs (add new work items to deploy that pool)
+    #  - run on a existing mac testers (dep on macosx-test-talos-on-hardware-100pct)
+    #  - run on linux (add new work items to implement that)
+
+releasetasks-partner-repacks-macosx:
+    title: "Implement partner repacks for MacOS X"
+    dependencies:
+        - partner-repacks-macosx-select-strategy
+        # .. TBD, depending on strategy
+
+releasetasks-update-verification-macosx:
+    title: "Implement update verification tasks that run on the OS X test/talos pool"
+    dependencies:
+        - macosx-test-talos-on-hardware-100pct
+
+releasetasks-update-verification-windows:
+    title: "Implement update verification tasks that run on a Windows tester workerType"
+    dependencies:
+        - windows-tests-tier2
+
+releasetasks-bouncer-scriptworker:
+    title: "Implement a scriptworker that can communicate with the bouncer API via network ACLs"
+    dependencies:
+        - scriptworker-tier1
+
+releasetasks-hg-bumper:
+    title: "Implement a bumper as a scriptworker using the hg-committer script"
+    dependencies:
+        - scriptworker-tier1
+        - scriptworker-hg-committer
+
+stop-releasetasks-via-bbb:
+    title: "Stop using BBB in release tasks"
+    dependencies:
+        - releasetasks-l10n-repacks
+        - releasetasks-partner-repacks-linux
+        - releasetasks-partner-repacks-macosx
+        - releasetasks-update-verification-macosx
+        - releasetasks-update-verification-windows
+        - releasetasks-bouncer-scriptworker
+        - releasetasks-hg-bumper

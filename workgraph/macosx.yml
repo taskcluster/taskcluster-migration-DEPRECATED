@@ -70,6 +70,7 @@ macosx-asan-tier2:
         macosx-builds-tier2
 
 macosx-nightlies-manual-test:
+    # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
     dependencies:
         - macosx-nightlies-tier2
@@ -142,15 +143,10 @@ stop-bb-macosx-test-masters:
     dependencies:
         - macosx-test-talos-on-hardware-100pct
 
-macosx-beta-capable:
-    title: "Build shippable macosx beta release builds"
-    dependencies:
-        - macosx-nightlies-manual-test
-
 macosx-beta-release:
     title: "Ship macosx beta release"
     dependencies:
-        - macosx-beta-capable
+        - macosx-nightlies-manual-test
         - macosx-all-tier1
 
 macosx-release:

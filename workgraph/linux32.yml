@@ -42,11 +42,6 @@ linux32-nightlies-tier2:
         - linux32-single-locale-tier2
         - nightly-beetmover-tier2
 
-linux32-beta-capable:
-    title: "Build shippable linux32 beta release builds"
-    dependencies:
-        - linux32-nightlies-manual-test
-
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
     dependencies:
@@ -54,6 +49,7 @@ linux32-debug-tier1:
         - linux32-tests-tier2
 
 linux32-nightlies-manual-test:
+    # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the linux32 en-US+l10n nightlies and associated update methods work via manual testing"
     dependencies:
         - linux32-nightlies-tier2
@@ -85,7 +81,7 @@ linux32-disable-bb-builds:
 linux32-beta-release:
     title: "Ship a real linux32 beta release"
     dependencies:
-        - linux32-beta-capable
+        - linux32-nightlies-manual-test
         - linux32-opt-tier1
 
 linux32-release:

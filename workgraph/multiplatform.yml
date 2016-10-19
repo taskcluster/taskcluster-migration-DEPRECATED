@@ -27,7 +27,7 @@ stop-bb-test-masters:
 stop-bb-build-masters:
     title: "Turn off the Build Buildmasters (except one of each for ESR et al.)"
     dependencies:
-        - stop-relpromo-via-bbb
+        - stop-releasetasks-via-bbb
         - macosx-disable-bb-builds
         - linux32-disable-bb-builds
         - linux64-disable-bb-builds
@@ -139,12 +139,12 @@ orange-builds:
     title: "Support turning some builds orange instead of red"
     bug: 1186848
 
-scriptworker-update-service:
-    title: "Implement and deploy an update service scriptworkerinstance"
+scriptworker-hg-committer:
+    title: "Implement a scriptworker script that can safely land commits to hg"
 
 periodic-update-service:
     title: "Implement the periodic update service"
     bug: 1171193
     dependencies:
         - scriptworker-tier1
-        - scriptworker-update-service
+        - scriptworker-hg-committer

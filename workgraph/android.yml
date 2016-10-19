@@ -41,6 +41,7 @@ android-debug-tier1:
     done: true
 
 android-nightlies-manual-test:
+    # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the multilocale+en-US+l10n nightlies and associated update methods work via manual testing"
     dependencies:
         - android-nightlies-tier2
@@ -62,15 +63,10 @@ android-opt-tier1:
         - android-nightlies-manual-test
         - scriptworker-tier1
 
-android-beta-capable:
-    title: "Build shippable android beta release builds"
-    dependencies:
-        - android-nightlies-manual-test
-
 android-beta-release:
     title: "Ship android beta releases"
     dependencies:
-        - android-beta-capable
+        - android-nightlies-manual-test
         - android-opt-tier1
 
 android-release:
