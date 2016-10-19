@@ -47,16 +47,20 @@ export default React.createClass({
     });
 
     const listItems = (name, title, nodes) => {
-      if (!nodes.length) {
-        return null;
-      }
-
       const visible = this.state.visible[name];
       const header = (
         <h2 onClick={() => this.toggleVisible(name)}>
           {title}
         </h2>
       );
+
+      if (!nodes.length) {
+        return (
+          <Panel collapsible expanded={visible} header={header}>
+            <span className="text-muted">no items</span>
+          </Panel>
+        );
+      }
 
       return <Panel collapsible expanded={visible} header={header}>
         <ul>
@@ -66,7 +70,7 @@ export default React.createClass({
         </ul>
       </Panel>;
     };
-    return <div>
+    return <div className="container-fluid">
       {listItems('blocked', 'Blocked', blocked)}
       {listItems('inProgress', 'In Progress', inProgress)}
       {listItems('ready', 'Ready', ready)}
