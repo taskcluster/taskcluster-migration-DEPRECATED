@@ -31,3 +31,13 @@ The following is the process for getting a platform to tier 1 on TC.
 
 In particular, the key is that a build can't go to tier 1 until its outputs are
 being tested by tests that are also ready to go to tier 1.
+
+# Mach Repackage
+
+Windows and Mac packages contain signed bits (internals) which are then
+packaged into a single file, which is itself signed (external).
+
+Currently, the signing and packaging are interleaved in a single file, but this
+is not compatible with separate signing.  The `mach repackage` work will
+separate these operations so that a complete package can be disassebled,
+signed, and re-assembled.

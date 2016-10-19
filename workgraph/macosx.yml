@@ -32,10 +32,11 @@ macosx-single-locale-tier2:
         - macosx-builds-tier2
 
 macosx-mach-repackage:
-    title: "Support exploding/[re-]signing pre-built DMGs"
+    title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
+    assigneD: kmoir
 
 macosx-signing-tier2:
-    title: "Implemnt macosx signing tasks for nightly builds on a project branch"
+    title: "Implemnt macosx signing tasks for nightly builds on a project branch, using mach repackage"
     dependencies:
         - macosx-builds-tier2
         - macosx-mach-repackage

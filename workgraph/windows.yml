@@ -37,10 +37,13 @@ windows-single-locale-tier2:
         - windows-builds-tier2
 
 windows-mach-repackage:
-    title: "Support exploding/[re-]signing pre-built windows installers"
+    title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
+    assigned: kmoir
+    bug: 1287881
 
 windows-signing-tier2:
-    title: "Implement Windows signing tasks for nightly builds on a project branch"
+    title: "Implement Windows signing tasks for nightly builds on a project branch, using mach repackage"
+    bug: 1277591
     dependencies:
         - windows-builds-tier2
         - windows-mach-repackage
