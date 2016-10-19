@@ -41,7 +41,7 @@ seta-in-tree:
 
 beetmover-worker-impl:
     # "beetworker"?
-    title: "Implement a Beetmoover Worker"
+    title: "Implement and deploy a Beetmoover Worker based on scriptworker"
     bug: 1282188
     assigned: mtabara
 
@@ -67,6 +67,7 @@ docker-worker-retry-on:
 
 nightly-beetmover-tier2:
     title: "beetmover tasks implemented in-tree for tier2 platforms"
+    assigned: mtabara
     dependencies:
         - beetmover-worker-impl
 
