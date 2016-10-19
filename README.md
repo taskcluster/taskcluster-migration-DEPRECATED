@@ -1,20 +1,25 @@
 # Buildbot-to-TaskCluster Migration
 
-## Work Graph
+This repository contains detailed tracking information for the Great
+TaskCluster Migraiton.  It also implements a web application to view that
+status in some useful ways.
 
-The central idea here is to map out all of the actual work items we need to
-accomplish, and the dependencies between them.  There will be some gray areas
-here, and we can focus on filling those in.
+The focus is the "work graph", which describes the individual work items that
+need to be accomplished.  Key among those are some "milestone" work items which
+represent measurable intermediate progress.
 
-These are all defined in fairly self-explanatory YAML files in `workgraph/`.
+## Modifying
 
-## Results:
+To modify the work graph, update the data in the YAML files under workgraph/.
 
- * [Full Work Graph SVG](https://index.taskcluster.net/v1/task/project.taskcluster.migration.latest/artifacts/public/output/workgraph.dot.svg) (it's big!)
- * [Graph Roots](https://index.taskcluster.net/v1/task/project.taskcluster.migration.latest/artifacts/public/output/roots.txt) - all of the work items on which nothing else depends.  Ideally these would all be milestones!
+Running `npm start` (after having run `npm install`) will set up a development
+server that will helpfully inform you about a few basic errors in the graph
+format, and also allow you to explore the result in your browser.
 
-More results are coming soon! For example, a list of unblocked work items
-sorted by criticality (longest pole first), and results for milestones such as
-turning off the BB scheduler masters.
+When you are happy, submit a pull request!
 
-See also the [open and closed questions](QUESTIONS.md).
+## More Information
+
+* [workgraph README](workgraph/README.md)
+* [notes](NOTES.md)
+* [open and closed questions](QUESTIONS.md)
