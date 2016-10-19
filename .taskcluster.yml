@@ -16,19 +16,15 @@ tasks:
           - pull_request.synchronize
     payload:
       maxRunTime: 3600
-      image: "djmitche/tc-migration:1.0"
-      artifacts:
-        "public/output":
-          type: directory
-          path: "/migration/output"
+      image: "node:5.12"
       command:
         - "/bin/bash"
         - "--login"
         - "-c"
-        - "git clone $GITHUB_HEAD_REPO_URL && cd migration && git checkout $GITHUB_HEAD_BRANCH && pip install -e . && echo 'RUNNING' && python main.py"
+        - "git clone $GITHUB_HEAD_REPO_URL && cd migration && git checkout $GITHUB_HEAD_BRANCH && npm install && npm run build"
     metadata:
-      name: "taskcluster-docs check"
-      description: "Run `gulp check` to verify docs well-formedness`"
+      name: "migrate graph update"
+      description: "Update the migration work graph site"
       owner: "{{ event.head.user.email }}"
       source: "{{ event.head.repo.url }}"
   - provisionerId: "{{ taskcluster.docker.provisionerId }}"
@@ -42,20 +38,17 @@ tasks:
           - push
         branches:
           - master
+          - neutrino
     payload:
       maxRunTime: 3600
-      image: "djmitche/tc-migration:1.0"
-      artifacts:
-        "public/output":
-          type: directory
-          path: "/migration/output"
+      image: "node:5.12"
       command:
         - "/bin/bash"
         - "--login"
         - "-c"
-        - "git clone $GITHUB_HEAD_REPO_URL && cd migration && git checkout $GITHUB_HEAD_BRANCH && pip install -e . && echo 'RUNNING' && python main.py"
+        - "git clone $GITHUB_HEAD_REPO_URL && cd migration && git checkout $GITHUB_HEAD_BRANCH && npm install && npm run build && npm run upload"
     metadata:
-      name: "migrate graph redrawing"
-      description: "Redraw the migration work graph"
+      name: "migrate graph update"
+      description: "Update the migration work graph site"
       owner: "{{ event.head.user.email }}"
       source: "{{ event.head.repo.url }}"
