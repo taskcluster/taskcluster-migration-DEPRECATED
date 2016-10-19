@@ -1,25 +1,45 @@
-import { Graph } from 'graphlib';
-
 export default class WorkGraph {
   constructor(data) {
-    const nodes = this.nodes = {};
-    const g = this.g = new Graph({ directed: true });
+    const nodes = this.nodes = [];
+    const byName = this.byName = {};
 
     Object.keys(data).forEach(name => {
       const node = data[name];
-      g.setNode(name, node.title || name);
-      nodes[name] = {
-        title: node.title,
-        bug: node.bug,
-        assigned: node.assigned,
-        done: node.done || false,
-        milestone: node.milestone || false,
-        external: node.external || false,
-      };
 
-      (node.dependencies || []).forEach(dep => {
-        g.setEdge(name, dep);
-      });
+      // normalize
+      node.name = name;
+      if (!node.dependencies) {
+        node.dependencies = [];
+      }
+
+      nodes.push(node);
+      byName[name] = node;
     });
+  }
+
+  // Return a new WorkGraph instance containing only the nodes on which
+  // the given node depends
+  subgraph(name) {
+    const subgraph = {};
+    const byName = this.byName;
+
+    const recur = n => {
+      if (subgraph[n]) {
+        return;
+      }
+
+      const node = byName[n];
+      subgraph[n] = node;
+      node.dependencies.forEach(dep => recur(dep));
+    };
+    recur(name);
+
+    return new WorkGraph(subgraph);
+  }
+
+  // Return the list of work items tagged as milestones
+  milestones() {
+    return this.nodes
+      .filter(node => node.milestone);
   }
 }
