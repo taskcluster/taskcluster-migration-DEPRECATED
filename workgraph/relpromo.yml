@@ -3,7 +3,31 @@
 
 stop-relpromo-via-bbb:
     title: "Stop using BBB in release promotion tasks"
-    dependencies:
+    dependencies: []
         # there's probably an intermediate step here, involving actually *using*
         # proirities for releases..
-        - worker-priority-support
+
+#Release Tasks = relpromo
+#
+#  pushes a task graph
+#  reuse existing binaries from CI
+#  create l10n repacks - done via BBB, needs to be ported after Callek finishes **
+#  port partner repacks - done via BBB, currently on mac workers
+#    both l10n and partner need a pool of macosx workers, or to port to do cross-compile **
+#    (windows partner repacks will rework on linux)
+#  funsize stuff runs in docker-worker
+#  update-verification needs to run on testers
+#    port for mac and for windows **
+#  source tarballs, etc. runs in docker-worker
+#  bouncer client -- requires VPN access to cloudops amz account **
+#    solve with scriptworker
+#  bumper to bump in-tree fx version - can use common infra with periodic updates **
+#    solve with same scriptowrker as periodic updates
+#
+#Scriptworker deployment??
+#
+#manual-nightly-test = whimboo stuff, but done in a project branch
+#
+#beta-capable = remove
+#
+#keep the rest
