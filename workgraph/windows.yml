@@ -47,6 +47,9 @@ windows-signing-tier2:
 
 windows-balrog-tier2:
     title: "Implement balrog submission tasks for nightly Windows builds on a project branch"
+    dependencies:
+        - windows-builds-tier2
+        - balrog-worker-impl
 
 windows-nightlies-tier2:
     title: "Land config for windows nightly builds at tier2"
@@ -55,7 +58,6 @@ windows-nightlies-tier2:
         - windows-single-locale-tier2
         - windows-signing-tier2
         - windows-balrog-tier2
-        - balrog-worker-migrate-funsize
         - nightly-beetmover-tier2
 
 windows-debug-tier1:
@@ -83,12 +85,18 @@ windows-nightlies-manual-test:
     dependencies:
         - windows-nightlies-tier2
 
+windows-verify-build-equivalence:
+    title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    dependencies:
+        - windows-builds-tier2
+
 windows-opt-tier1:
     title: "Promote all windows builds to tier1; turn off windows buildbot builds and nightlies; commit for beta in 6-12 weeks"
     # NOTE: this involves
     #  - running all talos and XP jobs via BBB
     #  - turning off BB talos, demoting builds to tier 2, and disabling sendchanges
     dependencies:
+        - windows-verify-build-equivalence
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo
         - taskcluster-worker-cot-gpg-keys-in-repo  # drop if tc-w isn't used on windows yet

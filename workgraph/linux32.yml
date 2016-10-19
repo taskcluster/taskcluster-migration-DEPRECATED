@@ -25,6 +25,7 @@ linux32-balrog-tier2:
     # these will submit to a staging balrog instance
     dependencies:
         - linux32-builds-tier2
+        - balrog-worker-impl
 
 linux32-single-locale-tier2:
     title: "Implement single locale repacks for nightly linux32 builds on a project branch"
@@ -39,7 +40,6 @@ linux32-nightlies-tier2:
         - linux32-signing-tier2
         - linux32-balrog-tier2
         - linux32-single-locale-tier2
-        - balrog-worker-migrate-funsize
         - nightly-beetmover-tier2
 
 linux32-beta-capable:
@@ -58,10 +58,18 @@ linux32-nightlies-manual-test:
     dependencies:
         - linux32-nightlies-tier2
 
+linux32-verify-build-equivalence:
+    title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    dependencies:
+        - linux32-builds-tier2
+
 linux32-opt-tier1:
     title: "Promote all linux32 opt and nightly tasks to tier1, demote Buildbot, start 6-12 week timer to linux32-beta-release"
     # also, disable sendchanges for BB builds to save resources
     dependencies:
+        - linux32-verify-build-equivalence
+        - scriptworker-tier1
+        - docker-worker-cot-gpg-keys-in-repo
         - linux32-nightlies-manual-test
         - pulse-actions-backfill
         - orange-builds

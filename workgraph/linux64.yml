@@ -37,6 +37,7 @@ linux64-balrog-tier2:
     title: "Implement balrog submission tasks for nightly linux64 builds on a project branch"
     dependencies:
         - linux64-builds-tier2
+        - balrog-worker-impl
 
 linux64-single-locale-tier2:
     title: "Implement single locale repacks for nightly linux64 builds on a project branch"
@@ -52,7 +53,6 @@ linux64-nightlies-tier2:
         - linux64-signing-tier2
         - linux64-balrog-tier2
         - linux64-single-locale-tier2
-        - balrog-worker-migrate-funsize
         - nightly-beetmover-tier2
 
 linux64-talos-via-bbb-green:
@@ -66,12 +66,20 @@ linux64-nightlies-manual-test:
     dependencies:
         - linux64-nightlies-tier2
 
+linux64-verify-build-equivalence:
+    title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    dependencies:
+        - linux64-builds-tier2
+
 linux64-opt-tier1:
     title: "Promote all windows builds to tier 1, commit for beta in 6-12 weeks"
     # NOTE: this involves:
     #  - running all talos jobs via BBB
     #  - turning off BB talos jobs, demoting builds to tier 2, and disabling sendchanges
     dependencies:
+        - linux64-verify-build-equivalence
+        - scriptworker-tier1
+        - docker-worker-cot-gpg-keys-in-repo
         - pulse-actions-missing-talos
         - pulse-actions-backfill
         - orange-builds

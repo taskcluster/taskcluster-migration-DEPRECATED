@@ -43,11 +43,18 @@ beetmover-worker-impl:
     # "beetworker"?
     title: "Implement a Beetmoover Worker"
     bug: 1282188
+    assigned: mtabara
 
-balrog-worker-migrate-funsize:
-    title: "Migrate existing funsize balrog worker to use new script worker functionality"
+balrog-python-api-updates:
+    title: "Improve Balrog Python API"
+    assigned: sfraser
+
+balrog-worker-impl:
+    title: "Implement and deploy a balorg worker based on scriptworker"
     bug: 1277871
     assigned: mtabara
+    dependencies:
+        - balrog-python-api-updates
 
 automatic-retry-android-jobs:
     title: "Automatically retry Android jobs with specific kinds of failures"
@@ -59,7 +66,7 @@ docker-worker-retry-on:
     done: true
 
 nightly-beetmover-tier2:
-    title: "beetmover in-tree for tier2 platforms"
+    title: "beetmover tasks implemented in-tree for tier2 platforms"
     dependencies:
         - beetmover-worker-impl
 
@@ -80,18 +87,16 @@ stop-bb-linux-test-masters:
         - android-opt-tier1
 
 docker-worker-cot-gpg-keys-in-repo:
-    title: "docker-worker chain of trust gpg keys in repo, with ongoing process per ami-regen"
+    title: "Set up a process for generating and adding keys to the cot gpg repo for every docker-worker deployment (reimage or AMI generation)"
 
 generic-worker-cot-gpg-keys-in-repo:
-    title: "generic-worker chain of trust gpg keys in repo, with ongoing process per reimage"
+    title: "Set up a process for generating and adding keys to the cot gpg repo for every generic-worker deployment (reimage or AMI generation)"
 
 taskcluster-worker-cot-gpg-keys-in-repo:
-    title: "taskcluster-worker chain of trust gpg keys in repo, with ongoing process per reimage/ami-regen"
+    title: "Set up a process for generating and adding keys to the cot gpg repo for every taskcluster-worker deployment (reimage or AMI generation)"
 
-scriptworker-chain-of-trust:
+scriptworker-chain-of-trust-verification:
     title: "Enable chain of trust verification, and block on it before scriptworker jobs"
-    dependencies:
-        - docker-worker-cot-gpg-keys-in-repo
 
 scriptworker-queue-monitoring:
     title: "Monitor scriptworker queues and alert when too large"
@@ -108,7 +113,7 @@ scriptworker-ssh-alerts:
 scriptworker-tier1:
     title: "Scriptworker is tier1-ready"
     dependencies:
-        - scriptworker-chain-of-trust
+        - scriptworker-chain-of-trust-verification
         - scriptworker-queue-monitoring
         - scriptworker-nagios
         - scriptworker-ssh-alerts

@@ -17,7 +17,9 @@ android-signing-tier2:
     done: true
 
 android-balrog-tier2:
-    title: "Android single locale repacks, tier2"
+    title: "Implement balrog submission tasks for nightly android builds on a project branch"
+    dependencies:
+        - balrog-worker-impl
 
 android-google-play-tier2:
     title: "Google Play submitter, tier2"
@@ -43,9 +45,16 @@ android-nightlies-manual-test:
     dependencies:
         - android-nightlies-tier2
 
+android-verify-build-equivalence:
+    title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    dependencies:
+        - android-opt-tier2
+
 android-opt-tier1:
     title: "Promote Android opt builds and tests to tier 1, demote in buildbot; 6-12 weeks before beta"
     dependencies:
+        - android-verify-build-equivalence
+        - docker-worker-cot-gpg-keys-in-repo
         - automatic-retry-android-jobs
         - pulse-actions-backfill
         - orange-builds
