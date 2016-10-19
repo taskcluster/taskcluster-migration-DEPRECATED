@@ -1,5 +1,4 @@
 # TODO
 
 * Icons on views
-* Use hash to track location
-* rename 'graph' to 'workgraph' where it refers to WorkGraph
+* custom bootstrap theme similar to http://taskcluster.github.io/migration-dashboard/
