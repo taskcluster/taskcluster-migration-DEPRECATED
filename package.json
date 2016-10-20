@@ -10,7 +10,9 @@
     "lodash": "^4.16.4",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "sync-request": "^3.0.1",
+    "webpack-s3-plugin": "^0.9.0"
   },
   "devDependencies": {
     "neutrino": "^2.2.0",
@@ -19,7 +21,8 @@
   "scripts": {
     "start": "PORT=3000 neutrino start -p migration-preset",
     "test": "neutrino test -p migration-preset",
-    "build": "neutrino build -p migration-preset"
+    "build": "neutrino build -p migration-preset",
+    "upload": "node upload.js"
   },
   "repository": {
     "type": "git",

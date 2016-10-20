@@ -38,15 +38,21 @@ tasks:
           - push
         branches:
           - master
-          - neutrino
+    scopes:
+        - "auth:aws-s3:read-write:migration-taskcluster-net/"
     payload:
       maxRunTime: 3600
       image: "node:5.12"
+      features:
+        taskclusterProxy: true
+      env:
+          PUBLISH_BUCKET: migration-taskcluster-net
+          PUBLISH_REGION: us-east-1
       command:
         - "/bin/bash"
         - "--login"
         - "-c"
-        - "git clone $GITHUB_HEAD_REPO_URL && cd migration && git checkout $GITHUB_HEAD_BRANCH && npm install && npm run build && npm run upload"
+        - "git clone $GITHUB_HEAD_REPO_URL && cd migration && git checkout $GITHUB_HEAD_BRANCH && npm install && npm run build"
     metadata:
       name: "migrate graph update"
       description: "Update the migration work graph site"
