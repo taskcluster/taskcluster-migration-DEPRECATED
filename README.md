@@ -1,5 +1,7 @@
 # Buildbot-to-TaskCluster Migration
 
+*Explore the migration at http://migration.taskcluster.net*
+
 This repository contains detailed tracking information for the Great
 TaskCluster Migraiton.  It also implements a web application to view that
 status in some useful ways.
