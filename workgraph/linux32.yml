@@ -4,6 +4,7 @@
 linux32-docker-container:
     title: "Create a docker container with a 32-bit Linux runtime"
     bug:  1287099
+    assigned: gbrown
 
 linux32-builds-tier2:
     title: "Green Linux32 builds in the tree"

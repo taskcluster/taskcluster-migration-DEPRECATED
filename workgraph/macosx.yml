@@ -127,6 +127,7 @@ macosx-test-talos-on-hardware-10pct:
 
 macosx-test-talos-on-hardware-green:
     title: "Green up MacOS X tests and talos on TC"
+    assigned: rwood
     dependencies:
         - macosx-test-talos-on-hardware-10pct
 
