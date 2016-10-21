@@ -18,6 +18,11 @@
 # Except Windows XP.  XP Can't run in the cloud, and we will not try to run it
 # via Generic-Worker,  Instead, it will run via BBB until the platform is no longer
 # supported (Firefox 53, for reals this time)
+#
+# The testing platforms are windows 7 (32-bit) and windows 10 (64-bit).  Note
+# that this process assumes the current win8 -> win10 transition is
+# sufficiently complete in Buildbot that we need not concern ourselves with
+# running win8 in TC.
 
 windows-builds-tier2:
     title: "Run all Windows builds at Tier 2"
