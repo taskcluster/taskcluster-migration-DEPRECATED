@@ -50,6 +50,8 @@ releasetasks-hg-bumper:
 stop-releasetasks-via-bbb:
     title: "Stop using BBB in release tasks"
     dependencies:
+        - balrog-worker-impl
+        - beetmover-worker-impl
         - releasetasks-l10n-repacks
         - releasetasks-partner-repacks-linux
         - releasetasks-partner-repacks-macosx
