@@ -64,6 +64,12 @@ windows-balrog-tier2:
         - windows-builds-tier2
         - balrog-worker-impl
 
+windows-verify-signing-equivalence:
+    # ask coop for details
+    title: "Verify that the signature formats match those from BB builds"
+    dependencies:
+        - windows-signing-tier2
+
 windows-nightlies-tier2:
     title: "Land config for windows nightly builds at tier2"
     milestone: true
@@ -71,6 +77,7 @@ windows-nightlies-tier2:
         - windows-single-locale-tier2
         - windows-signing-tier2
         - windows-balrog-tier2
+        - windows-verify-signing-equivalence
         - nightly-beetmover-tier2
 
 windows-debug-tier1:

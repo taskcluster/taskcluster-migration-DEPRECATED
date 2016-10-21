@@ -33,6 +33,12 @@ linux32-single-locale-tier2:
     dependencies:
         - linux32-builds-tier2
 
+linux32-verify-signing-equivalence:
+    # ask coop for details
+    title: "Verify that the signature formats match those from BB builds"
+    dependencies:
+        - linux32-signing-tier2
+
 linux32-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
     milestone: true
@@ -41,6 +47,7 @@ linux32-nightlies-tier2:
         - linux32-signing-tier2
         - linux32-balrog-tier2
         - linux32-single-locale-tier2
+        - linux32-verify-signing-equivalence
         - nightly-beetmover-tier2
 
 linux32-debug-tier1:

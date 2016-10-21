@@ -47,6 +47,12 @@ macosx-balrog-tier2:
         - macosx-builds-tier2
         - balrog-worker-impl
 
+macosx-verify-signing-equivalence:
+    # ask coop for details
+    title: "Verify that the signature formats match those from BB builds"
+    dependencies:
+        - macosx-signing-tier2
+
 macosx-nightlies-tier2:
     title: "Land config for macosx nightly builds at tier2"
     milestone: true
@@ -55,6 +61,7 @@ macosx-nightlies-tier2:
         - macosx-single-locale-tier2
         - macosx-signing-tier2
         - macosx-balrog-tier2
+        - macosx-verify-signing-equivalence
         - nightly-beetmover-tier2
 
 macosx-test-talos-via-bbb-green:
