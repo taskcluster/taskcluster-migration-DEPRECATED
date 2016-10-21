@@ -23,6 +23,9 @@ releasetasks-partner-repacks-macosx:
         - partner-repacks-macosx-select-strategy
         # .. TBD, depending on strategy
 
+releasetasks-uptake-monitoring:
+    title: "Implement uptake monitoring via a TC task, not via BBB"
+
 releasetasks-update-verification-macosx:
     title: "Implement update verification tasks that run on the OS X test/talos pool"
     dependencies:
@@ -50,6 +53,7 @@ stop-releasetasks-via-bbb:
         - releasetasks-l10n-repacks
         - releasetasks-partner-repacks-linux
         - releasetasks-partner-repacks-macosx
+        - releasetasks-uptake-monitoring
         - releasetasks-update-verification-macosx
         - releasetasks-update-verification-windows
         - releasetasks-bouncer-scriptworker

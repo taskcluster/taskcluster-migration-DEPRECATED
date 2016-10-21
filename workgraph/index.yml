@@ -7,5 +7,5 @@ include:
     - macosx.yml
     - milestones.yml
     - multiplatform.yml
-    - relpromo.yml
+    - releasetasks.yml
     - windows.yml
