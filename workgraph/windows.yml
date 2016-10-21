@@ -114,6 +114,7 @@ windows-opt-tier1:
         - windows-verify-build-equivalence
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo
+        - generic-worker-terminate-on-ami-update
         - taskcluster-worker-cot-gpg-keys-in-repo  # drop if tc-w isn't used on windows yet
         - pulse-actions-missing-talos
         - pulse-actions-backfill
