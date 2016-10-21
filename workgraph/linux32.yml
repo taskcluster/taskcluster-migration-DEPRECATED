@@ -41,7 +41,6 @@ linux32-verify-signing-equivalence:
 
 linux32-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
-    milestone: true
     dependencies:
         - linux32-builds-tier2
         - linux32-signing-tier2

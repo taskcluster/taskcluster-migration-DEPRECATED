@@ -72,7 +72,6 @@ windows-verify-signing-equivalence:
 
 windows-nightlies-tier2:
     title: "Land config for windows nightly builds at tier2"
-    milestone: true
     dependencies:
         - windows-single-locale-tier2
         - windows-signing-tier2

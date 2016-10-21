@@ -32,7 +32,6 @@ android-verify-signing-equivalence:
 
 android-nightlies-tier2:
     title: "Run Android opt nightlies and tests at tier 2"
-    milestone: true
     dependencies:
         - android-multilocale-tier2
         - android-single-locale-tier2

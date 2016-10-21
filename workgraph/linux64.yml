@@ -52,7 +52,6 @@ linux64-verify-signing-equivalence:
 
 linux64-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
-    milestone: true
     dependencies:
         - linux64-builds-tier2
         - linux64-tests-tier2

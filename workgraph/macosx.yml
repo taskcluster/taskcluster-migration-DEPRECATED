@@ -55,7 +55,6 @@ macosx-verify-signing-equivalence:
 
 macosx-nightlies-tier2:
     title: "Land config for macosx nightly builds at tier2"
-    milestone: true
     dependencies:
         - macosx-universal-builds
         - macosx-single-locale-tier2
