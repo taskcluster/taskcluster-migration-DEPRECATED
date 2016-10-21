@@ -92,6 +92,9 @@ docker-worker-cot-gpg-keys-in-repo:
 
 generic-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every generic-worker deployment (reimage or AMI generation)"
+    description: |
+        The automation that creates AMIs based on OpenCloudConfig commits will create a pull request against the gpg repository with the new key,
+        and block deploying the new AMI until that PR is signed and merged.
 
 taskcluster-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every taskcluster-worker deployment (reimage or AMI generation)"
