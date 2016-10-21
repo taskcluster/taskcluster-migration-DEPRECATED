@@ -44,13 +44,19 @@ linux64-single-locale-tier2:
     dependencies:
         - linux64-builds-tier2
 
+linux64-verify-signing-equivalence:
+    # ask coop for details
+    title: "Verify that the signature formats match those from BB builds"
+    dependencies:
+        - linux64-signing-tier2
+
 linux64-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
-    milestone: true
     dependencies:
         - linux64-builds-tier2
         - linux64-tests-tier2
         - linux64-signing-tier2
+        - linux64-verify-signing-equivalence
         - linux64-balrog-tier2
         - linux64-single-locale-tier2
         - nightly-beetmover-tier2
@@ -69,6 +75,7 @@ linux64-nightlies-manual-test:
 
 linux64-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    # this is repeating the work glandium did months ago
     dependencies:
         - linux64-builds-tier2
 

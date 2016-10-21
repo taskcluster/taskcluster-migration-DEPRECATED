@@ -23,15 +23,18 @@ releasetasks-partner-repacks-macosx:
         - partner-repacks-macosx-select-strategy
         # .. TBD, depending on strategy
 
+releasetasks-uptake-monitoring:
+    title: "Implement uptake monitoring via a TC task, not via BBB"
+
 releasetasks-update-verification-macosx:
     title: "Implement update verification tasks that run on the OS X test/talos pool"
     dependencies:
         - macosx-test-talos-on-hardware-100pct
 
 releasetasks-update-verification-windows:
-    title: "Implement update verification tasks that run on a Windows tester workerType"
+    title: "Implement update verification tasks that run on a Windows 10 tester workerType"
     dependencies:
-        - windows-tests-tier2
+        - windows-tests-win10-tier2
 
 releasetasks-bouncer-scriptworker:
     title: "Implement a scriptworker that can communicate with the bouncer API via network ACLs"
@@ -47,9 +50,12 @@ releasetasks-hg-bumper:
 stop-releasetasks-via-bbb:
     title: "Stop using BBB in release tasks"
     dependencies:
+        - balrog-worker-impl
+        - beetmover-worker-impl
         - releasetasks-l10n-repacks
         - releasetasks-partner-repacks-linux
         - releasetasks-partner-repacks-macosx
+        - releasetasks-uptake-monitoring
         - releasetasks-update-verification-macosx
         - releasetasks-update-verification-windows
         - releasetasks-bouncer-scriptworker

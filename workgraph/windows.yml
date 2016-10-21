@@ -18,13 +18,23 @@
 # Except Windows XP.  XP Can't run in the cloud, and we will not try to run it
 # via Generic-Worker,  Instead, it will run via BBB until the platform is no longer
 # supported (Firefox 53, for reals this time)
+#
+# The testing platforms are windows 7 (32-bit) and windows 10 (64-bit).  Note
+# that this process assumes the current win8 -> win10 transition is
+# sufficiently complete in Buildbot that we need not concern ourselves with
+# running win8 in TC.
 
 windows-builds-tier2:
     title: "Run all Windows builds at Tier 2"
     done: true
 
-windows-tests-tier2:
-    title: "Run Windows tests on TC for all platforms but XP at Tier 2"
+windows-tests-win10-tier2:
+    title: "Run Windows 10 tests on TC for all platforms but XP at Tier 2"
+    dependencies:
+        - windows-builds-tier2
+
+windows-tests-win7-tier2:
+    title: "Run Windows 7 tests on TC for all platforms but XP at Tier 2"
     dependencies:
         - windows-builds-tier2
 
@@ -54,19 +64,26 @@ windows-balrog-tier2:
         - windows-builds-tier2
         - balrog-worker-impl
 
+windows-verify-signing-equivalence:
+    # ask coop for details
+    title: "Verify that the signature formats match those from BB builds"
+    dependencies:
+        - windows-signing-tier2
+
 windows-nightlies-tier2:
     title: "Land config for windows nightly builds at tier2"
-    milestone: true
     dependencies:
         - windows-single-locale-tier2
         - windows-signing-tier2
         - windows-balrog-tier2
+        - windows-verify-signing-equivalence
         - nightly-beetmover-tier2
 
 windows-debug-tier1:
     title: "Run windows debug builds and tests at tier1"
     dependencies:
-        - windows-tests-tier2
+        - windows-tests-win7-tier2
+        - windows-tests-win10-tier2
         - windows-builds-tier2
         - windows-symbol-uploads
 
@@ -103,13 +120,15 @@ windows-opt-tier1:
         - windows-verify-build-equivalence
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo
+        - generic-worker-terminate-on-ami-update
         - taskcluster-worker-cot-gpg-keys-in-repo  # drop if tc-w isn't used on windows yet
         - pulse-actions-missing-talos
         - pulse-actions-backfill
         - orange-builds
         - windows-debug-tier1
         - windows-talos-via-bbb-green
-        - windows-tests-tier2
+        - windows-tests-win7-tier2
+        - windows-tests-win10-tier2
         - windows-nightlies-manual-test
         - windows-xp-via-bbb-green
 

@@ -9,6 +9,7 @@ stop-bb-schedulers:
     # should already be disabled)
     title: "Shut off BB Schedulers (except one for ESR et al.)"
     dependencies:
+        - fuzzing
         - seta-in-tree
         - periodic-update-service
         - windows-opt-tier1
@@ -74,6 +75,9 @@ nightly-beetmover-tier2:
 linux-tc-worker-engine:
     title: "implement a tc-worker engine that can support linux talos on hardware"
     bug: 1282011
+    dependencies:
+        # this will be a generalization of wander's work for OS X
+        - macosx-taskcluster-worker
 
 linux-worker-deployment-hardware:
     title: "build a method of deploying a worker for linux on hardware"
@@ -92,6 +96,9 @@ docker-worker-cot-gpg-keys-in-repo:
 
 generic-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every generic-worker deployment (reimage or AMI generation)"
+    description: |
+        The automation that creates AMIs based on OpenCloudConfig commits will create a pull request against the gpg repository with the new key,
+        and block deploying the new AMI until that PR is signed and merged.
 
 taskcluster-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every taskcluster-worker deployment (reimage or AMI generation)"
@@ -149,3 +156,10 @@ periodic-update-service:
     dependencies:
         - scriptworker-tier1
         - scriptworker-hg-committer
+
+generic-worker-terminate-on-ami-update:
+    # this is necessary for parity with Buildbot, where we can ship environment changes in <96 hours
+    title: "Implement the ability for generic-worker instance to terminate themselves when they are idle and running an old workerType definition"
+
+fuzzing:
+    title: "Implement fuzzing in taskcluster (TBD)"
