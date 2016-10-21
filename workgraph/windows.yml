@@ -28,8 +28,13 @@ windows-builds-tier2:
     title: "Run all Windows builds at Tier 2"
     done: true
 
-windows-tests-tier2:
-    title: "Run Windows tests on TC for all platforms but XP at Tier 2"
+windows-tests-win10-tier2:
+    title: "Run Windows 10 tests on TC for all platforms but XP at Tier 2"
+    dependencies:
+        - windows-builds-tier2
+
+windows-tests-win7-tier2:
+    title: "Run Windows 7 tests on TC for all platforms but XP at Tier 2"
     dependencies:
         - windows-builds-tier2
 
@@ -71,7 +76,8 @@ windows-nightlies-tier2:
 windows-debug-tier1:
     title: "Run windows debug builds and tests at tier1"
     dependencies:
-        - windows-tests-tier2
+        - windows-tests-win7-tier2
+        - windows-tests-win10-tier2
         - windows-builds-tier2
         - windows-symbol-uploads
 
@@ -114,7 +120,8 @@ windows-opt-tier1:
         - orange-builds
         - windows-debug-tier1
         - windows-talos-via-bbb-green
-        - windows-tests-tier2
+        - windows-tests-win7-tier2
+        - windows-tests-win10-tier2
         - windows-nightlies-manual-test
         - windows-xp-via-bbb-green
 
