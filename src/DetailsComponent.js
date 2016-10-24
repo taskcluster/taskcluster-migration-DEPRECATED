@@ -1,8 +1,11 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
+import { Link, IndexLink } from 'react-router';
 
-export default React.createClass({
-  propTypes: {
+export const DetailsGraph = () => <h1>To Do</h1>;
+
+export const DetailsKanban = React.createClass({
+  contextTypes: {
     graph: React.PropTypes.object.isRequired,
   },
 
@@ -26,7 +29,7 @@ export default React.createClass({
   },
 
   render() {
-    const graph = this.props.graph;
+    const graph = this.context.graph;
     const blocked = [];
     const inProgress = [];
     const ready = [];
@@ -76,6 +79,63 @@ export default React.createClass({
       {listItems('ready', 'Ready', ready)}
       {listItems('done', 'Done', done)}
     </div>;
+  },
+});
+
+const Tab = React.createClass({
+  // see http://brandonlehr.com/bootstrap-tabs-react-router-and-the-active-class/
+  contextTypes: {
+    router: React.PropTypes.object.isRequired,
+  },
+
+  propTypes: {
+    to: React.PropTypes.string,
+    onlyActiveOnIndex: React.PropTypes.bool,
+    children: React.PropTypes.node,
+  },
+
+  render() {
+    const isActive = this.context.router.isActive(this.props.to, this.props.onlyActiveOnIndex);
+    const LinkComponent = this.props.onlyActiveOnIndex ? IndexLink : Link;
+    const className = isActive ? 'active' : '';
+
+    return (
+      <li className={className}>
+        <LinkComponent to={this.props.to}>{this.props.children}</LinkComponent>
+      </li>
+    );
+  },
+});
+
+export const DetailsComponent = React.createClass({
+  contextTypes: {
+    graph: React.PropTypes.object.isRequired,
+  },
+
+  childContextTypes: {
+    graph: React.PropTypes.object,
+  },
+
+  getChildContext() {
+    // limit the graph to work items rooted at rootWorkItem and pass that along as
+    // the graph context
+    const graph = this.props.params.rootWorkItem === 'all' ?
+      this.context.graph :
+      this.context.graph.subgraph(this.props.params.rootWorkItem);
+    return { graph };
+  },
+
+  render() {
+    const root = `/details/${this.props.params.rootWorkItem}`;
+    return (
+      <nav>
+        <ul className="nav nav-tabs">
+          <Tab to={root} onlyActiveOnIndex>Graph</Tab>
+          <Tab to={`${root}/kanban`}>Kanban</Tab>
+        </ul>
+        {this.props.children}
+      </nav>
+    );
   },
 });
 
