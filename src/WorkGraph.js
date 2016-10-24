@@ -12,6 +12,17 @@ export default class WorkGraph {
         node.dependencies = [];
       }
 
+      if (node.done) {
+        node.state = 'done';
+      } else if (node.assigned) {
+        // note that a work item can be inProgress even if it is blocked
+        node.state = 'inProgress';
+      } else if (node.dependencies.length) {
+        node.state = 'blocked';
+      } else {
+        node.state = 'ready';
+      }
+
       nodes.push(node);
       byName[name] = node;
     });

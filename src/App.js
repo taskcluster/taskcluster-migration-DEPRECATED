@@ -20,7 +20,9 @@ const Navigation = () => (
 const Container = props =>
   <div>
     <Navigation />
-    {props.children}
+    <div className="container-fluid">
+      {props.children}
+    </div>
   </div>;
 
 export default React.createClass({

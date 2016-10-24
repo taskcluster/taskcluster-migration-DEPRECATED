@@ -1,6 +1,10 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
+import Col from 'react-bootstrap/lib/Col';
+import Row from 'react-bootstrap/lib/Row';
+import WorkItem from './WorkItem';
 import { Link, IndexLink } from 'react-router';
+import './details.css';
 
 export const DetailsGraph = () => <h1>To Do</h1>;
 
@@ -20,9 +24,9 @@ export const DetailsKanban = React.createClass({
     };
   },
 
-  toggleVisible(name) {
+  toggleVisible(state) {
     const update = {};
-    update[name] = !this.state.visible[name];
+    update[state] = !this.state.visible[state];
     this.setState({
       visible: { ...this.state.visible, ...update },
     });
@@ -30,32 +34,21 @@ export const DetailsKanban = React.createClass({
 
   render() {
     const graph = this.context.graph;
-    const blocked = [];
-    const inProgress = [];
-    const ready = [];
-    const done = [];
 
-    graph.nodes.forEach(node => {
-      if (node.done) {
-        done.push(node);
-      } else if (!node.dependencies.length) {
-        if (node.assigned) {
-          inProgress.push(node);
-        } else {
-          ready.push(node);
-        }
-      } else {
-        blocked.push(node);
-      }
-    });
+    const byState = { blocked: [], inProgress: [], ready: [], done: [] };
+    graph.nodes.forEach(node => byState[node.state].push(node));
 
-    const listItems = (name, title, nodes) => {
-      const visible = this.state.visible[name];
+    const listItems = (state, title) => {
+      const visible = this.state.visible[state];
+      const nodes = byState[state];
+
       const header = (
-        <h2 onClick={() => this.toggleVisible(name)}>
+        <h2 onClick={() => this.toggleVisible(state)}>
           {title}
         </h2>
       );
+
+      const className = `wi-${state}`;
 
       if (!nodes.length) {
         return (
@@ -65,19 +58,24 @@ export const DetailsKanban = React.createClass({
         );
       }
 
-      return <Panel collapsible expanded={visible} header={header}>
-        <ul>
+      return <Panel collapsible className={className} expanded={visible} header={header}>
+        <Row>
           {
-            nodes.map(node => <li key={node.name}>{node.title}</li>)
+            // TODO: use react-columns?  Or all in one column?  Order will matter..
+            nodes.map(node => (
+              <Col xs={12} lg={6}>
+                <WorkItem node={node} />
+              </Col>
+            ))
           }
-        </ul>
+        </Row>
       </Panel>;
     };
     return <div className="container-fluid">
-      {listItems('blocked', 'Blocked', blocked)}
-      {listItems('inProgress', 'In Progress', inProgress)}
-      {listItems('ready', 'Ready', ready)}
-      {listItems('done', 'Done', done)}
+      {listItems('blocked', 'Blocked')}
+      {listItems('inProgress', 'In Progress')}
+      {listItems('ready', 'Ready')}
+      {listItems('done', 'Done')}
     </div>;
   },
 });
@@ -128,13 +126,17 @@ export const DetailsComponent = React.createClass({
   render() {
     const root = `/details/${this.props.params.rootWorkItem}`;
     return (
-      <nav>
-        <ul className="nav nav-tabs">
-          <Tab to={root} onlyActiveOnIndex>Graph</Tab>
-          <Tab to={`${root}/kanban`}>Kanban</Tab>
-        </ul>
-        {this.props.children}
-      </nav>
+      <div>
+        <nav>
+          <ul className="nav nav-tabs">
+            <Tab to={root} onlyActiveOnIndex>Graph</Tab>
+            <Tab to={`${root}/kanban`}>Kanban</Tab>
+          </ul>
+        </nav>
+        <div className="details-pane">
+          {this.props.children}
+        </div>
+      </div>
     );
   },
 });

@@ -1,3 +1,35 @@
 div#content {
     padding: 0px 1em;
 }
+
+.progress-bar.wi-done {
+    background-color: #80C29E;
+}
+
+.progress-bar.wi-inProgress {
+    background-color: #80a4c2;
+}
+
+.progress-bar.wi-ready {
+    background-color: #bf80c2;
+}
+
+.progress-bar.wi-blocked {
+    background-color: darkgray;
+}
+
+.panel.wi-done .panel-heading {
+    background-color: #80C29E;
+}
+
+.panel.wi-inProgress .panel-heading {
+    background-color: #80a4c2;
+}
+
+.panel.wi-ready .panel-heading {
+    background-color: #bf80c2;
+}
+
+.panel.wi-blocked .panel-heading {
+    background-color: darkgray;
+}
