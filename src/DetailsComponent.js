@@ -3,10 +3,15 @@ import Panel from 'react-bootstrap/lib/Panel';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
 import WorkItem from './WorkItem';
+import GraphComponent from './GraphComponent';
 import { Link, IndexLink } from 'react-router';
 import './details.css';
 
-export const DetailsGraph = () => <h1>To Do</h1>;
+export const DetailsGraph = React.createClass({
+  render() {
+    return <GraphComponent width={600} height={600}/>;
+  },
+});
 
 export const DetailsKanban = React.createClass({
   contextTypes: {

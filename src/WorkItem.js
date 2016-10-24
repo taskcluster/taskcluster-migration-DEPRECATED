@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/lib/Col';
 
 export default React.createClass({
   propTypes: {
-    node: React.PropTypes.object.required,
+    node: React.PropTypes.object,
   },
 
   render() {
