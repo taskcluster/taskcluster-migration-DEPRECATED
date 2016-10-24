@@ -55,4 +55,6 @@ if (process.env.PUBLISH_BUCKET) {
   }));
 }
 
+// TODO: use https://www.npmjs.com/package/d3-webpack-loader
+
 module.exports = preset;
