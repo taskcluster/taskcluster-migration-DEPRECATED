@@ -17,19 +17,34 @@ export default React.createClass({
   propTypes: {
     width: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
+    root: React.PropTypes.string.isRequired,
   },
 
   extractGraph() {
+    const root = this.props.root;
+    const nodes = [];
     const links = [];
 
     this.context.graph.nodes.forEach(node => {
       node.dependencies.forEach(dep => {
         links.push({ source: node.name, target: dep });
       });
+      const graphNode = { name: node.name, state: node.state };
+
+      // fix the root node to the top of the graph
+      if (node.name === root) {
+        graphNode.fx = this.props.width / 2;
+        graphNode.fy = 5;
+      } else {
+        graphNode.x = this.props.width / 2;
+        graphNode.y = 5;
+      }
+
+      nodes.push(graphNode);
     });
 
     return {
-      nodes: this.context.graph.nodes,
+      nodes,
       links,
     };
   },
@@ -57,7 +72,7 @@ export default React.createClass({
       .data(nodes)
       .enter()
       .append('circle')
-      .attr('r', 7)
+      .attr('r', 5)
       .attr('fill', d => STATE_COLORS[d.state]);
 
     this.node.append('title')
@@ -79,11 +94,21 @@ export default React.createClass({
   componentDidMount() {
     const { links, nodes } = this.extractGraph();
 
+    // a force that tries to point edges downward
+    const treeForce = alpha => {
+      const delta = alpha;
+
+      links.forEach(({ source, target }) => {
+        const expectedY = source.y + 30;
+        target.vy += (expectedY - target.y) * 0.1;
+      });
+    };
+
     this.makeSvg(links, nodes);
     this.simulation = d3.forceSimulation()
-      .force('link', d3.forceLink().id(d => d.name))
-      .force('charge', d3.forceManyBody())
-      .force('center', d3.forceCenter(this.props.width / 2, this.props.height / 2));
+      .force('link', d3.forceLink().id(d => d.name).strength(0.5).distance(30))
+      .force('charge', d3.forceManyBody(-500).distanceMax(100))
+      .force('tree', treeForce);
 
     this.simulation.on('tick', this.updateSvg);
     this.simulation.nodes(nodes);
@@ -91,11 +116,15 @@ export default React.createClass({
   },
 
   componentDidUpdate() {
-    // update with new state
+    const { links, nodes } = this.extractGraph();
+
+    this.simulation.nodes(nodes);
+    this.simulation.force('link').links(links);
+    this.updateSvg();
   },
 
   componentWillUnmount() {
-    // TODO: this lifecycle is wrong, and we keep creating new simultations..
+    // stop the simulation if we're being removed from the DOM..
     this.simulation.stop();
   },
 

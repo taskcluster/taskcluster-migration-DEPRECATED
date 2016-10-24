@@ -9,7 +9,7 @@ import './details.css';
 
 export const DetailsGraph = React.createClass({
   render() {
-    return <GraphComponent width={600} height={600}/>;
+    return <GraphComponent width={600} height={600} root={this.props.params.rootWorkItem}/>;
   },
 });
 
