@@ -1,5 +1,6 @@
 import React from 'react';
 const cytoscape = require('cytoscape');
+import Well from 'react-bootstrap/lib/Well';
 import './graph.css';
 
 const STATE_COLORS = {
@@ -16,6 +17,7 @@ export default React.createClass({
 
   propTypes: {
     root: React.PropTypes.string.isRequired,
+    onSelect: React.PropTypes.func.isRequired,
   },
 
   makeCy(container) {
@@ -76,11 +78,19 @@ export default React.createClass({
     });
   },
 
-  componentDidMount() {
-    this.cy = this.makeCy(this.domElement);
+  handleSelected() {
+    const selected = this.cy.$(':selected');
+    if (selected.length === 1) {
+      this.props.onSelect(selected[0].id());
+    } else {
+      this.props.onSelect(null);
+    }
   },
 
-  componentDidUpdate() {
+  componentDidMount() {
+    this.cy = this.makeCy(this.domElement);
+    this.cy.on('select', this.handleSelected);
+    this.cy.on('unselect', this.handleSelected);
   },
 
   componentWillUnmount() {
@@ -88,7 +98,11 @@ export default React.createClass({
   },
 
   render() {
-    return <div id="cy" ref={elt => { this.domElement = elt; }} />;
+    return (
+      <Well bsSize="large">
+        <div id="cy" ref={elt => { this.domElement = elt; }} />
+      </Well>
+    );
   },
 });
 

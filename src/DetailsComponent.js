@@ -2,14 +2,80 @@ import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
+import Alert from 'react-bootstrap/lib/Alert';
 import WorkItem from './WorkItem';
 import GraphDisplay from './GraphDisplay';
 import { Link, IndexLink } from 'react-router';
 import './details.css';
 
 export const DetailsGraph = React.createClass({
+  contextTypes: {
+    graph: React.PropTypes.object.isRequired,
+  },
+
+  getInitialState() {
+    return {
+      selectedNode: 'linux32-builds-tier2',
+    };
+  },
+
+  handleNodeSelected(name) {
+    this.setState({ selectedNode: name });
+  },
+
+  renderNodeInfo() {
+    const node = this.context.graph.byName[this.state.selectedNode];
+
+    if (!node) {
+      return (
+        <Alert bsStyle="info">
+          <p>Select a node in the graph to see details about it</p>
+        </Alert>
+      );
+    }
+
+    return (
+      <div>
+        <h2>{node.name}</h2>
+        <p>{node.title}</p>
+        {node.description ? <p className="text-muted">{node.description}</p> : null}
+        <dl>
+          <dt>State</dt>
+          <dd>{node.state}</dd>
+          {node.assigned ? <dt>Assigned:</dt> : null}
+          {node.assigned ? <dd>{node.assigned}</dd> : null}
+          {node.bug ? <dt>Bug:</dt> : null}
+          {node.bug ? (
+            <dd>
+              <a href={`https://bugzilla.mozilla.org/show_bug.cgi?id=${node.bug}`} target="_blank">
+                #{node.bug}
+              </a>
+            </dd>
+          ) : null}
+          <dt>Dependencies</dt>
+          <dd>
+            <ul>
+              {node.dependencies.map(dep => <li key={dep}>{dep}</li>)}
+            </ul>
+          </dd>
+        </dl>
+      </div>
+    );
+  },
+
   render() {
-    return <GraphDisplay root={this.props.params.rootWorkItem}/>;
+    return (
+      <Row>
+        <Col xs={12} md={7}>
+          <GraphDisplay
+            root={this.props.params.rootWorkItem}
+            onSelect={this.handleNodeSelected} />
+        </Col>
+        <Col xs={12} md={5}>
+          {this.renderNodeInfo()}
+        </Col>
+      </Row>
+    );
   },
 });
 
