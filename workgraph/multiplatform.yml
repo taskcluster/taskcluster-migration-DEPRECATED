@@ -46,16 +46,10 @@ beetmover-worker-impl:
     bug: 1282188
     assigned: mtabara
 
-balrog-python-api-updates:
-    title: "Improve Balrog Python API"
-    assigned: sfraser
-
 balrog-worker-impl:
     title: "Implement and deploy a balorg worker based on scriptworker"
     bug: 1277871
     assigned: mtabara
-    dependencies:
-        - balrog-python-api-updates
 
 automatic-retry-android-jobs:
     title: "Automatically retry Android jobs with specific kinds of failures"
