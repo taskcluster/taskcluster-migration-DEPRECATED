@@ -53,4 +53,24 @@ export default class WorkGraph {
     return this.nodes
       .filter(node => node.milestone);
   }
+
+  rootDistances(root) {
+    const distances = {};
+    const stack = [{ node: root, distance: 0 }];
+
+    while (stack.length) {
+      const { node, distance } = stack.pop();
+
+      // update distance, finding the minimum
+      if (distance < (distances[node] || 9999)) {
+        distances[node] = distance;
+      }
+
+      this.byName[node].dependencies.forEach(dep => {
+        stack.push({ node: dep, distance: distance + 1 });
+      });
+    }
+
+    return distances;
+  }
 }

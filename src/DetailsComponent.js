@@ -109,6 +109,7 @@ export const DetailsKanban = React.createClass({
 
   render() {
     const graph = this.context.graph;
+    const distances = graph.rootDistances(this.props.params.rootWorkItem);
 
     const byState = { blocked: [], inProgress: [], ready: [], done: [] };
     graph.nodes.forEach(node => byState[node.state].push(node));
@@ -116,6 +117,9 @@ export const DetailsKanban = React.createClass({
     const listItems = (state, title) => {
       const visible = this.state.visible[state];
       const nodes = byState[state];
+
+      // sort the longest distances first
+      nodes.sort((a, b) => distances[b.name] - distances[a.name]);
 
       const header = (
         <h2 onClick={() => this.toggleVisible(state)}>
@@ -136,9 +140,8 @@ export const DetailsKanban = React.createClass({
       return <Panel collapsible className={className} expanded={visible} header={header}>
         <Row>
           {
-            // TODO: use react-columns?  Or all in one column?  Order will matter..
             nodes.map(node => (
-              <Col key={node.name} xs={12} lg={6}>
+              <Col key={node.name} xs={12}>
                 <WorkItem node={node} />
               </Col>
             ))
