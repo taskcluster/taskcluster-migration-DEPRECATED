@@ -5,6 +5,10 @@ linux-android-nightlies-tier2:
     title: "Linux32/64 and android nightlies at tier2"
     milestone: true
     due: 2016-11-01
+    description: |
+        Nightlies for the linux32, linux64, and Android platforms are
+        implemented on a project branch, and produce updates that can be
+        dogfooded by team members.
     dependencies:
         - linux32-nightlies-tier2
         - linux64-nightlies-tier2
@@ -14,6 +18,13 @@ linux-android-tier1:
     title: "Linux32/64 and android at tier1"
     milestone: true
     due: 2017-01-01
+    description: |
+        All builds and tests for the linux32, linux64, and Android platforms
+        are running in TaskCluster at tier 1, with Buildbot jobs demoted or
+        disabled. All tasks are scheduled via TaskCluster, but hardware-only
+        tasks are executed via BBB.  Since tier-1 opt builds are what we ship
+        to users, this also requires nightlies and preparations for making full
+        releases when they are due.
     dependencies:
         - linux32-opt-tier1
         - linux64-opt-tier1
@@ -22,21 +33,33 @@ linux-android-tier1:
 no-buildbot-schedulers:
     title: "Buildbot schedulers are disabled (except ESR)"
     milestone: true
+    description: |
+        The Buildbot scheduler masters are no longer scheduling any jobs except
+        ESR builds.
     dependencies:
         - stop-bb-schedulers
 
-no-buildbot:
-    title: "Buildbot completely turned off"
+all-releases:
+    title: "Everything has been released at least once from TC (except ESR)"
     milestone: true
+    description: |
+        We have performed a final release for all platforms, built and tested
+        on all TaskCluster.
     dependencies:
-        - almost-no-buildbot
-        - thunderbird-off-bb
-        - esr-on-bb-desupported
-        - windows-xp-deprecated
+        - android-release
+        - linux32-release
+        - linux64-release
+        - macosx-release
+        - windows-release
 
 almost-no-buildbot:
     title: "Turn off Buildbot except for ESR and Thunderbird"
     milestone: true
+    description: |
+        Buildbot is almost completely unused -- with the exception of ESR and
+        Thunderbird, which we just have to wait for.  The Buildbot
+        infrastructure is drastically scaled back and left to run until it is
+        no longer used.
     dependencies:
         - all-releases
         - stop-bb-schedulers
@@ -44,12 +67,13 @@ almost-no-buildbot:
         - stop-bb-test-masters
         - stop-bbb
 
-all-releases:
-    title: "Everything has been released at least once from TC (except ESR)"
+no-buildbot:
+    title: "Buildbot completely turned off"
     milestone: true
+    description: |
+        All Buildbot infrastructure is unused and decomissioned.
     dependencies:
-        - android-release
-        - linux32-release
-        - linux64-release
-        - macosx-release
-        - windows-release
+        - almost-no-buildbot
+        - thunderbird-off-bb
+        - esr-on-bb-desupported
+        - windows-xp-deprecated

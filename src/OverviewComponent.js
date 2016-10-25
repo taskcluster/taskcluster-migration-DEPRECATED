@@ -47,7 +47,11 @@ export default React.createClass({
     return (
       <Table responsive striped hover>
         <thead>
-          <tr><th>Milestone/OKR</th><th>Due</th><th>Progress</th></tr>
+          <tr>
+            <th width="50%">Milestone/OKR</th>
+            <th width="20%">Due</th>
+            <th width="30%">Progress</th>
+          </tr>
         </thead>
         <tbody>
           {milestones.map(node => {
@@ -58,6 +62,7 @@ export default React.createClass({
                   <Link to={`/details/${node.name}`}>
                     {node.title}
                   </Link>
+                  {node.description ?  <p className="text-muted">{node.description}</p> : null}
                 </td>
                 <td>
                   <OverlayTrigger overlay={<Tooltip id="due">{due.format('LL')}</Tooltip>}>
