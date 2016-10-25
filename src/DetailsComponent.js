@@ -138,7 +138,7 @@ export const DetailsKanban = React.createClass({
           {
             // TODO: use react-columns?  Or all in one column?  Order will matter..
             nodes.map(node => (
-              <Col xs={12} lg={6}>
+              <Col key={node.name} xs={12} lg={6}>
                 <WorkItem node={node} />
               </Col>
             ))
