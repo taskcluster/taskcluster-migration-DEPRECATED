@@ -17,7 +17,7 @@ android-multilocale-tier2:
         - android-opt-tier2
 
 android-single-locale-tier2:
-    done:
+    done: true
     assigned: Callek
     title: "Android single locale repacks, tier2"
     description: |
