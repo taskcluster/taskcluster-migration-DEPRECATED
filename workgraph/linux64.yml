@@ -55,6 +55,8 @@ linux64-single-locale-tier2:
     title: "Implement single locale repacks for nightly linux64 builds on a project branch"
     description: |
         Implement tasks to generate single-locale builds on a project branch
+    done: true
+    assigned: Callek
     dependencies:
         - linux64-builds-tier2
 
