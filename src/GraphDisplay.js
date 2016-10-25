@@ -34,11 +34,19 @@ export default React.createClass({
           },
         });
       });
+      let shape = 'ellipse';
+      if (node.external) {
+        shape = 'diamond';
+      }
+      if (node.milestone) {
+        shape = 'square';
+      }
+
       nodes.push({
         data: {
           id: node.name,
           color: STATE_COLORS[node.state],
-          shape: node.external ? 'diamond' : (node.milestone ? 'square' : 'ellipse'),
+          shape,
         },
       });
     });
