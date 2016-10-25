@@ -3,13 +3,13 @@ import Panel from 'react-bootstrap/lib/Panel';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
 import WorkItem from './WorkItem';
-import GraphComponent from './GraphComponent';
+import GraphDisplay from './GraphDisplay';
 import { Link, IndexLink } from 'react-router';
 import './details.css';
 
 export const DetailsGraph = React.createClass({
   render() {
-    return <GraphComponent width={600} height={600} root={this.props.params.rootWorkItem}/>;
+    return <GraphDisplay root={this.props.params.rootWorkItem}/>;
   },
 });
 
