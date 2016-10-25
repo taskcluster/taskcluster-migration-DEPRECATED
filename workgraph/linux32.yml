@@ -18,26 +18,50 @@ linux32-tests-tier2:
 
 linux32-signing-tier2:
     title: "Implement linux32 signing tasks for nightly builds on a project branch"
+    description: |
+        Implement signing for en_US builds on a project branch
     dependencies:
         - linux32-builds-tier2
 
 linux32-balrog-tier2:
     title: "Implement balrog submission tasks for nightly linux32 builds on a project branch"
-    # these will submit to a staging balrog instance
+    description: |
+        Implement balrog submission tasks for nightly multilocale builds on a
+        project branch, submitting to the balrog staging instance
     dependencies:
         - linux32-builds-tier2
         - balrog-worker-impl
 
+linux32-single-locale-balrog-tier2:
+    title: "Linux32 balrog submission for single-locale builds, tier 2"
+    description: |
+        Implement balrog submission tasks for single-locale builds on a project
+        branch.  This is complicated due to the per-locale naming of the
+        artifacts.
+    dependencies:
+        - balrog-worker-impl
+
 linux32-single-locale-tier2:
     title: "Implement single locale repacks for nightly linux32 builds on a project branch"
+    description: |
+        Implement tasks to generate single-locale builds on a project branch
+    assigned: Callek
     dependencies:
         - linux32-builds-tier2
+
+linux32-single-locale-signing-tier2:
+    title: "Sign linux32 single-locale repacks"
+    description: |
+        Implement task-graph tasks that will sign the single-locale repacks
+    dependencies:
+        - linux32-single-locale-tier2
 
 linux32-verify-signing-equivalence:
     # ask coop for details
     title: "Verify that the signature formats match those from BB builds"
     dependencies:
         - linux32-signing-tier2
+        - linux32-single-locale-signing-tier2
 
 linux32-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
@@ -45,9 +69,11 @@ linux32-nightlies-tier2:
         - linux32-builds-tier2
         - linux32-signing-tier2
         - linux32-balrog-tier2
+        - linux32-single-locale-balrog-tier2
         - linux32-single-locale-tier2
         - linux32-verify-signing-equivalence
         - nightly-beetmover-tier2
+        - nightly-single-locale-beetmover-tier2
 
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
