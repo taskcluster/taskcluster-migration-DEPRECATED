@@ -38,6 +38,7 @@ export default React.createClass({
         data: {
           id: node.name,
           color: STATE_COLORS[node.state],
+          shape: node.external ? 'diamond' : (node.milestone ? 'square' : 'ellipse'),
         },
       });
     });
@@ -49,6 +50,7 @@ export default React.createClass({
         .selector('node')
           .css({
             'background-color': 'data(color)',
+            shape: 'data(shape)',
           })
         .selector('edge')
           .css({

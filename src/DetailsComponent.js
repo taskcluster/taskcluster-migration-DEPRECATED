@@ -44,6 +44,10 @@ export const DetailsGraph = React.createClass({
           <dd>{node.state}</dd>
           {node.assigned ? <dt>Assigned:</dt> : null}
           {node.assigned ? <dd>{node.assigned}</dd> : null}
+          {node.external ? <dt>External:</dt> : null}
+          {node.external ? <dd>yes</dd> : null}
+          {node.milestone ? <dt>Milestone:</dt> : null}
+          {node.milestone ? <dd>yes</dd> : null}
           {node.bug ? <dt>Bug:</dt> : null}
           {node.bug ? (
             <dd>
