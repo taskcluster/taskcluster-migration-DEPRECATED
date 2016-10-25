@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from 'react-bootstrap/lib/Table';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
+import moment from 'moment';
 import { Link } from 'react-router';
 
 export default React.createClass({
@@ -26,23 +27,41 @@ export default React.createClass({
   },
 
   render() {
-    // TODO: sort by OKR due date
+    // get milestones, with a default due date
+    const milestones = this.context.graph.milestones().map(milestone => {
+      const { due, ...fields } = milestone;
+      return { due: new Date(due || '2020-01-01'), ...fields };
+    });
+
+    milestones.sort((a, b) => {
+      if (a.due < b.due) {
+        return -1;
+      } else if (a.due === b.due) {
+        return 0;
+      }
+      return 1;
+    });
+
     return (
       <Table responsive striped hover>
         <thead>
-          <tr><th>Milestone</th><th>Progress</th></tr>
+          <tr><th>Milestone/OKR</th><th>Due</th><th>Progress</th></tr>
         </thead>
         <tbody>
-          {this.context.graph.milestones().map(node =>
-            <tr key={node.name}>
-              <td>
-                <Link to={`/details/${node.name}`}>
-                  {node.title}
-                </Link>
-              </td>
-              <td>{this.renderMilestoneProgress(node)}</td>
-            </tr>
-          )}
+          {milestones.map(node => {
+            const due = moment(node.due);
+            return (
+              <tr key={node.name}>
+                <td>
+                  <Link to={`/details/${node.name}`}>
+                    {node.title}
+                  </Link>
+                </td>
+                <td>{due.format('LL')}</td>
+                <td>{this.renderMilestoneProgress(node)}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     );
