@@ -1,6 +1,8 @@
 import React from 'react';
 import Table from 'react-bootstrap/lib/Table';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
 import moment from 'moment';
 import { Link } from 'react-router';
 
@@ -49,7 +51,7 @@ export default React.createClass({
         </thead>
         <tbody>
           {milestones.map(node => {
-            const due = moment(node.due);
+            const due = moment.utc(node.due);
             return (
               <tr key={node.name}>
                 <td>
@@ -57,7 +59,11 @@ export default React.createClass({
                     {node.title}
                   </Link>
                 </td>
-                <td>{due.format('LL')}</td>
+                <td>
+                  <OverlayTrigger overlay={<Tooltip id="due">{due.format('LL')}</Tooltip>}>
+                    <span>{due.fromNow()}</span>
+                  </OverlayTrigger>
+                </td>
                 <td>{this.renderMilestoneProgress(node)}</td>
               </tr>
             );
