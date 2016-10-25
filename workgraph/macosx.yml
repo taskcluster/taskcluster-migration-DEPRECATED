@@ -33,7 +33,7 @@ macosx-single-locale-tier2:
 
 macosx-mach-repackage:
     title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
-    assigneD: kmoir
+    assigned: kmoir
 
 macosx-signing-tier2:
     title: "Implemnt macosx signing tasks for nightly builds on a project branch, using mach repackage"
