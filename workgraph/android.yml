@@ -8,16 +8,49 @@ android-opt-tier2:
 
 android-multilocale-tier2:
     title: "Android multilocale builds, tier2"
+    description: |
+        This was basically accomplished as part of `android-opt-tier2`, since
+        the multilocale build is the default
+    assigned: jlund
+    done: true
+    dependencies:
+        - android-opt-tier2
 
 android-single-locale-tier2:
     title: "Android single locale repacks, tier2"
+    description: |
+        Implement tasks to generate single-locale builds on a project branch
+    assigned: Callek
+
+android-single-locale-signing-tier2:
+    title: "Sign android single-locale repacks"
+    description: |
+        Implement task-graph tasks that will sign the single-locale repacks
+    dependencies:
+        - android-single-locale-tier2
 
 android-signing-tier2:
     title: "Android taskcluster signing, tier2"
+    description: |
+        Implement signing for multilocale android builds on a project branch
     done: true
+    dependencies:
+        - android-multilocale-tier2
 
 android-balrog-tier2:
-    title: "Implement balrog submission tasks for nightly android builds on a project branch"
+    title: "Android balrog submission for multilocale builds, tier 2"
+    description: |
+        Implement balrog submission tasks for nightly multilocale builds on a
+        project branch, submitting to the balrog staging instance
+    dependencies:
+        - balrog-worker-impl
+
+android-single-locale-balrog-tier2:
+    title: "Android balrog submission for single-locale builds, tier 2"
+    description: |
+        Implement balrog submission tasks for single-locale builds on a project
+        branch.  This is complicated due to the per-locale naming of the
+        artifacts.
     dependencies:
         - balrog-worker-impl
 
@@ -26,6 +59,7 @@ android-verify-signing-equivalence:
     title: "Verify that the signature formats match those from BB builds"
     dependencies:
         - android-signing-tier2
+        - android-single-locale-signing-tier2
 
 android-nightlies-tier2:
     title: "Run Android opt nightlies and tests at tier 2"
@@ -35,7 +69,9 @@ android-nightlies-tier2:
         - android-signing-tier2
         - android-verify-signing-equivalence
         - android-balrog-tier2
+        - android-single-locale-balrog-tier2
         - nightly-beetmover-tier2
+        - nightly-single-locale-beetmover-tier2
 
 android-debug-tier1:
     title: "Run Android debug builds and tests at tier 1"

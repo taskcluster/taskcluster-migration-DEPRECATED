@@ -72,6 +72,14 @@ nightly-beetmover-tier2:
     dependencies:
         - beetmover-worker-impl
 
+nightly-single-locale-beetmover-tier2:
+    title: "beetmover tasks for single-locale builds"
+    description: |
+        Implement tasks for beetmover that can handle the additional complexity of
+        artifact names containing locale names.
+    dependencies:
+        - beetmover-worker-impl
+
 linux-tc-worker-engine:
     title: "implement a tc-worker engine that can support linux talos on hardware"
     bug: 1282011
