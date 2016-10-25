@@ -62,7 +62,7 @@ export default React.createClass({
                   <Link to={`/details/${node.name}`}>
                     {node.title}
                   </Link>
-                  {node.description ?  <p className="text-muted">{node.description}</p> : null}
+                  {node.description ? <p className="text-muted">{node.description}</p> : null}
                 </td>
                 <td>
                   <OverlayTrigger overlay={<Tooltip id="due">{due.format('LL')}</Tooltip>}>
