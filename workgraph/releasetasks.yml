@@ -36,10 +36,31 @@ releasetasks-update-verification-windows:
     dependencies:
         - windows-tests-win10-tier2
 
-releasetasks-bouncer-scriptworker:
+releasetasks-bouncer-submitter:
     title: "Implement a scriptworker that can communicate with the bouncer API via network ACLs"
     dependencies:
         - scriptworker-tier1
+
+releasetasks-bouncer-aliases:
+    title: "Implement post-release bouncer aliases task using TC only in releasetasks"
+
+releasetasks-checksums:
+    title: "Implement checksums task using TC only in releasetasks"
+
+releasetasks-mark-release-as-shipped:
+    title: "Implement the mark-release-as-shipped task that can communicate with Ship-it API using TC only in releasetasks"
+
+releasetasks-publish-to-balrog:
+    title: "Implement the publish-to-Balrog task using TC only in releasetasks"
+
+releasetasks-updates:
+    title: "Implement the updates task using TC only in releasetasks"
+
+releasetasks-eme-free-repacks:
+    title: "Implement the EME-free repacks task using TC only in releasetasks"
+
+releasetasks-sha1-repacks:
+    title: "Implement the SHA1 repacks task using TC only in releasetasks"
 
 releasetasks-hg-bumper:
     title: "Implement a bumper as a scriptworker using the hg-committer script"
@@ -58,5 +79,12 @@ stop-releasetasks-via-bbb:
         - releasetasks-uptake-monitoring
         - releasetasks-update-verification-macosx
         - releasetasks-update-verification-windows
-        - releasetasks-bouncer-scriptworker
+        - releasetasks-bouncer-submitter
+        - releasetasks-bouncer-aliases
+        - releasetasks-checksums
+        - releasetasks-mark-release-as-shipped
+        - releasetasks-publish-to-balrog
+        - releasetasks-updates
         - releasetasks-hg-bumper
+        - releasetasks-eme-free-repacks
+        - releasetasks-sha1-repacks
