@@ -12,10 +12,22 @@ releasetasks-partner-repacks-linux:
 
 partner-repacks-macosx-select-strategy:
     title: "Select a strategy for MacOS X partner repacks"
-    # one of:
-    #  - run on a dedicated pool of macs (add new work items to deploy that pool)
-    #  - run on a existing mac testers (dep on macosx-test-talos-on-hardware-100pct)
-    #  - run on linux (add new work items to implement that)
+    description: |
+        One of (1) run on a dedicated pool of macs (add new work items to
+        deploy that pool) (2) run on a existing mac testers (dep on
+        macosx-test-talos-on-hardware-100pct) (3) run on linux (add new work
+        items to implement that)
+
+releasetasks-funsize-sched-tc-pulse:
+    title: "Modify the funsize scheduler to listen to pulse events from TC"
+    description: |
+        This is an intermediate step that allows funsize tasks to operate
+        against release builds performed in TC
+
+releasetasks-funsize-sched-in-tree:
+    title: "Replace the funsize scheduler with tasks generated in-tree"
+    dependencies:
+        - releasetasks-funsize-sched-tc-pulse
 
 releasetasks-partner-repacks-macosx:
     title: "Implement partner repacks for MacOS X"
@@ -88,3 +100,4 @@ stop-releasetasks-via-bbb:
         - releasetasks-hg-bumper
         - releasetasks-eme-free-repacks
         - releasetasks-sha1-repacks
+        - releasetasks-funsize-sched-in-tree

@@ -39,6 +39,7 @@ seta-in-tree:
     # in-tree taskgraph generation correctly skips low-value tests
     title: "SETA support in tree"
     bug: 1287018
+    assigned: MikeLing
 
 beetmover-worker-impl:
     # "beetworker"?
