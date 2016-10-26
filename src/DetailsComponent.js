@@ -70,12 +70,19 @@ export const DetailsGraph = React.createClass({
   render() {
     return (
       <Row>
-        <Col xs={12} md={7}>
+        <Col className="hidden-xs hidden-sm" md={7}>
           <GraphDisplay
             root={this.props.params.rootWorkItem}
             onSelect={this.handleNodeSelected} />
         </Col>
-        <Col xs={12} md={5}>
+        <Col className="hidden-md hidden-lg" xs={6}>
+          <ul>
+            {this.context.graph.nodes.map(node => (
+              <li key={node.name} onClick={() => this.handleNodeSelected(node.name)}>{node.name}</li>
+            ))}
+          </ul>
+        </Col>
+        <Col xs={6} md={5}>
           {this.renderNodeInfo()}
         </Col>
       </Row>
