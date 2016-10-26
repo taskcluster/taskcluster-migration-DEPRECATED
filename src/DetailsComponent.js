@@ -34,37 +34,7 @@ export const DetailsGraph = React.createClass({
       );
     }
 
-    return (
-      <div>
-        <h2>{node.name}</h2>
-        <p>{node.title}</p>
-        {node.description ? <p className="text-muted">{node.description}</p> : null}
-        <dl>
-          <dt>State</dt>
-          <dd>{node.state}</dd>
-          {node.assigned ? <dt>Assigned:</dt> : null}
-          {node.assigned ? <dd>{node.assigned}</dd> : null}
-          {node.external ? <dt>External:</dt> : null}
-          {node.external ? <dd>yes</dd> : null}
-          {node.milestone ? <dt>Milestone:</dt> : null}
-          {node.milestone ? <dd>yes</dd> : null}
-          {node.bug ? <dt>Bug:</dt> : null}
-          {node.bug ? (
-            <dd>
-              <a href={`https://bugzilla.mozilla.org/show_bug.cgi?id=${node.bug}`} target="_blank">
-                #{node.bug}
-              </a>
-            </dd>
-          ) : null}
-          <dt>Dependencies</dt>
-          <dd>
-            <ul>
-              {node.dependencies.map(dep => <li key={dep}>{dep}</li>)}
-            </ul>
-          </dd>
-        </dl>
-      </div>
-    );
+    return <WorkItem node={node} detailed />;
   },
 
   render() {
