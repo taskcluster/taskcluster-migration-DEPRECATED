@@ -24,4 +24,3 @@ When you are happy, submit a pull request!
 
 * [workgraph README](workgraph/README.md)
 * [notes](NOTES.md)
-* [open and closed questions](QUESTIONS.md)
