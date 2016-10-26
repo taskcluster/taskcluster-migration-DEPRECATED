@@ -78,7 +78,9 @@ export const DetailsGraph = React.createClass({
         <Col className="hidden-md hidden-lg" xs={6}>
           <ul>
             {this.context.graph.nodes.map(node => (
-              <li key={node.name} onClick={() => this.handleNodeSelected(node.name)}>{node.name}</li>
+              <li key={node.name} onClick={() => this.handleNodeSelected(node.name)}>
+                {node.name}
+              </li>
             ))}
           </ul>
         </Col>
