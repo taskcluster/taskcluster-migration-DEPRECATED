@@ -21,10 +21,12 @@ export default React.createClass({
   },
 
   makeCy(container) {
+    const graph = this.context.graph.transitiveReduction();
+
     const nodes = [];
     const edges = [];
 
-    this.context.graph.nodes.forEach(node => {
+    graph.nodes.forEach(node => {
       node.dependencies.forEach(dep => {
         edges.push({
           data: {

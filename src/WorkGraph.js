@@ -48,6 +48,55 @@ export default class WorkGraph {
     return new WorkGraph(subgraph);
   }
 
+  // Return a copy of this WorkGraph containing only the minimum edges required
+  // to reach every node from the root.  This removes redundant "long" edges:
+  // if A -> B -> C, then an edge from A -> C is redundant.  The effect is a
+  // much simpler, almost tree-shaped visual display
+  transitiveReduction() {
+    // begin by making a reachability matrix
+    const paths = new Set();
+    const seen = new Set();
+    const stack = [];
+
+    // DFS through the graph, using a stack to get transitive reachability
+    const recur = name => {
+      seen.add(name);
+      stack.forEach(n => paths.add(`${n}-${name}`));
+      stack.push(name);
+      this.byName[name].dependencies.forEach(recur);
+      stack.pop();
+    };
+
+    this.nodes.forEach(node => {
+      if (seen.has(node.name)) {
+        return;
+      }
+      recur(node.name);
+    });
+
+    // now omit dependencies for which another dependency has a path
+    const reduced = {};
+    this.nodes.forEach(node => {
+      const omit = new Set();
+
+      node.dependencies.forEach(dep1 => {
+        node.dependencies.forEach(dep2 => {
+          if (dep1 !== dep2 && paths.has(`${dep2}-${dep1}`)) {
+            // node -> dep2 --...--> dep1
+            //      \______________/
+            // so omit the longer edge from node1 -> dep1
+            omit.add(dep1);
+          }
+        });
+      });
+
+      const dependencies = node.dependencies.filter(dep => !omit.has(dep));
+      reduced[node.name] = { ...node, dependencies };
+    });
+
+    return new WorkGraph(reduced);
+  }
+
   // Return the list of work items tagged as milestones
   milestones() {
     return this.nodes
