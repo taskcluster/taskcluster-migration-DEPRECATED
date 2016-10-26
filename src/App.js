@@ -1,17 +1,21 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import OverviewComponent from './OverviewComponent';
+import Breadcrumbs from 'react-breadcrumbs';
 import { DetailsComponent, DetailsGraph, DetailsKanban } from './DetailsComponent';
 import { Router, Route, Redirect, Link, IndexRoute, hashHistory } from 'react-router';
 
-const Navigation = () => (
-  // TODO: add Navbar.Text containing title
+const Navigation = props => (
   <div id="navbar">
     <Navbar fluid={true} inverse={true} staticTop={true}>
       <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">TaskCluster Migration Work Graph</Link>
-        </Navbar.Brand>
+        <Navbar.Text>
+          <Breadcrumbs
+            separator=" &#x21d2; "
+            wrapperElement="span"
+            routes={props.routes}
+            params={props.params} />
+        </Navbar.Text>
       </Navbar.Header>
     </Navbar>
   </div>
@@ -19,7 +23,7 @@ const Navigation = () => (
 
 const Container = props =>
   <div>
-    <Navigation />
+    <Navigation routes={props.routes} params={props.params} />
     <div className="container-fluid">
       {props.children}
     </div>
@@ -41,12 +45,12 @@ export default React.createClass({
   render() {
     return (
       <Router history={hashHistory}>
-        <Route path="/" component={Container}>
-          <IndexRoute component={OverviewComponent} />
+        <Route name="TaskCluster Migration" path="/" component={Container}>
+          <IndexRoute name="Overview" component={OverviewComponent} />
           <Redirect from="/details" to="/details/all" />
-          <Route path="/details/:rootWorkItem" component={DetailsComponent}>
-            <IndexRoute component={DetailsGraph} />
-            <Route path="kanban" component={DetailsKanban} />
+          <Route name="Details" path="/details/:rootWorkItem" component={DetailsComponent}>
+            <IndexRoute name="Graph" component={DetailsGraph} />
+            <Route name="Kanban" path="kanban" component={DetailsKanban} />
           </Route>
         </Route>
       </Router>
