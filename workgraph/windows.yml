@@ -28,15 +28,29 @@ windows-builds-tier2:
     title: "Run all Windows builds at Tier 2"
     done: true
 
-windows-tests-win10-tier2:
-    title: "Run Windows 10 tests on TC for all platforms but XP at Tier 2"
-    dependencies:
-        - windows-builds-tier2
+generic-worker-publish-on-failure:
+    title: "Publish artifacts on test failure"
+    assigned: pmoore
+
+windows-fix-subprocess-issue:
+    title: "Fix issues preventing successful test runs that involve a subprocess"
+    assigned: grenade
+    description: |
+        The underlying issue isn't clear yet, but this may be due to
+        performance issues on Windows 7
 
 windows-tests-win7-tier2:
     title: "Run Windows 7 tests on TC for all platforms but XP at Tier 2"
     dependencies:
         - windows-builds-tier2
+        - generic-worker-publish-on-failure
+        - windows-fix-subprocess-issue
+
+windows-tests-win10-tier2:
+    title: "Run Windows 10 tests on TC for all platforms but XP at Tier 2"
+    dependencies:
+        - windows-builds-tier2
+        - windows-tests-win7-tier2
 
 windows-symbol-uploads:
     title: "Symbols from Windows builds uploadd to Socorro"
