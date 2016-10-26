@@ -1,6 +1,16 @@
 # Milestones are work items that don't actually involve any work,
 # but represent a major reference point in the work graph
 
+windows-testing-tier2:
+    title: "Windows testing running in TC at tier 2"
+    milestone: true
+    due: 2016-12-15
+    description: |
+        Dustin totally made this date and set of dependencies up.
+    dependencies:
+        - windows-tests-win7-tier2
+        - windows-tests-win10-tier2
+
 linux-android-nightlies-tier2:
     title: "Linux32/64 and android nightlies at tier2"
     milestone: true
