@@ -15,7 +15,7 @@ export const DetailsGraph = React.createClass({
 
   getInitialState() {
     return {
-      selectedNode: 'linux32-builds-tier2',
+      selectedNode: null,
     };
   },
 
