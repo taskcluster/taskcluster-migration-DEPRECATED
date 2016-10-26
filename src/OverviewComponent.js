@@ -1,5 +1,6 @@
 import React from 'react';
-import Table from 'react-bootstrap/lib/Table';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 import ProgressBar from 'react-bootstrap/lib/ProgressBar';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
@@ -45,36 +46,39 @@ export default React.createClass({
     });
 
     return (
-      <Table responsive striped hover>
-        <thead>
-          <tr>
-            <th width="50%">Milestone/OKR</th>
-            <th width="20%">Due</th>
-            <th width="30%">Progress</th>
-          </tr>
-        </thead>
-        <tbody>
-          {milestones.map(node => {
-            const due = moment.utc(node.due);
-            return (
-              <tr key={node.name}>
-                <td>
-                  <Link to={`/details/${node.name}`}>
-                    {node.title}
-                  </Link>
-                  {node.description ? <p className="text-muted">{node.description}</p> : null}
-                </td>
-                <td>
-                  <OverlayTrigger overlay={<Tooltip id="due">{due.format('LL')}</Tooltip>}>
-                    <span>{due.fromNow()}</span>
-                  </OverlayTrigger>
-                </td>
-                <td>{this.renderMilestoneProgress(node)}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <div>
+        <Row className="hidden-xs">
+          <Col xs={12} sm={6}><h3>Milestone/OKR</h3></Col>
+          <Col sm={2}><h3>Due</h3></Col>
+          <Col sm={4}><h3>Progress</h3></Col>
+        </Row>
+        {milestones.map(node => {
+          const due = moment.utc(node.due);
+          return [
+            <Row key={`${node.name}-1`}>
+              <Col xs={12} sm={6}>
+                <Link to={`/details/${node.name}`}>
+                  {node.title}
+                </Link>
+              </Col>
+              <Col xs={4} sm={2}>
+                <OverlayTrigger overlay={<Tooltip id="due">{due.format('LL')}</Tooltip>}>
+                  <span><span className="visible-xs-inline">Due </span>{due.fromNow()}</span>
+                </OverlayTrigger>
+              </Col>
+              <Col xs={8} sm={4}>
+                {this.renderMilestoneProgress(node)}
+              </Col>
+            </Row>,
+            <Row key={`${node.name}-2`}>
+              <Col xs={12}>
+                {node.description ? <p className="text-muted">{node.description}</p> : null}
+                <hr className="visible-xs-block" />
+              </Col>
+            </Row>,
+          ];
+        })}
+      </div>
     );
   },
 });
