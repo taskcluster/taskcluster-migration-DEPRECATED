@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import OverviewComponent from './OverviewComponent';
 import Breadcrumbs from 'react-breadcrumbs';
 import { DetailsComponent, DetailsGraph, DetailsKanban } from './DetailsComponent';
-import { Router, Route, Redirect, Link, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, Redirect, IndexRoute, hashHistory } from 'react-router';
 
 const Navigation = props => (
   <div id="navbar">
