@@ -130,9 +130,45 @@ pulse-actions-missing-talos:
     title: "Add support for backfilling all talos jobs on a push"
     bug: 1289824
 
+docker-generic-taskcluster-worker-priority-support:
+    title: "Use queue.claimWork in {docker,generic,taskcluster}-worker, load test"
+    assigned: jonasfj
+    description: |
+        Each of these three worker implementations needs to be updated to use
+        the `queue.claimWork` operation, followed by a staged deployment to
+        ensure that the queue service is not overwhelmed by the load.
+
+script-worker-priority-support:
+    title: "Use queue.claimWork in scriptworker"
+    description: |
+        Update scriptworker to use the `queue.claimWork` operation.  This will
+        be deployed only after the deployment for
+        {docker,generic,taskcluster}-worker is complete, to ensure the queue
+        service can handle the load.
+    dependencies:
+        - docker-generic-taskcluster-worker-priority-support
+
+bbb-priority-support:
+    title: "Use queue.claimWork in buildbot-bridge"
+    description: |
+        Update buildbot-bridge to use the `queue.claimWork` operation.  This will
+        be deployed only after the deployment for
+        {docker,generic,taskcluster}-worker is complete, to ensure the queue
+        service can handle the load.
+    dependencies:
+        - docker-generic-taskcluster-worker-priority-support
+
 worker-priority-support:
     title: "Support for priorities in TaskCluster workers"
+    description: |
+        This involves implementing support for the `queue.claimWork` operations
+        throughout the queue and workers, then adding new priority levels in queue.
     bug: 1231781
+    assigned: jonasfj
+    dependencies:
+        - bbb-priority-support
+        - script-worker-priority-support
+        - docker-generic-taskcluster-worker-priority-support
 
 orange-builds:
     title: "Support turning some builds orange instead of red"
