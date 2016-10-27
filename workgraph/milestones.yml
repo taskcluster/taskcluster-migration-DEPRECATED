@@ -86,4 +86,3 @@ no-buildbot:
         - almost-no-buildbot
         - thunderbird-off-bb
         - esr-on-bb-desupported
-        - windows-xp-deprecated
