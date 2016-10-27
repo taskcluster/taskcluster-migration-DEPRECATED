@@ -123,6 +123,7 @@ macosx-worker-deployment-hardware:
     assigned: wcosta
     dependencies:
         - macosx-taskcluster-worker
+        - taskcluster-worker-setup-cleanup
 
 macosx-test-talos-on-hardware-10pct:
     title: "Run MacOS X talos on TC on 10% of hardware"

@@ -155,3 +155,12 @@ generic-worker-terminate-on-ami-update:
 
 fuzzing:
     title: "Implement fuzzing in taskcluster (TBD)"
+
+taskcluster-worker-setup-cleanup:
+    title: "Add support to Taskcluster-Worker for pre-task setup and post-task cleanup work"
+    description: |
+        For Buildbot jobs, runner takes care of some pre-task setup (warming
+        caches, for example, to reduce end-to-end time) and post-task cleanup
+        (clearing temporary directories, killing stray processes, etc.).  We
+        will need similar functionality with taskcluster-worker, either by
+        using runner or implementing it with some other mechanism
