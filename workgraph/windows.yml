@@ -104,11 +104,22 @@ windows-nightlies-tier2:
         - windows-verify-signing-equivalence
         - nightly-beetmover-tier2
 
+windows-hardware-via-bbb-green:
+    title: "Green up Windows hardware tests on TC builds via BBB in try"
+    description: |
+        Hardware tests are those tests that require physical hardware --
+        clipboard, mochitest-other, etc.  We need to run these for debug
+        builds, so they must be green via BBB before windows-debug-tier1.
+    dependencies:
+        - in-tree-bbb-support
+        - windows-builds-tier2
+
 windows-debug-tier1:
     title: "Run windows debug builds and tests at tier1"
     dependencies:
         - windows-tests-win7-tier2
         - windows-tests-win10-tier2
+        - windows-hardware-via-bbb-green
         - windows-builds-tier2
         - windows-symbol-uploads
 
@@ -155,6 +166,7 @@ windows-opt-tier1:
         - orange-builds
         - windows-debug-tier1
         - windows-talos-via-bbb-green
+        - windows-hardware-via-bbb-green
         - windows-tests-win7-tier2
         - windows-tests-win10-tier2
         - windows-nightlies-manual-test
