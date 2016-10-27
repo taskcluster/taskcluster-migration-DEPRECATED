@@ -49,6 +49,7 @@ windows-tests-win7-tier2:
 verify-win10-spec:
     title: "Verify that the Win10 image matches a typical user's desktop"
     assigned: jmaher
+    bug: 1313374
 
 windows-tests-win10-tier2:
     title: "Run Windows 10 tests on TC for all platforms but XP at Tier 2"
