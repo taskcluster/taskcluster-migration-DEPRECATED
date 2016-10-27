@@ -137,10 +137,13 @@ windows-verify-build-equivalence:
         - windows-builds-tier2
 
 windows-opt-tier1:
-    title: "Promote all windows builds to tier1; turn off windows buildbot builds and nightlies; commit for beta in 6-12 weeks"
-    # NOTE: this involves
-    #  - running all talos and XP jobs via BBB
-    #  - turning off BB talos, demoting builds to tier 2, and disabling sendchanges
+    title: "Promote all windows opt builds and tests to tier1"
+    description: |
+        This is a "flag-day" moment where we promote opt on TC from tier 2 to
+        tier 1.  Because of the constrained hardware pools for hardware tests
+        and talos, we have to simultaneously stop running those jobs via
+        buildbot (and demote the rest to tier 2), and instead run those jobs
+        from TC via BBB.
     dependencies:
         - windows-verify-build-equivalence
         - scriptworker-tier1
