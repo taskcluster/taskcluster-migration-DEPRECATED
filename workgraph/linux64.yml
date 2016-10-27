@@ -126,6 +126,18 @@ linux64-disable-bb-builds:
     dependencies:
         - linux64-opt-tier1
 
+linux-tc-worker-engine:
+    title: "implement a tc-worker engine that can support linux talos on hardware"
+    bug: 1282011
+    dependencies:
+        # this will be a generalization of wander's work for OS X
+        - macosx-taskcluster-worker
+
+linux-worker-deployment-hardware:
+    title: "build a method of deploying a worker for linux on hardware"
+    dependencies:
+        - linux-tc-worker-engine
+
 linux64-talos-on-hardware-10pct:
     title: "Run linux* talos on TC on 10% of hardware"
     dependencies:

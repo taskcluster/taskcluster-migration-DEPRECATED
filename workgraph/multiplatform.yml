@@ -75,18 +75,6 @@ nightly-single-locale-beetmover-tier2:
     dependencies:
         - beetmover-worker-impl
 
-linux-tc-worker-engine:
-    title: "implement a tc-worker engine that can support linux talos on hardware"
-    bug: 1282011
-    dependencies:
-        # this will be a generalization of wander's work for OS X
-        - macosx-taskcluster-worker
-
-linux-worker-deployment-hardware:
-    title: "build a method of deploying a worker for linux on hardware"
-    dependencies:
-        - linux-tc-worker-engine
-
 stop-bb-linux-test-masters:
     title: "Turn off the Linux Test Buildmasters (except one for ESR et al.)"
     dependencies:
