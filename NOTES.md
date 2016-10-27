@@ -41,3 +41,11 @@ Currently, the signing and packaging are interleaved in a single file, but this
 is not compatible with separate signing.  The `mach repackage` work will
 separate these operations so that a complete package can be disassebled,
 signed, and re-assembled.
+
+# Post-Task Reboots
+
+Buildbot reboots hardware after some test tasks, as a way to flush any
+remaining tasks or other system state that may have been left from the previous
+task.  Docker provides a similar effect, and taskcluster-worker uses per-user
+tasks to achieve a similar isolation.  So the current plan is to not
+automatically reboot after any tasks.

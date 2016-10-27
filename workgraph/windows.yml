@@ -15,9 +15,8 @@
 # That is, we will not get Win10 to the finish line and then go back to start over with
 # Win7.
 #
-# Except Windows XP.  XP Can't run in the cloud, and we will not try to run it
-# via Generic-Worker,  Instead, it will run via BBB until the platform is no longer
-# supported (Firefox 53, for reals this time)
+# Windows XP is not an issue; since these changes ride the trains, and will get on
+# the trains after XP is gone, it will never cross paths with TaskCluster.
 #
 # The testing platforms are windows 7 (32-bit) and windows 10 (64-bit).  Note
 # that this process assumes the current win8 -> win10 transition is
@@ -30,17 +29,22 @@ windows-builds-tier2:
 
 generic-worker-publish-on-failure:
     title: "Publish artifacts on test failure"
-    assigned: pmoore
+    description: |
+        Change the test implementation to put blobber artifacts under
+        `$HOME\\public`, since that is where generic-worker looks for
+        artifacts.  Pete is working on a longer-term fix to generic-worker,
+        but that does not block the migration.
+    assigned: grenade
 
 windows-fix-subprocess-issue:
     title: "Fix issues preventing successful test runs that involve a subprocess"
     assigned: grenade
     description: |
         The underlying issue isn't clear yet, but this may be due to
-        performance issues on Windows 7
+        performance issues on Windows 7.
 
 windows-tests-win7-tier2:
-    title: "Run Windows 7 tests on TC for all platforms but XP at Tier 2"
+    title: "Run Windows 7 tests on TC at Tier 2"
     dependencies:
         - windows-builds-tier2
         - generic-worker-publish-on-failure
@@ -49,9 +53,10 @@ windows-tests-win7-tier2:
 verify-win10-spec:
     title: "Verify that the Win10 image matches a typical user's desktop"
     assigned: jmaher
+    bug: 1313374
 
 windows-tests-win10-tier2:
-    title: "Run Windows 10 tests on TC for all platforms but XP at Tier 2"
+    title: "Run Windows 10 tests on TC at Tier 2"
     dependencies:
         - windows-builds-tier2
         - windows-tests-win7-tier2
@@ -98,11 +103,22 @@ windows-nightlies-tier2:
         - windows-verify-signing-equivalence
         - nightly-beetmover-tier2
 
+windows-hardware-via-bbb-green:
+    title: "Green up Windows hardware tests on TC builds via BBB in try"
+    description: |
+        Hardware tests are those tests that require physical hardware --
+        clipboard, mochitest-other, etc.  We need to run these for debug
+        builds, so they must be green via BBB before windows-debug-tier1.
+    dependencies:
+        - in-tree-bbb-support
+        - windows-builds-tier2
+
 windows-debug-tier1:
     title: "Run windows debug builds and tests at tier1"
     dependencies:
         - windows-tests-win7-tier2
         - windows-tests-win10-tier2
+        - windows-hardware-via-bbb-green
         - windows-builds-tier2
         - windows-symbol-uploads
 
@@ -111,13 +127,6 @@ windows-talos-via-bbb-green:
     dependencies:
         - in-tree-bbb-support
         - windows-nightlies-tier2
-
-windows-xp-via-bbb-green:
-    title: "Green up Windows XP tests on TC builds via BBB in try"
-    bug: 1285576
-    dependencies:
-        - in-tree-bbb-support
-        - windows-builds-tier2
 
 windows-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
@@ -131,10 +140,13 @@ windows-verify-build-equivalence:
         - windows-builds-tier2
 
 windows-opt-tier1:
-    title: "Promote all windows builds to tier1; turn off windows buildbot builds and nightlies; commit for beta in 6-12 weeks"
-    # NOTE: this involves
-    #  - running all talos and XP jobs via BBB
-    #  - turning off BB talos, demoting builds to tier 2, and disabling sendchanges
+    title: "Promote all windows opt builds and tests to tier1"
+    description: |
+        This is a "flag-day" moment where we promote opt on TC from tier 2 to
+        tier 1.  Because of the constrained hardware pools for hardware tests
+        and talos, we have to simultaneously stop running those jobs via
+        buildbot (and demote the rest to tier 2), and instead run those jobs
+        from TC via BBB.
     dependencies:
         - windows-verify-build-equivalence
         - scriptworker-tier1
@@ -146,10 +158,10 @@ windows-opt-tier1:
         - orange-builds
         - windows-debug-tier1
         - windows-talos-via-bbb-green
+        - windows-hardware-via-bbb-green
         - windows-tests-win7-tier2
         - windows-tests-win10-tier2
         - windows-nightlies-manual-test
-        - windows-xp-via-bbb-green
 
 windows-disable-bb-builds:
     title: "Turn off the Windows builds on Buildbot"
@@ -172,21 +184,14 @@ windows-talos-on-hardware-green:
         - windows-talos-on-hardware-10pct
 
 windows-talos-on-hardware-90pct:
-    title: "Run win* talos on TC on 90% of hardware (leaving XP and a few for ESR)"
+    title: "Run win* talos on TC on 90% of hardware (leaving a few for ESR)"
     dependencies:
         - windows-talos-on-hardware-green
-
-windows-xp-removed:
-    title: "Remove support for Windows XP and reimage freed machines (except a few for ESR)"
-    dependencies:
-        - windows-opt-tier1
-        - windows-xp-deprecated
 
 stop-bb-windows-test-masters:
     title: "Turn off the Windows Test Buildmasters (except one for ESR)"
     dependencies:
         - windows-talos-on-hardware-90pct
-        - windows-xp-removed
 
 windows-beta-release:
     title: "Ship windows beta release"

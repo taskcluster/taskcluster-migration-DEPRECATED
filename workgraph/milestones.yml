@@ -1,15 +1,15 @@
 # Milestones are work items that don't actually involve any work,
 # but represent a major reference point in the work graph
 
-windows-testing-tier2:
-    title: "Windows testing running in TC at tier 2"
+win7-testing-tier2:
+    title: "Windows 7 non-hardware tests running in TC against TC builds at tier 2"
     milestone: true
     due: 2016-12-15
     description: |
-        Dustin totally made this date and set of dependencies up.
+        Run test for Windows 7 builds in TaskCluster EC2 instances at tier 2,
+        debugging host- and taskcluster-related issues along the way.
     dependencies:
         - windows-tests-win7-tier2
-        - windows-tests-win10-tier2
 
 linux-android-nightlies-tier2:
     title: "Linux32/64 and android nightlies at tier2"
@@ -23,6 +23,18 @@ linux-android-nightlies-tier2:
         - linux32-nightlies-tier2
         - linux64-nightlies-tier2
         - android-nightlies-tier2
+
+taskcluster-worker-on-mac:
+    title: "taskcluster-worker works reliably on a small pool of Macs"
+    milestone: true
+    due: 2016-12-01
+    description: |
+        While we are not yet ready to shift production load to
+        taskcluster-worker on hardware (the transition requires use of BBB and
+        shifting all mac builds and tests to tier 1), we are confident that the
+        tests will function correctly at that point.
+    dependencies:
+        - macosx-worker-deployment-hardware
 
 linux-android-tier1:
     title: "Linux32/64 and android at tier1"
@@ -39,6 +51,16 @@ linux-android-tier1:
         - linux32-opt-tier1
         - linux64-opt-tier1
         - android-opt-tier1
+
+linux64-talos-on-hardware:
+    title: "Linux64 Talos is running via TC worker on hardware"
+    description: |
+        Linux64 talos jobs are green in TaskCluster, and (almost) all hardware
+        Buildslaves have been reimaged to run taskcluster-worker directly.
+    milestone: true
+    due: 2017-02-15
+    dependencies:
+        - linux64-talos-on-hardware-100pct
 
 no-buildbot-schedulers:
     title: "Buildbot schedulers are disabled (except ESR)"
@@ -86,4 +108,3 @@ no-buildbot:
         - almost-no-buildbot
         - thunderbird-off-bb
         - esr-on-bb-desupported
-        - windows-xp-deprecated
