@@ -65,6 +65,7 @@ linux64-talos-on-hardware:
 no-buildbot-schedulers:
     title: "Buildbot schedulers are disabled (except ESR)"
     milestone: true
+    due: 2017-12-31
     description: |
         The Buildbot scheduler masters are no longer scheduling any jobs except
         ESR builds.
@@ -74,6 +75,7 @@ no-buildbot-schedulers:
 all-releases:
     title: "Everything has been released at least once from TC (except ESR)"
     milestone: true
+    due: 2017-12-31
     description: |
         We have performed a final release for all platforms, built and tested
         on all TaskCluster.
@@ -87,6 +89,7 @@ all-releases:
 almost-no-buildbot:
     title: "Turn off Buildbot except for ESR and Thunderbird"
     milestone: true
+    due: 2017-12-31
     description: |
         Buildbot is almost completely unused -- with the exception of ESR and
         Thunderbird, which we just have to wait for.  The Buildbot
@@ -102,6 +105,7 @@ almost-no-buildbot:
 no-buildbot:
     title: "Buildbot completely turned off"
     milestone: true
+    due: 2017-12-31
     description: |
         All Buildbot infrastructure is unused and decomissioned.
     dependencies:
