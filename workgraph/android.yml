@@ -27,6 +27,7 @@ android-single-locale-signing-tier2:
     title: "Sign android single-locale repacks"
     description: |
         Implement task-graph tasks that will sign the single-locale repacks
+    done: true
     dependencies:
         - android-single-locale-tier2
 
@@ -58,6 +59,7 @@ android-single-locale-balrog-tier2:
 android-verify-signing-equivalence:
     # ask coop for details
     title: "Verify that the signature formats match those from BB builds"
+    assigned: Callek
     dependencies:
         - android-signing-tier2
         - android-single-locale-signing-tier2
@@ -69,8 +71,6 @@ android-nightlies-tier2:
         - android-single-locale-tier2
         - android-signing-tier2
         - android-verify-signing-equivalence
-        - android-balrog-tier2
-        - android-single-locale-balrog-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
 
@@ -101,6 +101,8 @@ android-opt-tier1:
         - android-opt-tier2
         - android-nightlies-manual-test
         - scriptworker-tier1
+        - android-balrog-tier2
+        - android-single-locale-balrog-tier2
 
 android-beta-release:
     title: "Ship android beta releases"

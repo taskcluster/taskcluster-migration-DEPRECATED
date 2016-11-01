@@ -45,6 +45,7 @@ beetmover-worker-impl:
     # "beetworker"?
     title: "Implement and deploy a Beetmoover Worker based on scriptworker"
     bug: 1282188
+    done: true
     assigned: mtabara
 
 balrog-worker-impl:
@@ -63,7 +64,7 @@ docker-worker-retry-on:
 
 nightly-beetmover-tier2:
     title: "beetmover tasks implemented in-tree for tier2 platforms"
-    assigned: mtabara
+    assigned: kmoir
     dependencies:
         - beetmover-worker-impl
 
@@ -72,6 +73,7 @@ nightly-single-locale-beetmover-tier2:
     description: |
         Implement tasks for beetmover that can handle the additional complexity of
         artifact names containing locale names.
+    assigned: kmoir
     dependencies:
         - beetmover-worker-impl
 
@@ -96,6 +98,7 @@ taskcluster-worker-cot-gpg-keys-in-repo:
 
 scriptworker-chain-of-trust-verification:
     title: "Enable chain of trust verification, and block on it before scriptworker jobs"
+    assigned: aki
 
 scriptworker-queue-monitoring:
     title: "Monitor scriptworker queues and alert when too large"
