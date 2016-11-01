@@ -60,7 +60,6 @@ macosx-nightlies-tier2:
         - macosx-single-locale-tier2
         - macosx-signing-tier2
         - macosx-balrog-tier2
-        - macosx-verify-signing-equivalence
         - nightly-beetmover-tier2
 
 macosx-test-talos-via-bbb-green:
@@ -95,6 +94,7 @@ macosx-all-tier1:
     title: "Promote all macosx builds to tier1; turn off macosx buildbot builds and nightlies; commit for beta in 6-12 weeks"
     dependencies:
         - macosx-verify-build-equivalence
+        - macosx-verify-signing-equivalence
         - macosx-asan-tier2
         - macosx-builds-tier2
         - macosx-nightlies-manual-test

@@ -74,7 +74,6 @@ linux32-nightlies-tier2:
         - linux32-builds-tier2
         - linux32-signing-tier2
         - linux32-single-locale-tier2
-        - linux32-verify-signing-equivalence
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
 
@@ -100,6 +99,7 @@ linux32-opt-tier1:
     # also, disable sendchanges for BB builds to save resources
     dependencies:
         - linux32-verify-build-equivalence
+        - linux32-verify-signing-equivalence
         - scriptworker-tier1
         - docker-worker-cot-gpg-keys-in-repo
         - linux32-nightlies-manual-test

@@ -82,7 +82,6 @@ linux64-nightlies-tier2:
         - linux64-builds-tier2
         - linux64-tests-tier2
         - linux64-signing-tier2
-        - linux64-verify-signing-equivalence
         - linux64-single-locale-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
@@ -112,6 +111,7 @@ linux64-opt-tier1:
     #  - turning off BB talos jobs, demoting builds to tier 2, and disabling sendchanges
     dependencies:
         - linux64-verify-build-equivalence
+        - linux64-verify-signing-equivalence
         - scriptworker-tier1
         - docker-worker-cot-gpg-keys-in-repo
         - pulse-actions-missing-talos
