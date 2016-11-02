@@ -2,7 +2,7 @@ import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Row from 'react-bootstrap/lib/Row';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Button from 'react-bootstrap/lib/Button';
+import Badge from 'react-bootstrap/lib/Badge';
 import Col from 'react-bootstrap/lib/Col';
 
 export default React.createClass({
@@ -48,6 +48,16 @@ export default React.createClass({
     );
     const className = `wi-${node.state}`;
     const revDeps = this.context.graph.reverseDependencies(node.name);
+    const showDep = dep => {
+      const depState = this.context.graph.byName[dep].state;
+      return (
+        <li key={dep}>
+          {dep}
+          &nbsp;
+          <Badge className={`wi-${depState}`}>{depState}</Badge>
+        </li>
+      );
+    };
 
     return (
       <Panel className={className} header={header} footer={footer}>
@@ -64,17 +74,13 @@ export default React.createClass({
             {node.dependencies.length > 0 && <dt>Dependencies:</dt>}
             {node.dependencies.length > 0 && (
               <dd>
-                <ul>
-                  {node.dependencies.map(dep => <li key={dep}>{dep}</li>)}
-                </ul>
+                <ul>{node.dependencies.map(showDep)}</ul>
               </dd>
             )}
             {revDeps.length > 0 && <dt>Depended On By:</dt>}
             {revDeps.length > 0 && (
               <dd>
-                <ul>
-                  {revDeps.map(dep => <li key={dep}>{dep}</li>)}
-                </ul>
+                <ul>{revDeps.map(showDep)}</ul>
               </dd>
             )}
           </dl>

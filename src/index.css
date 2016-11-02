@@ -33,3 +33,19 @@ div#content {
 .panel.wi-blocked .panel-heading {
     background-color: darkgray;
 }
+
+.badge.wi-done {
+    background-color: #80C29E;
+}
+
+.badge.wi-inProgress {
+    background-color: #80a4c2;
+}
+
+.badge.wi-ready {
+    background-color: #bf80c2;
+}
+
+.badge.wi-blocked {
+    background-color: darkgray;
+}
