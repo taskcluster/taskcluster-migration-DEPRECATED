@@ -4,6 +4,10 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
 export default React.createClass({
+  contextTypes: {
+    graph: React.PropTypes.object.isRequired,
+  },
+
   propTypes: {
     node: React.PropTypes.object,
     detailed: React.PropTypes.bool,
@@ -25,6 +29,7 @@ export default React.createClass({
       </Row>
     );
     const className = `wi-${node.state}`;
+    const revDeps = this.context.graph.reverseDependencies(node.name);
 
     return (
       <Panel className={className} header={node.name} footer={footer}>
@@ -43,6 +48,14 @@ export default React.createClass({
               <dd>
                 <ul>
                   {node.dependencies.map(dep => <li key={dep}>{dep}</li>)}
+                </ul>
+              </dd>
+            )}
+            {revDeps.length > 0 && <dt>Depended On By:</dt>}
+            {revDeps.length > 0 && (
+              <dd>
+                <ul>
+                  {revDeps.map(dep => <li key={dep}>{dep}</li>)}
                 </ul>
               </dd>
             )}

@@ -122,4 +122,16 @@ export default class WorkGraph {
 
     return distances;
   }
+
+  // Return the "reverse dependencies" of this node -- nodes that depend on it
+  reverseDependencies(name) {
+    return Array.from(
+      this.nodes.reduce((res, node) => {
+        if (node.dependencies.indexOf(name) !== -1) {
+          res.add(node.name);
+        }
+        return res;
+      }, new Set())
+    );
+  }
 }
