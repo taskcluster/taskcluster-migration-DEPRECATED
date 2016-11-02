@@ -137,10 +137,12 @@ separate-make-check:
 pulse-actions-backfill:
     title: "Add support for backfilling jobs"
     bug: 1289823
+    assigned: bstack
 
 pulse-actions-missing-talos:
     title: "Add support for backfilling all talos jobs on a push"
     bug: 1289824
+    assigned: bstack
 
 docker-generic-taskcluster-worker-priority-support:
     title: "Use queue.claimWork in {docker,generic,taskcluster}-worker, load test"
