@@ -17,7 +17,7 @@ For simple modifications, it's safe to just edit the files and make a pull reque
 
 If you would like to run the site locally, install node 4 or higher, with a
 corresponding version of npm.  If you are new to JS development, you are *strongly*
-encouraged to use (nvm)[http://nvm.sh] to do this install -- it can be done without
+encouraged to use [nvm](http://nvm.sh) to do this install -- it can be done without
 root access, and avoids all the madness of distro-provided node installs (all of
 which are broken one way or another).
 
