@@ -51,6 +51,24 @@ windows-tests-win7-tier2:
         - windows-builds-tier2
         - generic-worker-publish-on-failure
         - windows-fix-subprocess-issue
+        - windows-tests-cppunit
+        - windows-tests-crashtest
+        - windows-tests-external-media-tests
+        - windows-tests-gtest
+        - windows-tests-jittest
+        - windows-tests-jsreftest
+        - windows-tests-marionette
+        - windows-tests-mochitest
+        - windows-tests-mochitest-browser-chrome
+        - windows-tests-mochitest-devtools-chrome
+        - windows-tests-mochitest-jetpack
+        - windows-tests-mochitest-media
+        - windows-tests-mochitest-webgl
+        - windows-tests-reftest
+        - windows-tests-reftest-no-accel
+        - windows-tests-web-platform-tests
+        - windows-tests-web-platform-tests-reftests
+        - windows-tests-xpcshell
 
 verify-win10-spec:
     title: "Verify that the Win10 image matches a typical user's desktop"
@@ -63,6 +81,93 @@ windows-tests-win10-tier2:
         - windows-builds-tier2
         - windows-tests-win7-tier2
         - verify-win10-spec
+        - windows-tests-cppunit
+        - windows-tests-crashtest
+        - windows-tests-external-media-tests
+        - windows-tests-gtest
+        - windows-tests-jittest
+        - windows-tests-jsreftest
+        - windows-tests-marionette
+        - windows-tests-mochitest
+        - windows-tests-mochitest-browser-chrome
+        - windows-tests-mochitest-devtools-chrome
+        - windows-tests-mochitest-jetpack
+        - windows-tests-mochitest-media
+        - windows-tests-mochitest-webgl
+        - windows-tests-reftest
+        - windows-tests-reftest-no-accel
+        - windows-tests-web-platform-tests
+        - windows-tests-web-platform-tests-reftests
+        - windows-tests-xpcshell
+
+windows-tests-cppunit:
+    title: "green cppunit test suite on Windows 7 and 10"
+    bug: 1280952
+    assigned: grenade
+    done: true
+
+windows-tests-crashtest:
+    title: "green crashtest test suite on Windows 7 and 10"
+    bug: 1304435
+
+windows-tests-external-media-tests:
+    title: "green external-media-tests test suite on Windows 7 and 10"
+    bug: 1298715
+    assigned: SingingTree
+    done: true
+
+windows-tests-gtest:
+    title: "green gtest test suite on Windows 7 and 10"
+
+windows-tests-jittest:
+    title: "green jittest test suite on Windows 7 and 10"
+
+windows-tests-jsreftest:
+    title: "green jsreftest test suite on Windows 7 and 10"
+
+windows-tests-marionette:
+    title: "green marionette test suite on Windows 7 and 10"
+
+windows-tests-mochitest:
+    title: "green mochitest test suite on Windows 7 and 10"
+    bug: 1304033
+
+windows-tests-mochitest-browser-chrome:
+    title: "green mochitest-browser-chrome test suite on Windows 7 and 10"
+    bug: 1304034
+
+windows-tests-mochitest-devtools-chrome:
+    title: "green mochitest-devtools-chrome test suite on Windows 7 and 10"
+    bug: 1304433
+
+windows-tests-mochitest-jetpack:
+    title: "green mochitest-jetpack test suite on Windows 7 and 10"
+    bug: 1311978
+
+windows-tests-mochitest-media:
+    title: "green mochitest-media test suite on Windows 7 and 10"
+
+windows-tests-mochitest-webgl:
+    title: "green mochitest-webgl test suite on Windows 7 and 10"
+    bug: 1304430
+
+windows-tests-reftest:
+    title: "green reftest test suite on Windows 7 and 10"
+    bug: 1304039
+
+windows-tests-reftest-no-accel:
+    title: "green reftest-no-accel test suite on Windows 7 and 10"
+
+windows-tests-web-platform-tests:
+    title: "green web-platform-tests test suite on Windows 7 and 10"
+
+windows-tests-web-platform-tests-reftests:
+    title: "green web-platform-tests-reftests test suite on Windows 7 and 10"
+    bug: 1304438
+
+windows-tests-xpcshell:
+    title: "green xpcshell test suite on Windows 7 and 10"
+    bug: 1304040
 
 windows-symbol-uploads:
     title: "Symbols from Windows builds uploadd to Socorro"
