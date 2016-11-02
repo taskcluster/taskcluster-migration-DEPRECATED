@@ -30,18 +30,20 @@ windows-builds-tier2:
 generic-worker-publish-on-failure:
     title: "Publish artifacts on test failure"
     description: |
-        Change the test implementation to put blobber artifacts under
-        `$HOME\\public`, since that is where generic-worker looks for
-        artifacts.  Pete is working on a longer-term fix to generic-worker,
-        but that does not block the migration.
-    assigned: grenade
+        The artifacts in question are in the blobber-uploads directory.  It is
+        impractical to configure these to go to a different location on TC
+        only, so the better fix is to configure generic-worker to be able to
+        upload artifacts it finds in teh blobber-uploads directory (this was
+        the long-term solution anyway).
+    assigned: pmoore
 
 windows-fix-subprocess-issue:
     title: "Fix issues preventing successful test runs that involve a subprocess"
-    assigned: grenade
+    assigned: pmoore
     description: |
-        The underlying issue isn't clear yet, but this may be due to
-        performance issues on Windows 7.
+        The issue revolves around the complexities of CreateProcess and Job Objects,
+        and requires some non-trivial changes to the process-spawning implemetnation
+        in generic-worker.
 
 windows-tests-win7-tier2:
     title: "Run Windows 7 tests on TC at Tier 2"

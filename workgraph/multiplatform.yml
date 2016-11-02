@@ -36,10 +36,19 @@ stop-bb-build-masters:
         - android-disable-bb-builds
 
 seta-in-tree:
-    # in-tree taskgraph generation correctly skips low-value tests
     title: "SETA support in tree"
+    description: in-tree taskgraph generation correctly skips low-value tests
     bug: 1287018
+    done: true
     assigned: MikeLing
+
+in-tree-bbb-support:
+    title: "Support for invoking BB jobs from decision tasks via BBB"
+    description: |
+        This involves building in-tree infrastructure to create the proper
+        payload for BBB to run test tasks against builds made in TaskCluster.
+        Likely the hardest part is generating the BuilderName correctly.
+    assigned: wcosta
 
 beetmover-worker-impl:
     # "beetworker"?
@@ -128,10 +137,12 @@ separate-make-check:
 pulse-actions-backfill:
     title: "Add support for backfilling jobs"
     bug: 1289823
+    assigned: bstack
 
 pulse-actions-missing-talos:
     title: "Add support for backfilling all talos jobs on a push"
     bug: 1289824
+    assigned: bstack
 
 docker-generic-taskcluster-worker-priority-support:
     title: "Use queue.claimWork in {docker,generic,taskcluster}-worker, load test"
@@ -191,6 +202,8 @@ generic-worker-terminate-on-ami-update:
     # this is necessary for parity with Buildbot, where we can ship environment changes in <96 hours
     title: "Implement the ability for generic-worker instance to terminate themselves when they are idle and running an old workerType definition"
     bug: 1298010
+    assigned: pmoore
+    done: true
 
 fuzzing:
     title: "Implement fuzzing in taskcluster (TBD)"
