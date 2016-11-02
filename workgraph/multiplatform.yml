@@ -191,6 +191,8 @@ generic-worker-terminate-on-ami-update:
     # this is necessary for parity with Buildbot, where we can ship environment changes in <96 hours
     title: "Implement the ability for generic-worker instance to terminate themselves when they are idle and running an old workerType definition"
     bug: 1298010
+    assigned: pmoore
+    done: true
 
 fuzzing:
     title: "Implement fuzzing in taskcluster (TBD)"
