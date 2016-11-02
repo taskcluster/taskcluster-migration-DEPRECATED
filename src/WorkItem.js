@@ -25,7 +25,7 @@ export default React.createClass({
     const node = this.props.node;
     const header = (
       <span>
-        {node.title}
+        {node.name}
         {this.state.detailed || (
           <span className="pull-right" onClick={() => this.setState({ detailed: true })}>
             <Glyphicon bsSize="xsmall" glyph="option-vertical" />
