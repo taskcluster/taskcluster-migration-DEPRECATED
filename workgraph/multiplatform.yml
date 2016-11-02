@@ -42,6 +42,14 @@ seta-in-tree:
     done: true
     assigned: MikeLing
 
+in-tree-bbb-support:
+    title: "Support for invoking BB jobs from decision tasks via BBB"
+    description: |
+        This involves building in-tree infrastructure to create the proper
+        payload for BBB to run test tasks against builds made in TaskCluster.
+        Likely the hardest part is generating the BuilderName correctly.
+    assigned: wcosta
+
 beetmover-worker-impl:
     # "beetworker"?
     title: "Implement and deploy a Beetmoover Worker based on scriptworker"
