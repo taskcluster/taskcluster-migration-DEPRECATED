@@ -36,9 +36,10 @@ stop-bb-build-masters:
         - android-disable-bb-builds
 
 seta-in-tree:
-    # in-tree taskgraph generation correctly skips low-value tests
     title: "SETA support in tree"
+    description: in-tree taskgraph generation correctly skips low-value tests
     bug: 1287018
+    done: true
     assigned: MikeLing
 
 beetmover-worker-impl:
