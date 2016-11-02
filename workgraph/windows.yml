@@ -100,7 +100,6 @@ windows-nightlies-tier2:
         - windows-single-locale-tier2
         - windows-signing-tier2
         - windows-balrog-tier2
-        - windows-verify-signing-equivalence
         - nightly-beetmover-tier2
 
 windows-hardware-via-bbb-green:
@@ -149,6 +148,7 @@ windows-opt-tier1:
         from TC via BBB.
     dependencies:
         - windows-verify-build-equivalence
+        - windows-verify-signing-equivalence
         - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo
         - generic-worker-terminate-on-ami-update
