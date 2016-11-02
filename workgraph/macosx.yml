@@ -69,8 +69,7 @@ macosx-test-talos-via-bbb-green:
         - in-tree-bbb-support
 
 macosx-asan-tier2:
-    title: "Run macosx ASAN builds, and tests on them, at tier 1"
-    # this encompasses running the builds at tier 2 for a while
+    title: "Run macosx ASAN builds at tier 2"
     bug: 1209937
     depenencies:
         macosx-builds-tier2
