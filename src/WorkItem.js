@@ -51,11 +51,11 @@ export default React.createClass({
     const showDep = dep => {
       const depState = this.context.graph.byName[dep].state;
       return (
-        <li key={dep}>
-          {dep}
-          &nbsp;
+        <div key={dep}>
           <Badge className={`wi-${depState}`}>{depState}</Badge>
-        </li>
+          &nbsp;
+          {dep}
+        </div>
       );
     };
 
@@ -74,13 +74,13 @@ export default React.createClass({
             {node.dependencies.length > 0 && <dt>Dependencies:</dt>}
             {node.dependencies.length > 0 && (
               <dd>
-                <ul>{node.dependencies.map(showDep)}</ul>
+                {node.dependencies.map(showDep)}
               </dd>
             )}
             {revDeps.length > 0 && <dt>Depended On By:</dt>}
             {revDeps.length > 0 && (
               <dd>
-                <ul>{revDeps.map(showDep)}</ul>
+                {revDeps.map(showDep)}
               </dd>
             )}
           </dl>
