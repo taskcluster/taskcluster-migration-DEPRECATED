@@ -2,6 +2,7 @@ import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Col from 'react-bootstrap/lib/Col';
 import Row from 'react-bootstrap/lib/Row';
+import Button from 'react-bootstrap/lib/Button';
 import Alert from 'react-bootstrap/lib/Alert';
 import WorkItem from './WorkItem';
 import GraphDisplay from './GraphDisplay';
@@ -15,6 +16,7 @@ export const DetailsGraph = React.createClass({
 
   getInitialState() {
     return {
+      showDone: true,
       selectedNode: null,
     };
   },
@@ -43,7 +45,14 @@ export const DetailsGraph = React.createClass({
         <Col className="hidden-xs hidden-sm" md={7}>
           <GraphDisplay
             root={this.props.params.rootWorkItem}
-            onSelect={this.handleNodeSelected} />
+            onSelect={this.handleNodeSelected}
+            showDone={this.state.showDone} />
+            <div className="pull-right">
+              <Button bsStyle="info" bsSize="small"
+                  onClick={() => this.setState({ showDone: !this.state.showDone })}>
+                {this.state.showDone ? 'Hide' : 'Show'} completed
+              </Button>
+            </div>
         </Col>
         <Col className="hidden-md hidden-lg" xs={6}>
           <ul>

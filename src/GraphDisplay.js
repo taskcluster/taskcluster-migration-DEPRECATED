@@ -3,13 +3,6 @@ const cytoscape = require('cytoscape');
 import Well from 'react-bootstrap/lib/Well';
 import './graph.css';
 
-const STATE_COLORS = {
-  done: '#80C29E',
-  inProgress: '#80a4c2',
-  ready: '#bf80c2',
-  blocked: 'darkgray',
-};
-
 export default React.createClass({
   contextTypes: {
     graph: React.PropTypes.object.isRequired,
@@ -18,6 +11,48 @@ export default React.createClass({
   propTypes: {
     root: React.PropTypes.string.isRequired,
     onSelect: React.PropTypes.func.isRequired,
+    showDone: React.PropTypes.bool,
+  },
+
+  makeStyle(style) {
+    return style
+      .selector('node')
+        .css({
+          shape: 'data(shape)',
+        })
+      .selector('edge')
+        .css({
+          'target-arrow-shape': 'triangle',
+          width: 2,
+          'line-color': '#ddd',
+          'target-arrow-color': '#ddd',
+          'curve-style': 'bezier',
+        })
+      .selector(':selected')
+        .css({
+          'background-blacken': '0.5',
+          'line-color': '#61bffc',
+          'target-arrow-color': '#61bffc',
+          'transition-property': 'background-blacken, line-color, target-arrow-color',
+          'transition-duration': '0.2s',
+        })
+      .selector('.done')
+        .css({
+          'background-color': '#80C29E',
+          display: this.props.showDone ? 'element' : 'none',
+        })
+      .selector('.inProgress')
+        .css({
+          'background-color': '#80a4c2',
+        })
+      .selector('.ready')
+        .css({
+          'background-color': '#bf80c2',
+        })
+      .selector('.blocked')
+        .css({
+          'background-color': 'darkgray',
+        });
   },
 
   makeCy(container) {
@@ -34,6 +69,7 @@ export default React.createClass({
             source: node.name,
             target: dep,
           },
+          selectable: false,
         });
       });
       let shape = 'ellipse';
@@ -47,37 +83,16 @@ export default React.createClass({
       nodes.push({
         data: {
           id: node.name,
-          color: STATE_COLORS[node.state],
           shape,
         },
+        classes: node.state,
       });
     });
 
     return cytoscape({
       container,
 
-      style: cytoscape.stylesheet()
-        .selector('node')
-          .css({
-            'background-color': 'data(color)',
-            shape: 'data(shape)',
-          })
-        .selector('edge')
-          .css({
-            'target-arrow-shape': 'triangle',
-            width: 2,
-            'line-color': '#ddd',
-            'target-arrow-color': '#ddd',
-            'curve-style': 'bezier',
-          })
-        .selector(':selected')
-          .css({
-            'background-blacken': '0.5',
-            'line-color': '#61bffc',
-            'target-arrow-color': '#61bffc',
-            'transition-property': 'background-blacken, line-color, target-arrow-color',
-            'transition-duration': '0.2s',
-          }),
+      style: this.makeStyle(cytoscape.stylesheet()),
 
       elements: { nodes, edges },
 
@@ -97,6 +112,11 @@ export default React.createClass({
     } else {
       this.props.onSelect(null);
     }
+  },
+
+  componentDidUpdate() {
+    this.makeStyle(this.cy.style().resetToDefault())
+      .update();
   },
 
   componentDidMount() {
