@@ -1,6 +1,8 @@
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Row from 'react-bootstrap/lib/Row';
+import Glyphicon from 'react-bootstrap/lib/Glyphicon';
+import Button from 'react-bootstrap/lib/Button';
 import Col from 'react-bootstrap/lib/Col';
 
 export default React.createClass({
@@ -13,8 +15,24 @@ export default React.createClass({
     detailed: React.PropTypes.bool,
   },
 
+  getInitialState() {
+    return {
+      detailed: this.props.detailed,
+    };
+  },
+
   render() {
     const node = this.props.node;
+    const header = (
+      <span>
+        {node.title}
+        {this.state.detailed || (
+          <span className="pull-right" onClick={() => this.setState({ detailed: true })}>
+            <Glyphicon bsSize="xsmall" glyph="option-vertical" />
+          </span>)
+        }
+      </span>
+    );
     const footer = (
       <Row>
         <Col xs={6}>
@@ -32,10 +50,10 @@ export default React.createClass({
     const revDeps = this.context.graph.reverseDependencies(node.name);
 
     return (
-      <Panel className={className} header={node.name} footer={footer}>
+      <Panel className={className} header={header} footer={footer}>
         {node.title}
         {node.description ? <p className="text-muted">{node.description}</p> : null}
-        {this.props.detailed && (
+        {this.state.detailed && (
           <dl className="dl-horizontal">
             <dt>State:</dt>
             <dd>{node.state}</dd>
