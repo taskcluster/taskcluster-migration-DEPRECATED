@@ -93,6 +93,7 @@ linux32-nightlies-manual-test:
 
 linux32-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    assigned: Callek
     dependencies:
         - linux32-builds-tier2
 

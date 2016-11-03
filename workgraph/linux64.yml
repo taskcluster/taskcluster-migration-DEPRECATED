@@ -103,6 +103,7 @@ linux64-nightlies-manual-test:
 linux64-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
     # this is repeating the work glandium did months ago
+    assigned: Callek
     dependencies:
         - linux64-builds-tier2
 
