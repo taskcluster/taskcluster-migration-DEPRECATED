@@ -114,6 +114,7 @@ scriptworker-queue-monitoring:
 
 scriptworker-nagios:
     title: "Monitor scriptworker instances and alert on issues"
+    bug: 1314840
 
 scriptworker-iptables:
     title: "Block non-required scriptworker ports/traffic"
