@@ -83,6 +83,8 @@ linux64-nightlies-tier2:
         - linux64-tests-tier2
         - linux64-signing-tier2
         - linux64-single-locale-tier2
+        - linux64-balrog-tier2
+        - linux64-single-locale-balrog-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
 
@@ -101,6 +103,7 @@ linux64-nightlies-manual-test:
 linux64-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
     # this is repeating the work glandium did months ago
+    assigned: Callek
     dependencies:
         - linux64-builds-tier2
 
@@ -120,8 +123,6 @@ linux64-opt-tier1:
         - linux64-nightlies-manual-test
         - linux64-debug-tier1
         - linux64-talos-via-bbb-green
-        - linux64-balrog-tier2
-        - linux64-single-locale-balrog-tier2
         - linux64-partial-updates
 
 linux64-partial-updates:

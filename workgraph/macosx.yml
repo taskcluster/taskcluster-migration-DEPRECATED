@@ -18,13 +18,6 @@ macosx-builds-tier2:
     dependencies:
         - separate-make-check
 
-macosx-universal-builds:
-    # NOTE: we may decide not to do this if it turns out to be difficult
-    # and we can just drop universal support
-    title: "Support cross-compiler generation of universal builds.  Or drop need for universal builds"
-    bug: 1183613
-    assigned: mshal
-
 macosx-startup-cache:
     title: "Support or disable the startup cache for Mac builds"
     bug: 1314154
@@ -39,7 +32,6 @@ macosx-startup-cache:
 macosx-single-locale-tier2:
     title: "Support single locale repacks for macosx"
     dependencies:
-        - macosx-universal-builds
         - macosx-builds-tier2
 
 macosx-mach-repackage:
@@ -67,7 +59,6 @@ macosx-verify-signing-equivalence:
 macosx-nightlies-tier2:
     title: "Land config for macosx nightly builds at tier2"
     dependencies:
-        - macosx-universal-builds
         - macosx-single-locale-tier2
         - macosx-signing-tier2
         - macosx-balrog-tier2
@@ -110,7 +101,6 @@ macosx-all-tier1:
         - macosx-nightlies-manual-test
         - macosx-nightlies-tier2
         - macosx-test-talos-via-bbb-green
-        - macosx-universal-builds  # unless we decide to drop this
         - macosx-startup-cache
         - orange-builds
         - pulse-actions-backfill

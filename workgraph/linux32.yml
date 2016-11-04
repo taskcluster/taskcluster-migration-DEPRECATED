@@ -76,6 +76,8 @@ linux32-nightlies-tier2:
         - linux32-single-locale-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
+        - linux32-balrog-tier2
+        - linux32-single-locale-balrog-tier2
 
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
@@ -91,6 +93,7 @@ linux32-nightlies-manual-test:
 
 linux32-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    assigned: Callek
     dependencies:
         - linux32-builds-tier2
 
@@ -107,8 +110,6 @@ linux32-opt-tier1:
         - orange-builds
         - linux32-debug-tier1
         - scriptworker-tier1
-        - linux32-balrog-tier2
-        - linux32-single-locale-balrog-tier2
         - linux32-partial-updates
 
 linux32-partial-updates:

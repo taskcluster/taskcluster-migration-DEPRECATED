@@ -70,6 +70,8 @@ android-nightlies-tier2:
         - android-multilocale-tier2
         - android-single-locale-tier2
         - android-signing-tier2
+        - android-balrog-tier2
+        - android-single-locale-balrog-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
 
@@ -86,6 +88,7 @@ android-nightlies-manual-test:
 
 android-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    assigned: Callek
     dependencies:
         - android-opt-tier2
 
@@ -101,8 +104,6 @@ android-opt-tier1:
         - android-opt-tier2
         - android-nightlies-manual-test
         - scriptworker-tier1
-        - android-balrog-tier2
-        - android-single-locale-balrog-tier2
 
 android-beta-release:
     title: "Ship android beta releases"

@@ -241,6 +241,8 @@ windows-nightlies-manual-test:
         - windows-nightlies-tier2
 
 windows-verify-build-equivalence:
+    # coop is going to talk to mconley about finding someone with the
+    # expertise to work on this
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
     dependencies:
         - windows-builds-tier2
