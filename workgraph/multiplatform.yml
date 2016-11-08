@@ -44,6 +44,7 @@ seta-in-tree:
 
 in-tree-bbb-support:
     title: "Support for invoking BB jobs from decision tasks via BBB"
+    bug: 1316077
     description: |
         This involves building in-tree infrastructure to create the proper
         payload for BBB to run test tasks against builds made in TaskCluster.
