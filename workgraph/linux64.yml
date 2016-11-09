@@ -151,6 +151,7 @@ linux-worker-deployment-hardware:
 linux64-talos-on-hardware-10pct:
     title: "Run linux* talos on TC on 10% of hardware"
     dependencies:
+        - taskcluster-worker-cancel-tasks
         - linux-worker-deployment-hardware
         - linux64-opt-tier1
 
