@@ -108,10 +108,10 @@ linux64-verify-build-equivalence:
         - linux64-builds-tier2
 
 linux64-opt-tier1:
-    title: "Promote all windows builds to tier 1, commit for beta in 6-12 weeks"
-    # NOTE: this involves:
-    #  - running all talos jobs via BBB
-    #  - turning off BB talos jobs, demoting builds to tier 2, and disabling sendchanges
+    title: "Promote all Linxu64 builds to tier 1, commit for beta in 6-12 weeks"
+    description: |
+        This involves running all talos jobs via BBB and turning off BB talos
+        jobs, demoting builds to tier 2, and disabling sendchanges
     dependencies:
         - linux64-verify-build-equivalence
         - linux64-verify-signing-equivalence
