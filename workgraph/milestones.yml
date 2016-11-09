@@ -14,11 +14,11 @@ win7-testing-tier2:
 linux-android-nightlies-tier2:
     title: "Linux32/64 and android nightlies at tier2"
     milestone: true
-    due: 2016-11-09
+    due: 2016-11-25
     description: |
         Nightlies for the linux32, linux64, and Android platforms are
         implemented on a project branch, and can be dogfooded by team members.
-        Balrog updates are included,
+        Balrog updates are included, along with all of the other particulars.
     dependencies:
         - linux32-nightlies-tier2
         - linux64-nightlies-tier2

@@ -44,6 +44,7 @@ seta-in-tree:
 
 in-tree-bbb-support:
     title: "Support for invoking BB jobs from decision tasks via BBB"
+    bug: 1316077
     description: |
         This involves building in-tree infrastructure to create the proper
         payload for BBB to run test tasks against builds made in TaskCluster.
@@ -185,10 +186,6 @@ worker-priority-support:
         - script-worker-priority-support
         - docker-generic-taskcluster-worker-priority-support
 
-orange-builds:
-    title: "Support turning some builds orange instead of red"
-    bug: 1186848
-
 scriptworker-hg-committer:
     title: "Implement a scriptworker script that can safely land commits to hg"
 
@@ -217,3 +214,23 @@ taskcluster-worker-setup-cleanup:
         (clearing temporary directories, killing stray processes, etc.).  We
         will need similar functionality with taskcluster-worker, either by
         using runner or implementing it with some other mechanism
+
+taskcluster-worker-cancel-tasks:
+    title: "Support for cancelling tasks in taskcluster-worker"
+
+split-python-unit-tests:
+    title: "Move Python unit tests currently run in 'make check' into a separate job"
+    description: |
+        Run those Python unit tests that do not require an objdir in a separate
+        task, so that it can execute in parallel with the other test tasks, and
+        so that it can succeed for cross-compiled builds.
+
+make-check-ok-for-cross-compile:
+    title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
+    bug: 992323
+    description: |
+        There are a few tests that check properties of binaries, which should
+        run ok in cross-compilation.  Everything else must either be moved to a
+        test task (so it can run on the target OS) or removed.
+    dependencies:
+        - split-python-unit-tests

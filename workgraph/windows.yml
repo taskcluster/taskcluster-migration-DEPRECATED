@@ -40,6 +40,7 @@ generic-worker-publish-on-failure:
 windows-fix-subprocess-issue:
     title: "Fix issues preventing successful test runs that involve a subprocess"
     assigned: pmoore
+    done: true
     description: |
         The issue revolves around the complexities of CreateProcess and Job Objects,
         and requires some non-trivial changes to the process-spawning implemetnation
@@ -168,6 +169,7 @@ windows-tests-web-platform-tests-reftests:
 windows-tests-xpcshell:
     title: "green xpcshell test suite on Windows 7 and 10"
     bug: 1304040
+    assigned: gbrown
 
 windows-symbol-uploads:
     title: "Symbols from Windows builds uploadd to Socorro"
@@ -264,7 +266,6 @@ windows-opt-tier1:
         - taskcluster-worker-cot-gpg-keys-in-repo  # drop if tc-w isn't used on windows yet
         - pulse-actions-missing-talos
         - pulse-actions-backfill
-        - orange-builds
         - windows-debug-tier1
         - windows-talos-via-bbb-green
         - windows-hardware-via-bbb-green

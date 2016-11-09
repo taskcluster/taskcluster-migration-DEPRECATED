@@ -102,12 +102,12 @@ macosx-all-tier1:
         - macosx-nightlies-tier2
         - macosx-test-talos-via-bbb-green
         - macosx-startup-cache
-        - orange-builds
         - pulse-actions-backfill
         - pulse-actions-missing-talos
         - scriptworker-tier1
         - docker-worker-cot-gpg-keys-in-repo
         - taskcluster-worker-cot-gpg-keys-in-repo
+        - make-check-ok-for-cross-compile
 
 macosx-disable-bb-builds:
     title: "Turn off the MacOS X builds on Buildbot"
@@ -121,6 +121,11 @@ macosx-taskcluster-worker:
 
 macosx-worker-deployment-hardware:
     title: "Build a method of deploying a worker for Mac OS X on hardware"
+    description: |
+        This involves deploying taskcluster worker on a small pool of macs, and
+        running a few tests successfully.  With luck, we can keep running that
+        small set of tests to ensure there is no backsliding (they stay green),
+        but hardware resources may not allow that.
     assigned: wcosta
     dependencies:
         - macosx-taskcluster-worker
@@ -129,6 +134,7 @@ macosx-worker-deployment-hardware:
 macosx-test-talos-on-hardware-10pct:
     title: "Run MacOS X talos on TC on 10% of hardware"
     dependencies:
+        - taskcluster-worker-cancel-tasks
         - macosx-worker-deployment-hardware
         - worker-priority-support
         - macosx-all-tier1

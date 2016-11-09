@@ -100,7 +100,6 @@ android-opt-tier1:
         - docker-worker-cot-gpg-keys-in-repo
         - automatic-retry-android-jobs
         - pulse-actions-backfill
-        - orange-builds
         - android-opt-tier2
         - android-nightlies-manual-test
         - scriptworker-tier1
