@@ -40,6 +40,7 @@ generic-worker-publish-on-failure:
 windows-fix-subprocess-issue:
     title: "Fix issues preventing successful test runs that involve a subprocess"
     assigned: pmoore
+    done: true
     description: |
         The issue revolves around the complexities of CreateProcess and Job Objects,
         and requires some non-trivial changes to the process-spawning implemetnation
