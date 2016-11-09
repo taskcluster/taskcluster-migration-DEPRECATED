@@ -102,12 +102,12 @@ macosx-all-tier1:
         - macosx-nightlies-tier2
         - macosx-test-talos-via-bbb-green
         - macosx-startup-cache
-        - orange-builds
         - pulse-actions-backfill
         - pulse-actions-missing-talos
         - scriptworker-tier1
         - docker-worker-cot-gpg-keys-in-repo
         - taskcluster-worker-cot-gpg-keys-in-repo
+        - make-check-ok-for-cross-compile
 
 macosx-disable-bb-builds:
     title: "Turn off the MacOS X builds on Buildbot"
