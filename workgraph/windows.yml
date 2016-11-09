@@ -168,6 +168,7 @@ windows-tests-web-platform-tests-reftests:
 windows-tests-xpcshell:
     title: "green xpcshell test suite on Windows 7 and 10"
     bug: 1304040
+    assigned: gbrown
 
 windows-symbol-uploads:
     title: "Symbols from Windows builds uploadd to Socorro"
