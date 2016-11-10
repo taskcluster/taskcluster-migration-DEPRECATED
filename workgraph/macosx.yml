@@ -18,6 +18,13 @@ macosx-builds-tier2:
     dependencies:
         - separate-make-check
 
+macosx-universal-builds:
+    title: "Support cross-compiler generation of universal builds.  Or drop need for universal builds"
+    description: |
+        We may need these jobs if we choose to release ESR52 from TaskCluster, or if the deprecation of
+        32-bit OS X builds is not complete in time.
+    bug: 1183613
+
 macosx-startup-cache:
     title: "Support or disable the startup cache for Mac builds"
     bug: 1314154
@@ -101,6 +108,7 @@ macosx-all-tier1:
         - macosx-nightlies-manual-test
         - macosx-nightlies-tier2
         - macosx-test-talos-via-bbb-green
+        - macosx-universal-builds
         - macosx-startup-cache
         - pulse-actions-backfill
         - pulse-actions-missing-talos
