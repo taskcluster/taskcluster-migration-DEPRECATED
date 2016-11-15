@@ -14,7 +14,7 @@ win7-testing-tier2:
 linux-android-nightlies-tier2:
     title: "Linux32/64 and android nightlies at tier2"
     milestone: true
-    due: 2016-11-25
+    due: 2016-12-02
     description: |
         Nightlies for the linux32, linux64, and Android platforms are
         implemented on a project branch, and can be dogfooded by team members.
@@ -39,7 +39,7 @@ taskcluster-worker-on-mac:
 linux-android-tier1:
     title: "Linux32/64 and android at tier1"
     milestone: true
-    due: 2017-01-01
+    due: 2017-01-03
     description: |
         All builds and tests for the linux32, linux64, and Android platforms
         are running in TaskCluster at tier 1, with Buildbot jobs demoted or
