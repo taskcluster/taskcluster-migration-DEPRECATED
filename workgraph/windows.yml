@@ -71,6 +71,8 @@ windows-fix-desktop-resizing:
 
 windows-fix-desktop-leaks:
     title: "Fix issues with desktop references leaking"
+    bug: 1317671
+    assigned: pmoore
     description: |
         Desktops are not properly garbage-collected, leading to workers
         eventually failing after running a few tasks.  This does not block
