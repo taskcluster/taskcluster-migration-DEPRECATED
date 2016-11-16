@@ -44,6 +44,7 @@ android-balrog-tier2:
     description: |
         Implement balrog submission tasks for nightly multilocale builds on a
         project branch, submitting to the balrog staging instance
+    assigned: mtabara
     dependencies:
         - balrog-worker-impl
 
@@ -53,6 +54,7 @@ android-single-locale-balrog-tier2:
         Implement balrog submission tasks for single-locale builds on a project
         branch.  This is complicated due to the per-locale naming of the
         artifacts.
+    assigned: mtabara
     dependencies:
         - balrog-worker-impl
 

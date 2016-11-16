@@ -61,6 +61,7 @@ beetmover-worker-impl:
 balrog-worker-impl:
     title: "Implement and deploy a balorg worker based on scriptworker"
     bug: 1277871
+    done: true
     assigned: mtabara
 
 automatic-retry-android-jobs:
