@@ -46,12 +46,42 @@ windows-fix-subprocess-issue:
         and requires some non-trivial changes to the process-spawning implemetnation
         in generic-worker.
 
+windows-fix-perf-issues:
+    title: "Fix windows test performance issues"
+    bug: 1303455
+    assigned: pmoore
+    description: |
+        Windows tests seem to run slowly -- far too slowly to get useful
+        information.  Debug and fix.
+
+windows-fix-desktop-resizing:
+    title: "Fix issues resizing virtual desktops"
+    bug: 1316858
+    dependencies:
+        - windows-fix-perf-issues
+    description: |
+        The test assumes the process is running in the active desktop, and
+        thereby assumes that changes the display resolution will alter the
+        desktop size.  Previously this was the case, as the active desktop was
+        the desktop used by taskcluster tasks / buildbot jobs.  However, now we
+        have sandboxed taskcluster tasks so that they do not share a desktop,
+        but rather have their own desktop which cannot be exploited to gain
+        access to an administrative account (since the previous desktop was
+        running under an administrator account).
+
+windows-fix-desktop-leaks:
+    title: "Fix issues with desktop references leaking"
+    description: |
+        Desktops are not properly garbage-collected, leading to workers
+        eventually failing after running a few tasks.  This does not block
+        greening tests, as the workers will just report "blue" jobs and fail,
+        but needs to be fixed for tier 2.
+
 windows-tests-win7-tier2:
     title: "Run Windows 7 tests on TC at Tier 2"
     dependencies:
         - windows-builds-tier2
         - generic-worker-publish-on-failure
-        - windows-fix-subprocess-issue
         - windows-tests-cppunit
         - windows-tests-crashtest
         - windows-tests-external-media-tests
@@ -70,6 +100,7 @@ windows-tests-win7-tier2:
         - windows-tests-web-platform-tests
         - windows-tests-web-platform-tests-reftests
         - windows-tests-xpcshell
+        - windows-fix-desktop-leaks
 
 verify-win10-spec:
     title: "Verify that the Win10 image matches a typical user's desktop"
@@ -100,6 +131,7 @@ windows-tests-win10-tier2:
         - windows-tests-web-platform-tests
         - windows-tests-web-platform-tests-reftests
         - windows-tests-xpcshell
+        - windows-fix-desktop-leaks
 
 windows-tests-cppunit:
     title: "green cppunit test suite on Windows 7 and 10"
@@ -110,6 +142,10 @@ windows-tests-cppunit:
 windows-tests-crashtest:
     title: "green crashtest test suite on Windows 7 and 10"
     bug: 1304435
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-external-media-tests:
     title: "green external-media-tests test suite on Windows 7 and 10"
@@ -119,57 +155,116 @@ windows-tests-external-media-tests:
 
 windows-tests-gtest:
     title: "green gtest test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-jittest:
     title: "green jittest test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-jsreftest:
     title: "green jsreftest test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-marionette:
     title: "green marionette test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-mochitest:
     title: "green mochitest test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1304033
 
 windows-tests-mochitest-browser-chrome:
     title: "green mochitest-browser-chrome test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1304034
 
 windows-tests-mochitest-devtools-chrome:
     title: "green mochitest-devtools-chrome test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1304433
 
 windows-tests-mochitest-jetpack:
     title: "green mochitest-jetpack test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1311978
 
 windows-tests-mochitest-media:
     title: "green mochitest-media test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-mochitest-webgl:
     title: "green mochitest-webgl test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1304430
 
 windows-tests-reftest:
     title: "green reftest test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1304039
 
 windows-tests-reftest-no-accel:
     title: "green reftest-no-accel test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-web-platform-tests:
     title: "green web-platform-tests test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
 
 windows-tests-web-platform-tests-reftests:
     title: "green web-platform-tests-reftests test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1304438
 
 windows-tests-xpcshell:
     title: "green xpcshell test suite on Windows 7 and 10"
+    dependencies:
+        - windows-fix-perf-issues
+        - windows-fix-desktop-resizing
+        - windows-fix-subprocess-issue
     bug: 1304040
-    assigned: gbrown
 
 windows-symbol-uploads:
     title: "Symbols from Windows builds uploadd to Socorro"
