@@ -49,7 +49,7 @@ linux64-single-locale-balrog-tier2:
         Implement balrog submission tasks for single-locale builds on a project
         branch.  This is complicated due to the per-locale naming of the
         artifacts.
-    assigned: mtabara
+    assigned: Callek
     dependencies:
         - balrog-worker-impl
 
