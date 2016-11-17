@@ -97,6 +97,8 @@ stop-bb-linux-test-masters:
 
 docker-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every docker-worker deployment (reimage or AMI generation)"
+    assigned: garndt
+    done: true
 
 generic-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every generic-worker deployment (reimage or AMI generation)"
