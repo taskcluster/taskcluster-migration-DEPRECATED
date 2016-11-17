@@ -115,10 +115,12 @@ scriptworker-chain-of-trust-verification:
 
 scriptworker-queue-monitoring:
     title: "Monitor scriptworker queues and alert when too large"
+    assigned: sfraser
 
 scriptworker-nagios:
     title: "Monitor scriptworker instances and alert on issues"
     bug: 1314840
+    assigned: sfraser
 
 scriptworker-iptables:
     title: "Block non-required scriptworker ports/traffic"
