@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Badge from 'react-bootstrap/lib/Badge';
 import Col from 'react-bootstrap/lib/Col';
+import { Link } from 'react-router';
 
 export default React.createClass({
   contextTypes: {
@@ -42,7 +43,9 @@ export default React.createClass({
           }
         </Col>
         <Col className="text-right" xs={6}>
-          {node.assigned && <span>Assigned To: {node.assigned}</span>}
+          {node.assigned && (
+              <span>Assigned To: <Link to={`/person/${node.assigned}`}>{node.assigned}</Link></span>
+            )}
         </Col>
       </Row>
     );

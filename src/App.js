@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import OverviewComponent from './OverviewComponent';
 import Breadcrumbs from 'react-breadcrumbs';
 import { DetailsComponent, DetailsGraph, DetailsKanban } from './DetailsComponent';
+import { PersonComponent } from './PersonComponent';
 import { Router, Route, Redirect, IndexRoute, hashHistory } from 'react-router';
 
 const Navigation = props => (
@@ -52,6 +53,7 @@ export default React.createClass({
             <IndexRoute name="Graph" component={DetailsGraph} />
             <Route name="Kanban" path="kanban" component={DetailsKanban} />
           </Route>
+          <Route name="Person" path="/person/:person" component={PersonComponent} />
         </Route>
       </Router>
     );

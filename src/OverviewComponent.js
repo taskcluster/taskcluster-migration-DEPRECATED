@@ -29,6 +29,17 @@ export default React.createClass({
     );
   },
 
+  renderMilestoneWorkers(node) {
+    const graph = this.context.graph.subgraph(node.name);
+    let workers = new Set();
+
+    graph.nodes.forEach(n => n.assigned && workers.add(n.assigned));
+    workers = Array.from(workers);
+    workers.sort();
+
+    return workers.map(w => <span key={w}><Link to={`/person/${w}`}>{w}</Link>, </span>);
+  },
+
   render() {
     // get milestones, with a default due date
     const milestones = this.context.graph.milestones().map(milestone => {
@@ -58,7 +69,7 @@ export default React.createClass({
             <Row key={`${node.name}-1`}>
               <Col xs={12} sm={6}>
                 <Link to={`/details/${node.name}`}>
-                  {node.title}
+                  <em>{node.title}</em>
                 </Link>
               </Col>
               <Col xs={4} sm={2}>
@@ -72,8 +83,10 @@ export default React.createClass({
             </Row>,
             <Row key={`${node.name}-2`}>
               <Col xs={12}>
-                {node.description ? <p className="text-muted">{node.description}</p> : null}
-                <hr className="visible-xs-block" />
+                <p>Working On This: {this.renderMilestoneWorkers(node)}</p>
+                {node.description ?
+                  <p>Description: <span className="text-muted">{node.description}</span></p> : null}
+                <hr />
               </Col>
             </Row>,
           ];
