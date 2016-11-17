@@ -97,6 +97,8 @@ stop-bb-linux-test-masters:
 
 docker-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every docker-worker deployment (reimage or AMI generation)"
+    assigned: garndt
+    done: true
 
 generic-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every generic-worker deployment (reimage or AMI generation)"
@@ -113,10 +115,12 @@ scriptworker-chain-of-trust-verification:
 
 scriptworker-queue-monitoring:
     title: "Monitor scriptworker queues and alert when too large"
+    assigned: sfraser
 
 scriptworker-nagios:
     title: "Monitor scriptworker instances and alert on issues"
     bug: 1314840
+    assigned: sfraser
 
 scriptworker-iptables:
     title: "Block non-required scriptworker ports/traffic"
