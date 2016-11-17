@@ -26,7 +26,9 @@ export default React.createClass({
     const node = this.props.node;
     const header = (
       <span>
-        {node.name}
+        {this.state.detailed ?
+          node.name :
+          <Link to={`/item/${node.name}`}>{node.name}</Link>}
         {this.state.detailed || (
           <span className="pull-right" onClick={() => this.setState({ detailed: true })}>
             <Glyphicon bsSize="xsmall" glyph="option-vertical" />
@@ -57,7 +59,7 @@ export default React.createClass({
         <div key={dep}>
           <Badge className={`wi-${depState}`}>{depState}</Badge>
           &nbsp;
-          {dep}
+          <Link to={`/item/${dep}`}>{dep}</Link>
         </div>
       );
     };

@@ -4,6 +4,7 @@ import OverviewComponent from './OverviewComponent';
 import Breadcrumbs from 'react-breadcrumbs';
 import { DetailsComponent, DetailsGraph, DetailsKanban } from './DetailsComponent';
 import { PersonComponent } from './PersonComponent';
+import { ItemComponent } from './ItemComponent';
 import { Router, Route, Redirect, IndexRoute, hashHistory } from 'react-router';
 
 const Navigation = props => (
@@ -54,6 +55,7 @@ export default React.createClass({
             <Route name="Kanban" path="kanban" component={DetailsKanban} />
           </Route>
           <Route name="Person" path="/person/:person" component={PersonComponent} />
+          <Route name="Item" path="/item/:workItem" component={ItemComponent} />
         </Route>
       </Router>
     );
