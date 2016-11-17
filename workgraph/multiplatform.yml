@@ -110,28 +110,57 @@ taskcluster-worker-cot-gpg-keys-in-repo:
 scriptworker-chain-of-trust-verification:
     title: "Enable chain of trust verification, and block on it before scriptworker jobs"
     assigned: aki
+    bug: 1309293
+    done: true
+
+beetmover-chain-of-trust:
+    title: "Enable chain of trust verification in beetmover"
+    bug: 1317747
+
+pushapk-chain-of-trust:
+    title: "Enable chain of trust verification in pushapk"
+    bug: 1317783
+
+balrog-chain-of-trust:
+    title: "Enable chain of trust verification in balrog"
+    bug: 1317800
+
+docker-image-sha-doesnt-match:
+    title: "add info for scriptworker to be able to verify built docker image sha"
+    bug:  1315415
 
 scriptworker-queue-monitoring:
     title: "Monitor scriptworker queues and alert when too large"
+    bug: 1314840
+    assigned: sfraser
 
 scriptworker-nagios:
     title: "Monitor scriptworker instances and alert on issues"
     bug: 1314840
+    assigned: sfraser
 
 scriptworker-iptables:
     title: "Block non-required scriptworker ports/traffic"
+    bug: 1308980
 
 scriptworker-ssh-alerts:
     title: "Alerts on ssh to scriptworker instances"
+    bug: 1290261
+    assigned: phrozyn
 
 scriptworker-tier1:
     title: "Scriptworker is tier1-ready"
+    bug: 1317789
     dependencies:
         - scriptworker-chain-of-trust-verification
+        - beetmover-chain-of-trust
+        - pushapk-chain-of-trust
+        - balrog-chain-of-trust
         - scriptworker-queue-monitoring
         - scriptworker-nagios
         - scriptworker-ssh-alerts
         - scriptworker-iptables
+        - docker-image-sha-doesnt-match
 
 separate-make-check:
     title: "Run `make check` actions in a separate task from builds"
