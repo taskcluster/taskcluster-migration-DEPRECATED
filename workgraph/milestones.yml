@@ -23,6 +23,7 @@ linux-android-nightlies-tier2:
         - linux32-nightlies-tier2
         - linux64-nightlies-tier2
         - android-nightlies-tier2
+        - android-x86-nightlies-tier2
 
 taskcluster-worker-on-mac:
     title: "taskcluster-worker works reliably on a small pool of Macs"
