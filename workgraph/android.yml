@@ -6,6 +6,11 @@ android-opt-tier2:
     bug: 1277645
     done: true
 
+android-x86-tier2:
+    title: "Run Android x86 builds and tests at tier 2"
+    bug: 1174206
+    done: true
+
 android-multilocale-tier2:
     title: "Android multilocale builds, tier2"
     description: |
@@ -48,6 +53,14 @@ android-balrog-tier2:
     dependencies:
         - balrog-worker-impl
 
+android-x86-balrog-tier2:
+    title: "Android balrog submission for x86 builds, tier 2"
+    description: |
+        Implement balrog submission tasks for nightly x86 builds on a
+        project branch, submitting to the balrog staging instance
+    dependencies:
+        - balrog-worker-impl
+
 android-single-locale-balrog-tier2:
     title: "Android balrog submission for single-locale builds, tier 2"
     description: |
@@ -67,7 +80,7 @@ android-verify-signing-equivalence:
         - android-single-locale-signing-tier2
 
 android-nightlies-tier2:
-    title: "Run Android opt nightlies and tests at tier 2"
+    title: "Run Android opt nightlies at tier 2"
     dependencies:
         - android-multilocale-tier2
         - android-single-locale-tier2
@@ -76,6 +89,14 @@ android-nightlies-tier2:
         - android-single-locale-balrog-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
+
+android-x86-nightlies-tier2:
+    title: "Run Android opt and x86 nightlies at tier 2"
+    dependencies:
+        - android-x86-tier2
+        - android-signing-tier2
+        - android-x86-balrog-tier2
+        - nightly-beetmover-tier2
 
 android-debug-tier1:
     title: "Run Android debug builds and tests at tier 1"
