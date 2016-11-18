@@ -57,6 +57,7 @@ windows-fix-perf-issues:
 windows-fix-desktop-resizing:
     title: "Fix issues resizing virtual desktops"
     bug: 1316858
+    done: true
     dependencies:
         - windows-fix-perf-issues
     description: |
