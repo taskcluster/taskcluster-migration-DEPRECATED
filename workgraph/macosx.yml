@@ -125,6 +125,9 @@ macosx-disable-bb-builds:
 macosx-taskcluster-worker:
     title: "Build a tc-worker engine for OS X"
     assigned: wcosta
+    description: |
+        Implement a taskcluster-worker engine that runs on OS X.  The remaining
+        bit here is to support task cancellation.
     bug: 1171618
 
 macosx-worker-deployment-hardware:
@@ -133,7 +136,8 @@ macosx-worker-deployment-hardware:
         This involves deploying taskcluster worker on a small pool of macs, and
         running a few tests successfully.  With luck, we can keep running that
         small set of tests to ensure there is no backsliding (they stay green),
-        but hardware resources may not allow that.
+        but hardware resources may not allow that.  Remaining work here is to
+        finalize and land the puppet patches to deploy this.
     assigned: wcosta
     dependencies:
         - macosx-taskcluster-worker
