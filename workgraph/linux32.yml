@@ -31,6 +31,7 @@ linux32-balrog-tier2:
         Implement balrog submission tasks for nightly multilocale builds on a
         project branch, submitting to the balrog staging instance
     assigned: mtabara
+    done: true
     dependencies:
         - linux32-builds-tier2
         - balrog-worker-impl
@@ -42,6 +43,7 @@ linux32-single-locale-balrog-tier2:
         branch.  This is complicated due to the per-locale naming of the
         artifacts.
     assigned: Callek
+    done: true
     dependencies:
         - balrog-worker-impl
 
@@ -80,6 +82,7 @@ linux32-nightlies-tier2:
         - nightly-single-locale-beetmover-tier2
         - linux32-balrog-tier2
         - linux32-single-locale-balrog-tier2
+    done: true
 
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"

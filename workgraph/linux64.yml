@@ -39,6 +39,7 @@ linux64-balrog-tier2:
         Implement balrog submission tasks for nightly multilocale builds on a
         project branch, submitting to the balrog staging instance
     assigned: mtabara
+    done: true
     dependencies:
         - linux64-builds-tier2
         - balrog-worker-impl
@@ -50,6 +51,7 @@ linux64-single-locale-balrog-tier2:
         branch.  This is complicated due to the per-locale naming of the
         artifacts.
     assigned: Callek
+    done: true
     dependencies:
         - balrog-worker-impl
 
@@ -89,6 +91,7 @@ linux64-nightlies-tier2:
         - linux64-single-locale-balrog-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
+    done: true
 
 linux64-talos-via-bbb-green:
     title: "Green up Linux64 talos on TC builds via BBB in try or a project branch"
