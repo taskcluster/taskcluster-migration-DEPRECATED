@@ -50,6 +50,7 @@ android-balrog-tier2:
         Implement balrog submission tasks for nightly multilocale builds on a
         project branch, submitting to the balrog staging instance
     assigned: mtabara
+    done: true
     dependencies:
         - balrog-worker-impl
 
@@ -68,6 +69,7 @@ android-single-locale-balrog-tier2:
         branch.  This is complicated due to the per-locale naming of the
         artifacts.
     assigned: Callek
+    done: true
     dependencies:
         - balrog-worker-impl
 
@@ -89,6 +91,7 @@ android-nightlies-tier2:
         - android-single-locale-balrog-tier2
         - nightly-beetmover-tier2
         - nightly-single-locale-beetmover-tier2
+    done: true
 
 android-x86-nightlies-tier2:
     title: "Run Android opt and x86 nightlies at tier 2"
