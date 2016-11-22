@@ -128,7 +128,7 @@ macosx-taskcluster-worker:
     description: |
         Implement a taskcluster-worker engine that runs on OS X.  The remaining
         bit here is to support task cancellation.
-    bug: 1171618
+    bug: 1244150
 
 macosx-worker-deployment-hardware:
     title: "Build a method of deploying a worker for Mac OS X on hardware"
@@ -138,7 +138,8 @@ macosx-worker-deployment-hardware:
         small set of tests to ensure there is no backsliding (they stay green),
         but hardware resources may not allow that.  Remaining work here is to
         finalize and land the puppet patches to deploy this.
-    assigned: wcosta
+    assigned: dustin
+    bug: 1309197
     dependencies:
         - macosx-taskcluster-worker
         - taskcluster-worker-setup-cleanup
