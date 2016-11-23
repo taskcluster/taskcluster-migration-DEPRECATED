@@ -49,6 +49,7 @@ windows-fix-subprocess-issue:
 windows-fix-perf-issues:
     title: "Fix windows test performance issues"
     bug: 1303455
+    done: true
     assigned: pmoore
     description: |
         Windows tests seem to run slowly -- far too slowly to get useful
@@ -80,6 +81,14 @@ windows-fix-desktop-leaks:
         greening tests, as the workers will just report "blue" jobs and fail,
         but needs to be fixed for tier 2.
 
+windows-fix-appdata:
+    title: "Fix issues with APPDATA being set incorrectly"
+    bug: 1319453
+    assigned: pmoore
+    description: |
+        Tests that try to start Firefox fail, because Firefox is trying to
+        write appdata to the wrong location.
+
 windows-tests-win7-tier2:
     title: "Run Windows 7 tests on TC at Tier 2"
     dependencies:
@@ -104,6 +113,7 @@ windows-tests-win7-tier2:
         - windows-tests-web-platform-tests-reftests
         - windows-tests-xpcshell
         - windows-fix-desktop-leaks
+        - windows-fix-appdata
 
 verify-win10-spec:
     title: "Verify that the Win10 image matches a typical user's desktop"
@@ -135,6 +145,7 @@ windows-tests-win10-tier2:
         - windows-tests-web-platform-tests-reftests
         - windows-tests-xpcshell
         - windows-fix-desktop-leaks
+        - windows-fix-appdata
 
 windows-tests-cppunit:
     title: "green cppunit test suite on Windows 7 and 10"
