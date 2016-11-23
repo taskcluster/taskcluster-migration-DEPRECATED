@@ -223,10 +223,25 @@ worker-priority-support:
 scriptworker-hg-committer:
     title: "Implement a scriptworker script that can safely land commits to hg"
 
+periodic-tasks:
+    title: "Implement in-tree support for periodically executing certain tasks"
+    bug: 1252948
+    description: |
+        Lots of tasks need to run periodically, and those tasks and their
+        frequency should be controllable in-tree.  This is the `.cron.yml`
+        proposal.  This is useful for tasks outside of the migration, too,
+        such as valgrind.
+
 periodic-update-service:
     title: "Implement the periodic update service"
+    description: |
+        We periodically land automatic updates to HSTS, HPKP, and the
+        blocklist.  These will use the hg-committer scriptworker to actually
+        land the changes, but also need to run periodically, independent of
+        regular pushes.
     bug: 1171193
     dependencies:
+        - periodic-tasks
         - scriptworker-tier1
         - scriptworker-hg-committer
 
