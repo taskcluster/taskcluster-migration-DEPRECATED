@@ -29,6 +29,18 @@ releasetasks-funsize-sched-in-tree:
     dependencies:
         - releasetasks-funsize-sched-tc-pulse
 
+releasetasks-pushapk-sched-tc-pulse:
+    title: "Modify the pushapk scheduler to listen to pulse events from TC"
+    description: |
+        This is an intermediate step that allows pushapk tasks to operate
+        against release builds performed in TC
+
+releasetasks-pushapk-sched-in-tree:
+    title: "Replace the pushapk scheduler with tasks generated in-tree"
+    dependencies:
+        - releasetasks-pushapk-sched-tc-pulse
+        - pushapk-chain-of-trust
+
 releasetasks-partner-repacks-macosx:
     title: "Implement partner repacks for MacOS X"
     dependencies:
@@ -101,3 +113,4 @@ stop-releasetasks-via-bbb:
         - releasetasks-eme-free-repacks
         - releasetasks-sha1-repacks
         - releasetasks-funsize-sched-in-tree
+        - releasetasks-pushapk-sched-in-tree
