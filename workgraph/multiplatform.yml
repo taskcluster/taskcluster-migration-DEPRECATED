@@ -160,7 +160,6 @@ scriptworker-tier1:
     dependencies:
         - scriptworker-chain-of-trust-verification
         - beetmover-chain-of-trust
-        - pushapk-chain-of-trust
         - balrog-chain-of-trust
         - scriptworker-queue-monitoring
         - scriptworker-nagios
