@@ -36,6 +36,7 @@ generic-worker-publish-on-failure:
         upload artifacts it finds in teh blobber-uploads directory (this was
         the long-term solution anyway).
     assigned: pmoore
+    done: true
 
 windows-fix-subprocess-issue:
     title: "Fix issues preventing successful test runs that involve a subprocess"
