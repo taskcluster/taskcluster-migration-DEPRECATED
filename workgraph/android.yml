@@ -60,6 +60,7 @@ android-x86-balrog-tier2:
         Implement balrog submission tasks for nightly x86 builds on a
         project branch, submitting to the balrog staging instance
     assigned: kmoir
+    done: true
     dependencies:
         - balrog-worker-impl
 
@@ -97,6 +98,7 @@ android-nightlies-tier2:
 android-x86-nightlies-tier2:
     title: "Run Android opt and x86 nightlies at tier 2"
     bug: 1319546
+    done: true
     assigned: kmoir
     dependencies:
         - android-x86-tier2
