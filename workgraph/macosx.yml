@@ -65,6 +65,7 @@ macosx-verify-signing-equivalence:
 
 macosx-nightlies-tier2:
     title: "Land config for macosx nightly builds at tier2"
+    bug: 1267425
     dependencies:
         - macosx-single-locale-tier2
         - macosx-signing-tier2
@@ -155,6 +156,7 @@ macosx-test-talos-on-hardware-10pct:
 macosx-test-talos-on-hardware-green:
     title: "Green up MacOS X tests and talos on TC"
     assigned: rwood
+    bug: 1298431
     dependencies:
         - macosx-test-talos-on-hardware-10pct
 

@@ -82,6 +82,7 @@ linux64-verify-signing-equivalence:
 
 linux64-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
+    bug: 1267423
     dependencies:
         - linux64-builds-tier2
         - linux64-tests-tier2
@@ -114,6 +115,7 @@ linux64-verify-build-equivalence:
 
 linux64-opt-tier1:
     title: "Promote all Linxu64 builds to tier 1, commit for beta in 6-12 weeks"
+    bug: 1316158
     description: |
         This involves running all talos jobs via BBB and turning off BB talos
         jobs, demoting builds to tier 2, and disabling sendchanges

@@ -315,6 +315,8 @@ windows-verify-signing-equivalence:
 
 windows-nightlies-tier2:
     title: "Land config for windows nightly builds at tier2"
+    bug: 1267427  # win64
+    # note: also 1267428 for win32..
     dependencies:
         - windows-single-locale-tier2
         - windows-signing-tier2
@@ -333,6 +335,7 @@ windows-hardware-via-bbb-green:
 
 windows-debug-tier1:
     title: "Run windows debug builds and tests at tier1"
+    bug: 1293787
     dependencies:
         - windows-tests-win7-tier2
         - windows-tests-win10-tier2
@@ -367,6 +370,7 @@ windows-opt-tier1:
         and talos, we have to simultaneously stop running those jobs via
         buildbot (and demote the rest to tier 2), and instead run those jobs
         from TC via BBB.
+    bug: 1293783
     dependencies:
         - windows-verify-build-equivalence
         - windows-verify-signing-equivalence

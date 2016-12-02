@@ -86,6 +86,7 @@ linux32-nightlies-tier2:
 
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
+    bug: 1253312
     dependencies:
         - linux32-builds-tier2
         - linux32-tests-tier2
@@ -99,12 +100,14 @@ linux32-nightlies-manual-test:
 linux32-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
     assigned: Callek
+    bug: 1321001
     dependencies:
         - linux32-builds-tier2
 
 linux32-opt-tier1:
     title: "Promote all linux32 opt and nightly tasks to tier1, demote Buildbot, start 6-12 week timer to linux32-beta-release"
     # also, disable sendchanges for BB builds to save resources
+    bug: 1321000
     dependencies:
         - linux32-verify-build-equivalence
         - linux32-verify-signing-equivalence
