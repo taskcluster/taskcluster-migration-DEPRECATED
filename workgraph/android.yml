@@ -76,12 +76,17 @@ android-single-locale-balrog-tier2:
         - balrog-worker-impl
 
 android-verify-signing-equivalence:
-    # ask coop for details
     title: "Verify that the signature formats match those from BB builds"
     assigned: Callek
     dependencies:
         - android-signing-tier2
         - android-single-locale-signing-tier2
+
+android-x86-verify-signing-equivalence:
+    title: "Verify that the signature formats match those from BB builds"
+    assigned: Callek
+    dependencies:
+        - android-signing-tier2
 
 android-nightlies-tier2:
     title: "Run Android opt nightlies at tier 2"
@@ -117,8 +122,21 @@ android-nightlies-manual-test:
     dependencies:
         - android-nightlies-tier2
 
+android-x86-nightlies-manual-test:
+    # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
+    title: "Verify that the Android x86 nightlies and associated update methods work via manual testing"
+    assigned: Callek
+    dependencies:
+        - android-x86-nightlies-tier2
+
 android-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
+    assigned: Callek
+    dependencies:
+        - android-opt-tier2
+
+android-x86-verify-build-equivalence:
+    title: "Verify TC-dervied x86 builds are byte-for-byte equivalent to BB builds"
     assigned: Callek
     dependencies:
         - android-opt-tier2
@@ -135,16 +153,41 @@ android-opt-tier1:
         - android-nightlies-manual-test
         - scriptworker-tier1
 
+android-x86-tier1:
+    title: "Promote Android x86 builds and tests to tier 1, demote in buildbot; 6-12 weeks before beta"
+    dependencies:
+        - android-x86-verify-build-equivalence
+        - android-x86-verify-signing-equivalence
+        - docker-worker-cot-gpg-keys-in-repo
+        - automatic-retry-android-jobs
+        - pulse-actions-backfill
+        - android-x86-tier2
+        - android-x86-nightlies-manual-test
+        - scriptworker-tier1
+
 android-beta-release:
     title: "Ship android beta releases"
+    assigned: jlorenzo
     dependencies:
         - android-nightlies-manual-test
         - android-opt-tier1
+
+android-x86-beta-release:
+    title: "Ship android x86 beta releases"
+    assigned: jlorenzo
+    dependencies:
+        - android-x86-nightlies-manual-test
+        - android-x86-tier1
 
 android-release:
     title: "Ship android release"
     dependencies:
         - android-beta-release
+
+android-x86-release:
+    title: "Ship android x86 release"
+    dependencies:
+        - android-x86-beta-release
 
 android-disable-bb-builds:
     title: "Turn off the Android builds on buildbot - will ride trains"

@@ -130,7 +130,8 @@ linux64-opt-tier1:
         - linux64-partial-updates
 
 linux64-partial-updates:
-    title: "Generate, sign, and publish partial updates for linux64 nightly builds"
+    title: "Integrate partial update generation into the CoT for linux64 nightly builds"
+    assigned: sfraser
     dependencies:
         - linux64-signing-tier2
 
@@ -171,6 +172,7 @@ linux64-talos-on-hardware-100pct:
 
 linux64-beta-release:
     title: "Ship linux64 beta release"
+    assigned: jlorenzo
     dependencies:
         - linux64-nightlies-manual-test
         - linux64-opt-tier1
