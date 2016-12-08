@@ -134,6 +134,8 @@ balrog-chain-of-trust:
 docker-image-sha-doesnt-match:
     title: "add info for scriptworker to be able to verify built docker image SHA"
     bug:  1315415
+    assigned: garndt
+    done: true
 
 scriptworker-queue-monitoring:
     title: "Monitor scriptworker queues and alert when too large"
