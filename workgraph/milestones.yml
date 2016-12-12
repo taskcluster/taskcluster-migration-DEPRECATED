@@ -65,6 +65,18 @@ linux64-talos-on-hardware:
     dependencies:
         - linux64-talos-on-hardware-100pct
 
+macosx-native-on-hardware:
+    title: "MacOS X Talos is running via TC worker on hardware"
+    description: |
+        MacOS X Tests and Talos are green in TaskCluster and (almots) all
+        buildslaves have been reimaged to run taskcluster-worker directly.
+        This needs to happen before the hardware begins moving in 2017Q3, as
+        that move will take most of a year.
+    milestone: true
+    due: 2016-06-01
+    dependencies:
+        - stop-bb-macosx-test-masters
+
 no-buildbot-schedulers:
     title: "Buildbot schedulers are disabled (except ESR)"
     milestone: true

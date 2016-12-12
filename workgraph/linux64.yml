@@ -144,9 +144,11 @@ linux64-disable-bb-builds:
 
 linux-tc-worker-engine:
     title: "implement a tc-worker engine that can support linux talos on hardware"
+    description: |
+        This will be the "native engine", based on Wander's work for OS X but generalized
+        to support creating users on arbitrary platforms.
     bug: 1282011
     dependencies:
-        # this will be a generalization of wander's work for OS X
         - macosx-taskcluster-worker
 
 linux-worker-deployment-hardware:
