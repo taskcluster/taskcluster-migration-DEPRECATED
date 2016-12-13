@@ -73,7 +73,7 @@ macosx-native-on-hardware:
         This needs to happen before the hardware begins moving in 2017Q3, as
         that move will take most of a year.
     milestone: true
-    due: 2016-06-01
+    due: 2017-06-01
     dependencies:
         - stop-bb-macosx-test-masters
 
