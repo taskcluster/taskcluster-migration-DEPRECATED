@@ -29,7 +29,7 @@ linux-android-nightlies-tier2:
 taskcluster-worker-on-mac:
     title: "taskcluster-worker works reliably on a small pool of Macs"
     milestone: true
-    due: 2016-12-01
+    due: 2017-01-03
     description: |
         While we are not yet ready to shift production load to
         taskcluster-worker on hardware (the transition requires use of BBB and

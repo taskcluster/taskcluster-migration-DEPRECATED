@@ -140,15 +140,16 @@ macosx-worker-deployment-hardware:
         but hardware resources may not allow that.  Remaining work here is to
         finalize and land the puppet patches to deploy this.
     assigned: dustin
+    done: true
     bug: 1309197
     dependencies:
         - macosx-taskcluster-worker
-        - taskcluster-worker-setup-cleanup
 
 macosx-test-talos-on-hardware-10pct:
     title: "Run MacOS X talos on TC on 10% of hardware"
     dependencies:
         - taskcluster-worker-cancel-tasks
+        - taskcluster-worker-setup-cleanup
         - macosx-worker-deployment-hardware
         - worker-priority-support
         - macosx-all-tier1
