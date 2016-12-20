@@ -4,7 +4,7 @@
 win7-testing-tier2:
     title: "Windows 7 non-hardware tests running in TC against TC builds at tier 2"
     milestone: true
-    due: 2016-01-20
+    due: 2017-01-20
     description: |
         Run test for Windows 7 builds in TaskCluster EC2 instances at tier 2,
         debugging host- and taskcluster-related issues along the way.
