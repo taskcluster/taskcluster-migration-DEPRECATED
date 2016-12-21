@@ -120,7 +120,7 @@ linux32-opt-tier1:
         - linux32-partial-updates
 
 linux32-partial-updates:
-    title: "Integrate partial update generation into the CoT for linux32 nightly builds"
+    title: "Generate partial updates for linux32 nightly builds using the existing funsize worker"
     assigned: sfraser
     dependencies:
         - linux32-signing-tier2
