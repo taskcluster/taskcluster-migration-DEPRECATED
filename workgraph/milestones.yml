@@ -41,7 +41,7 @@ taskcluster-worker-on-mac:
 linux-android-tier1:
     title: "Linux32/64 and android at tier1"
     milestone: true
-    due: 2017-01-03
+    due: 2017-01-17
     description: |
         All builds and tests for the linux32, linux64, and Android platforms
         are running in TaskCluster at tier 1, with Buildbot jobs demoted or
