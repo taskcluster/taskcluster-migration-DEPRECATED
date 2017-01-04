@@ -82,13 +82,33 @@ windows-fix-desktop-leaks:
         greening tests, as the workers will just report "blue" jobs and fail,
         but needs to be fixed for tier 2.
 
-windows-fix-appdata:
-    title: "Fix issues with APPDATA being set incorrectly"
-    bug: 1319453
-    assigned: pmoore
+windows-sign-update-exe:
+    title: "sign test tools in windows build process"
+    bug: 1323732
+    assigned: grenade
     description: |
-        Tests that try to start Firefox fail, because Firefox is trying to
-        write appdata to the wrong location.
+	    xpcshell and browser-chrome have tests which depend on update.exe being
+		available and signed.  We can build with |MOZ_UPDATER=| and avoid these
+		tests, or sign the test binaries which required signing infrastructure.
+
+windows-bbb-test-jobs:
+    title: "Run test jobs that run in BB on HW via BBB from TC"
+    bug: TBD
+    assigned: TBD
+    description: |
+	    We hae 6 remaining test jobs on windows 7 which when run via buildbot are
+		run on physical hardware machines.  We need to run these jobs via bbb
+		to achieve parity with BB for windows 7 tests.
+
+windows-bbb-talos-jobs:
+    title: "Run talos jobs on HW via BBB from TC"
+    bug: TBD
+    assigned: TBD
+    description: |
+	    All Talos jobs will need to be scheduled via TC and run via BBB
+		to buildbot.  This will require us to define any in-tree config changes
+		as well as disable a sendchange from buildbot for scheduling talos jobs
+		by default when a buildbot build is completed.
 
 windows-tests-win7-tier2:
     title: "Run Windows 7 tests on TC at Tier 2"
@@ -96,25 +116,12 @@ windows-tests-win7-tier2:
         - windows-builds-tier2
         - generic-worker-publish-on-failure
         - windows-tests-cppunit
-        - windows-tests-crashtest
         - windows-tests-external-media-tests
-        - windows-tests-gtest
-        - windows-tests-jittest
-        - windows-tests-jsreftest
-        - windows-tests-marionette
-        - windows-tests-mochitest
         - windows-tests-mochitest-browser-chrome
-        - windows-tests-mochitest-devtools-chrome
-        - windows-tests-mochitest-jetpack
-        - windows-tests-mochitest-media
-        - windows-tests-mochitest-webgl
-        - windows-tests-reftest
-        - windows-tests-reftest-no-accel
-        - windows-tests-web-platform-tests
-        - windows-tests-web-platform-tests-reftests
         - windows-tests-xpcshell
         - windows-fix-desktop-leaks
-        - windows-fix-appdata
+        - windows-bbb-test-jobs
+        - windows-sign-update-exe
 
 verify-win10-spec:
     title: "Verify that the Win10 image matches a typical user's desktop"
