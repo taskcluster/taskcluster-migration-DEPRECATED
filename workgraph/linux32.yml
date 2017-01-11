@@ -65,8 +65,8 @@ linux32-single-locale-signing-tier2:
         - linux32-single-locale-tier2
 
 linux32-verify-signing-equivalence:
-    # ask coop for details
     title: "Verify that the signature formats match those from BB builds"
+    bug: 1321001
     assigned: Callek
     dependencies:
         - linux32-signing-tier2
@@ -94,6 +94,7 @@ linux32-debug-tier1:
 linux32-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the linux32 en-US+l10n nightlies and associated update methods work via manual testing"
+    bug: 1330008
     dependencies:
         - linux32-nightlies-tier2
 
