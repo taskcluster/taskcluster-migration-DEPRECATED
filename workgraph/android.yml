@@ -121,6 +121,7 @@ android-debug-tier1:
 
 android-nightly-checksum-signing:
     title: "Create an Android checksum signing task"
+    assigned: mtabara
     bug: 1305139
     description: |
         In tc world we don't pass our signing token to the build job. So

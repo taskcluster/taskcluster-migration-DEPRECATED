@@ -5,6 +5,7 @@ linux32-docker-container:
     title: "Create a docker container with a 32-bit Linux runtime"
     bug:  1287099
     assigned: gbrown
+    done: true
 
 linux32-builds-tier2:
     title: "Green Linux32 builds in the tree"
@@ -12,6 +13,7 @@ linux32-builds-tier2:
 
 linux32-tests-tier2:
     title: "Green linux32 tests in the tree"
+    done: true
     dependencies:
         - linux32-docker-container
         - linux32-builds-tier2
@@ -86,6 +88,7 @@ linux32-nightlies-tier2:
 
 linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
+    assigned: buildduty
     bug: 1253312
     dependencies:
         - linux32-builds-tier2
