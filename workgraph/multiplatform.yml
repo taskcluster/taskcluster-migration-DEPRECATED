@@ -50,6 +50,7 @@ in-tree-bbb-support:
         payload for BBB to run test tasks against builds made in TaskCluster.
         Likely the hardest part is generating the BuilderName correctly.
     assigned: wcosta
+    done: true
 
 beetmover-worker-impl:
     # "beetworker"?
@@ -66,8 +67,11 @@ balrog-worker-impl:
 
 automatic-retry-android-jobs:
     title: "Automatically retry Android jobs with specific kinds of failures"
+    assigned: gbrown
+    bug: 1280570
     dependencies:
         - docker-worker-retry-on
+    done: true
 
 docker-worker-retry-on:
     title: "Support automatically retrying on some failures in docker-worker"
@@ -147,17 +151,9 @@ scriptworker-nagios:
     bug: 1314840
     assigned: sfraser
 
-scriptworker-iptables:
-    title: "Block non-required scriptworker ports/traffic"
-    bug: 1308980
-
-scriptworker-ssh-alerts:
-    title: "Alerts on ssh to scriptworker instances"
-    bug: 1290261
-    assigned: phrozyn
-
 scriptworker-tier1:
     title: "Scriptworker is tier1-ready"
+    assigned: aki
     bug: 1317789
     dependencies:
         - scriptworker-chain-of-trust-verification
@@ -165,8 +161,6 @@ scriptworker-tier1:
         - balrog-chain-of-trust
         - scriptworker-queue-monitoring
         - scriptworker-nagios
-        - scriptworker-ssh-alerts
-        - scriptworker-iptables
         - docker-image-sha-doesnt-match
 
 separate-make-check:

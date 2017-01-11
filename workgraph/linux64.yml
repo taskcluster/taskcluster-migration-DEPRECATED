@@ -73,8 +73,8 @@ linux64-single-locale-signing-tier2:
         - linux64-single-locale-tier2
 
 linux64-verify-signing-equivalence:
-    # ask coop for details
     title: "Verify that the signature formats match those from BB builds"
+    bug: 1320998
     assigned: Callek
     dependencies:
         - linux64-signing-tier2
@@ -96,6 +96,7 @@ linux64-nightlies-tier2:
 
 linux64-talos-via-bbb-green:
     title: "Green up Linux64 talos on TC builds via BBB in try or a project branch"
+    assigned: jmaher
     dependencies:
         - in-tree-bbb-support
         - linux64-builds-tier2
@@ -103,12 +104,14 @@ linux64-talos-via-bbb-green:
 linux64-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
+    bug: 1330008
     dependencies:
         - linux64-nightlies-tier2
 
 linux64-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
     # this is repeating the work glandium did months ago
+    bug: 1320998
     assigned: Callek
     dependencies:
         - linux64-builds-tier2
