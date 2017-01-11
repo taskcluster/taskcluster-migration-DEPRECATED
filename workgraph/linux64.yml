@@ -96,6 +96,7 @@ linux64-nightlies-tier2:
 
 linux64-talos-via-bbb-green:
     title: "Green up Linux64 talos on TC builds via BBB in try or a project branch"
+    assigned: jmaher
     dependencies:
         - in-tree-bbb-support
         - linux64-builds-tier2
