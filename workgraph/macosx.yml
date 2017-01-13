@@ -113,7 +113,6 @@ macosx-all-tier1:
         - macosx-universal-builds
         - macosx-startup-cache
         - pulse-actions-backfill
-        - pulse-actions-missing-talos
         - scriptworker-tier1
         - docker-worker-cot-gpg-keys-in-repo
         - taskcluster-worker-cot-gpg-keys-in-repo
