@@ -114,6 +114,7 @@ generic-worker-cot-gpg-keys-in-repo:
 
 taskcluster-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every taskcluster-worker deployment (reimage or AMI generation)"
+    duration: 3
 
 scriptworker-chain-of-trust-verification:
     title: "Enable chain of trust verification, and block on it before scriptworker jobs"
@@ -124,6 +125,7 @@ scriptworker-chain-of-trust-verification:
 beetmover-chain-of-trust:
     title: "Enable chain of trust verification in beetmover scriptworker script"
     bug: 1317747
+    duration: 5
     assigned: jlund
 
 pushapk-chain-of-trust:
@@ -144,15 +146,18 @@ docker-image-sha-doesnt-match:
 scriptworker-queue-monitoring:
     title: "Monitor scriptworker queues and alert when too large"
     bug: 1314840
+    duration: 5
     assigned: sfraser
 
 scriptworker-nagios:
     title: "Monitor scriptworker instances and alert on issues"
     bug: 1314840
+    duration: 5
     assigned: sfraser
 
 scriptworker-iptables:
     title: "Block non-required scriptworker ports/traffic"
+    duration: 5
     bug: 1308980
 
 scriptworker-ssh-alerts:
@@ -174,6 +179,7 @@ scriptworker-tier1:
 
 separate-make-check:
     title: "Run `make check` actions in a separate task from builds"
+    duration: 20
     bug: 992323
 
 pulse-actions-backfill:
@@ -190,6 +196,7 @@ pulse-actions-missing-talos:
 docker-generic-taskcluster-worker-priority-support:
     title: "Use queue.claimWork in {docker,generic,taskcluster}-worker, load test"
     assigned: jonasfj
+    duration: 5
     description: |
         Each of these three worker implementations needs to be updated to use
         the `queue.claimWork` operation, followed by a staged deployment to
@@ -197,6 +204,7 @@ docker-generic-taskcluster-worker-priority-support:
 
 script-worker-priority-support:
     title: "Use queue.claimWork in scriptworker"
+    duration: 10
     description: |
         Update scriptworker to use the `queue.claimWork` operation.  This will
         be deployed only after the deployment for
@@ -207,6 +215,7 @@ script-worker-priority-support:
 
 bbb-priority-support:
     title: "Use queue.claimWork in buildbot-bridge"
+    duration: 10
     description: |
         Update buildbot-bridge to use the `queue.claimWork` operation.  This will
         be deployed only after the deployment for
@@ -222,6 +231,7 @@ worker-priority-support:
         throughout the queue and workers, then adding new priority levels in queue.
     bug: 1231781
     assigned: jonasfj
+    duration: 0
     dependencies:
         - bbb-priority-support
         - script-worker-priority-support
@@ -264,6 +274,7 @@ fuzzing:
 
 taskcluster-worker-setup-cleanup:
     title: "Add support to Taskcluster-Worker for pre-task setup and post-task cleanup work"
+    duration: 20
     description: |
         For Buildbot jobs, runner takes care of some pre-task setup (warming
         caches, for example, to reduce end-to-end time) and post-task cleanup
@@ -273,6 +284,7 @@ taskcluster-worker-setup-cleanup:
 
 taskcluster-worker-cancel-tasks:
     title: "Support for cancelling tasks in taskcluster-worker"
+    duration: 10
 
 split-python-unit-tests:
     title: "Move Python unit tests currently run in 'make check' into a separate job"
@@ -284,6 +296,7 @@ split-python-unit-tests:
 make-check-ok-for-cross-compile:
     title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
     bug: 992323
+    duration: 15
     description: |
         There are a few tests that check properties of binaries, which should
         run ok in cross-compilation.  Everything else must either be moved to a
