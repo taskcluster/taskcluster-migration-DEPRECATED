@@ -197,6 +197,7 @@ docker-generic-taskcluster-worker-priority-support:
     title: "Use queue.claimWork in {docker,generic,taskcluster}-worker, load test"
     assigned: jonasfj
     duration: 5
+    bug: 1331094
     description: |
         Each of these three worker implementations needs to be updated to use
         the `queue.claimWork` operation, followed by a staged deployment to
@@ -205,6 +206,7 @@ docker-generic-taskcluster-worker-priority-support:
 script-worker-priority-support:
     title: "Use queue.claimWork in scriptworker"
     duration: 10
+    bug: 1331098
     description: |
         Update scriptworker to use the `queue.claimWork` operation.  This will
         be deployed only after the deployment for
@@ -221,6 +223,7 @@ bbb-priority-support:
         be deployed only after the deployment for
         {docker,generic,taskcluster}-worker is complete, to ensure the queue
         service can handle the load.
+    bug: 1331096
     dependencies:
         - docker-generic-taskcluster-worker-priority-support
 
