@@ -76,6 +76,8 @@ export default React.createClass({
             {node.external && <dd>yes</dd>}
             {node.milestone && <dt>Milestone:</dt>}
             {node.milestone && <dd>yes</dd>}
+            {typeof node.duration === 'number' && <dt>Duration</dt>}
+            {typeof node.duration === 'number' && <dd>{node.duration} days</dd>}
             {node.dependencies.length > 0 && <dt>Dependencies:</dt>}
             {node.dependencies.length > 0 && (
               <dd>
