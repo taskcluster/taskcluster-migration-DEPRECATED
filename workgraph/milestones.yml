@@ -1,6 +1,17 @@
 # Milestones are work items that don't actually involve any work,
 # but represent a major reference point in the work graph
 
+linux-android-tier1-cleanup:
+    title: "Post Linux/Android tier 1 cleanup"
+    description: |
+        All the bits that don't block tier 1, but should be wrapped up immediately thereafter.
+    milestone: true
+    due: 2017-02-01
+    dependencies:
+        - scriptworker-iptables
+        - scriptworker-ssh-alerts
+        - pulse-actions-missing-talos
+
 win7-testing-tier2:
     title: "Windows 7 non-hardware tests running in TC against TC builds at tier 2"
     milestone: true

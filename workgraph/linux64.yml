@@ -127,7 +127,6 @@ linux64-opt-tier1:
         - linux64-verify-signing-equivalence
         - scriptworker-tier1
         - docker-worker-cot-gpg-keys-in-repo
-        - pulse-actions-missing-talos
         - pulse-actions-backfill
         - linux64-nightlies-manual-test
         - linux64-debug-tier1
@@ -137,6 +136,7 @@ linux64-opt-tier1:
 linux64-partial-updates:
     title: "Generate partial updates for linux64 nightly builds using the existing funsize worker"
     assigned: sfraser
+    bug: 1319824
     dependencies:
         - linux64-signing-tier2
 

@@ -151,6 +151,15 @@ scriptworker-nagios:
     bug: 1314840
     assigned: sfraser
 
+scriptworker-iptables:
+    title: "Block non-required scriptworker ports/traffic"
+    bug: 1308980
+
+scriptworker-ssh-alerts:
+    title: "Alerts on ssh to scriptworker instances"
+    bug: 1290261
+    assigned: phrozyn
+
 scriptworker-tier1:
     title: "Scriptworker is tier1-ready"
     assigned: aki
@@ -171,6 +180,7 @@ pulse-actions-backfill:
     title: "Add support for backfilling jobs"
     bug: 1289823
     assigned: bstack
+    done: true
 
 pulse-actions-missing-talos:
     title: "Add support for backfilling all talos jobs on a push"
