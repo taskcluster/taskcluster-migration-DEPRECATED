@@ -126,6 +126,7 @@ linux32-opt-tier1:
 linux32-partial-updates:
     title: "Generate partial updates for linux32 nightly builds using the existing funsize worker"
     assigned: sfraser
+    bug: 1319824
     dependencies:
         - linux32-signing-tier2
 
