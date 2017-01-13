@@ -13,9 +13,21 @@
 # problems, from the deployment perspective they are the same and share the
 # same hardware pool.
 
+macosx-debug-tier2:
+    title: "Run Mac debug builds at tier 2"
+    description: |
+        Run tests via BBB on debug builds produced in Taskcluster, immediately
+        disabling tests on the builds produced in Buildbot (for capacity
+        reasons; potentially disabling those builds soon after).  The tests
+        will be converte to run directly via taskcluster-worker later, after
+        going to tier 1.
+    assigned: wcosta
+    bug: 1330310
+
 macosx-builds-tier2:
     title: "Support macosx builds, tier2"
     dependencies:
+        - macosx-debug-tier2
         - separate-make-check
 
 macosx-universal-builds:
