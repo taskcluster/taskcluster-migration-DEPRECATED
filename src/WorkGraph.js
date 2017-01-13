@@ -17,14 +17,23 @@ export default class WorkGraph {
       } else if (node.assigned) {
         // note that a work item can be inProgress even if it is blocked
         node.state = 'inProgress';
-      } else if (node.dependencies.length) {
-        node.state = 'blocked';
       } else {
         node.state = 'ready';
       }
 
       nodes.push(node);
       byName[name] = node;
+    });
+
+    // If any 'ready' tasks have dependencies that aren't in state 'done', then
+    // they are actually blocked.
+    nodes.forEach(_node => {
+      const node = _node;
+      if (node.state === 'ready') {
+        if (node.dependencies.filter(d => byName[d].state !== 'done').length > 0) {
+          node.state = 'blocked';
+        }
+      }
     });
   }
 
