@@ -151,10 +151,9 @@ macosx-disable-bb-builds:
 macosx-taskcluster-worker:
     title: "Build a tc-worker engine for OS X"
     assigned: wcosta
+    done: true
     description: |
-        Implement a taskcluster-worker engine that runs on OS X.  The remaining
-        bit here is to support task cancellation.
-    bug: 1244150
+        Implement a taskcluster-worker engine that runs on OS X.
 
 macosx-worker-deployment-hardware:
     title: "Build a method of deploying a worker for Mac OS X on hardware"

@@ -288,6 +288,7 @@ taskcluster-worker-setup-cleanup:
 taskcluster-worker-cancel-tasks:
     title: "Support for cancelling tasks in taskcluster-worker"
     duration: 10
+    bug: 1295686
 
 split-python-unit-tests:
     title: "Move Python unit tests currently run in 'make check' into a separate job"
