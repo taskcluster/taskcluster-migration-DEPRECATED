@@ -24,6 +24,7 @@ macosx-universal-builds:
         We may need these jobs if we choose to release ESR52 from TaskCluster, or if the deprecation of
         32-bit OS X builds is not complete in time.
     bug: 1183613
+    done: true
 
 macosx-startup-cache:
     title: "Support or disable the startup cache for Mac builds"
