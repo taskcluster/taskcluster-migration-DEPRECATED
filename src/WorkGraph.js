@@ -124,7 +124,7 @@ export default class WorkGraph {
   // number of days from the start.
   calculateTimes({ readyDelay, defaultDuration }) {
     // first filter out the completed nodes
-    const nodes = this.nodes.filter(node => node.state !== 'done');
+    const nodes = this.nodes.filter(node => !node.done);
     const byName = this.byName;
 
     // calculate start times (in days from startDate) based on dependencies
@@ -142,10 +142,14 @@ export default class WorkGraph {
             if (d in times) {
               const depEnd = times[d].end;
               maxEnd = maxEnd > depEnd ? maxEnd : depEnd;
-            } else {
+            } else if (!byName[d].done) {
               queue.unshift(d);
               missingDep = true;
             }
+          }
+
+          if (maxEnd === -1) {
+            maxEnd = readyDelay;
           }
 
           // if we didn't find all the dependencies, re-queue this node
