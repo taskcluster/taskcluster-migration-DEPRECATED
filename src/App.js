@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import OverviewComponent from './OverviewComponent';
 import Breadcrumbs from 'react-breadcrumbs';
-import { DetailsComponent, DetailsGraph, DetailsKanban } from './DetailsComponent';
+import { DetailsComponent, DetailsGraph, DetailsKanban, DetailsGantt } from './DetailsComponent';
 import { PersonComponent } from './PersonComponent';
 import { ItemComponent } from './ItemComponent';
 import { Router, Route, Redirect, IndexRoute, hashHistory } from 'react-router';
@@ -53,6 +53,7 @@ export default React.createClass({
           <Route name="Details" path="/details/:rootWorkItem" component={DetailsComponent}>
             <IndexRoute name="Graph" component={DetailsGraph} />
             <Route name="Kanban" path="kanban" component={DetailsKanban} />
+            <Route name="Kanban" path="gantt" component={DetailsGantt} />
           </Route>
           <Route name="Person" path="/person/:person" component={PersonComponent} />
           <Route name="Item" path="/item/:workItem" component={ItemComponent} />

@@ -1,3 +1,9 @@
 div.details-pane {
     padding-top: 1em;
 }
+
+div.popover.card {
+    padding-top: 0em;
+    padding-left: 1em;
+    padding-right: 1em;
+}

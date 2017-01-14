@@ -112,6 +112,62 @@ export default class WorkGraph {
       .filter(node => node.milestone);
   }
 
+  // Calculate a start and end time, in days, for each node, based on
+  // durations and dependencies.  Finished nodes are ignored.
+  //
+  // Options: {
+  //   readyDelay: day count at which which "ready" tasks wil start
+  //   defaultDuration: duration for nodes without one specified
+  // }
+  //
+  // Returns: object mapping nodes to start and end times, given in
+  // number of days from the start.
+  calculateTimes({ readyDelay, defaultDuration }) {
+    // first filter out the completed nodes
+    const nodes = this.nodes.filter(node => node.state !== 'done');
+    const byName = this.byName;
+
+    // calculate start times (in days from startDate) based on dependencies
+    const times = {};
+    const queue = nodes.map(node => node.name);
+    while (queue.length) {
+      const node = byName[queue.pop()];
+      if (!(node.name in times)) {
+        const duration = typeof node.duration === 'number' ? node.duration : defaultDuration;
+
+        if (node.dependencies.length) {
+          let maxEnd = -1;
+          let missingDep = false;
+          for (const d of node.dependencies) {
+            if (d in times) {
+              const depEnd = times[d].end;
+              maxEnd = maxEnd > depEnd ? maxEnd : depEnd;
+            } else {
+              queue.unshift(d);
+              missingDep = true;
+            }
+          }
+
+          // if we didn't find all the dependencies, re-queue this node
+          if (missingDep) {
+            queue.unshift(node.name);
+          } else {
+            times[node.name] = { start: maxEnd, end: maxEnd + duration };
+          }
+        } else if (node.state === 'ready') {
+          times[node.name] = { start: 0, end: duration };
+        } else {
+          times[node.name] = { start: readyDelay, end: duration + readyDelay };
+        }
+      }
+    }
+
+    return times;
+  }
+
+  // Calculate the "distance", counted as number of dependencies, of each node
+  // from the root
+  // TODO: instead calculate total critical-path duration
   rootDistances(root) {
     const distances = {};
     const stack = [{ node: root, distance: 0 }];

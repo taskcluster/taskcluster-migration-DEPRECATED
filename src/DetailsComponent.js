@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import Panel from 'react-bootstrap/lib/Panel';
 import Col from 'react-bootstrap/lib/Col';
@@ -6,8 +7,88 @@ import Button from 'react-bootstrap/lib/Button';
 import Alert from 'react-bootstrap/lib/Alert';
 import WorkItem from './WorkItem';
 import GraphDisplay from './GraphDisplay';
+import ReactGantt from 'react-gantt';
 import { Link, IndexLink } from 'react-router';
 import './details.css';
+
+export const DetailsGantt = React.createClass({
+  contextTypes: {
+    graph: React.PropTypes.object.isRequired,
+  },
+
+  render() {
+    const times = this.context.graph.calculateTimes({
+      readyDelay: 0,
+      defaultDuration: 5,
+    });
+
+    // calculate a date, applying a factor of 7.5/5 to convert
+    // work days to calendar days (discounting weekends and holidays)
+    let leftBound = new Date();
+    let rightBound = new Date();
+    const date = days => {
+      const d = moment().add(days * 1.5, 'days').startOf('day').toDate();
+      if (d < leftBound) {
+        leftBound = d;
+      }
+      if (d > rightBound) {
+        rightBound = d;
+      }
+      return d;
+    };
+
+    let rows = [];
+    Object.keys(times).forEach(n => {
+      const { start, end } = times[n];
+      // skip zero-duration nodes
+      if (start === end) {
+        return;
+      }
+      const node = this.context.graph.byName[n];
+      const startDate = date(start);
+      const climaxDate = date(node.state === 'inProgress' ? ((start + end) / 2) : (start + 1));
+      const endDate = date(end);
+      rows.push({
+        title: node.name,
+        startDate,
+        climaxDate,
+        endDate,
+      });
+    });
+
+    rows = rows.sort((a, b) => {
+      if (a.startDate < b.startDate) {
+        return -1;
+      } else if (a.startDate > b.startDate) {
+        return 1;
+      } else if (a.endDate < b.endDate) {
+        return -1;
+      } else if (a.endDate > b.endDate) {
+        return 1;
+      } else if (a.climaxDate > b.climaxDate) {
+        return -1;
+      } else if (a.climaxDate < b.climaxDate) {
+        return 1;
+      }
+      return 0;
+    });
+
+    return (
+      <Row>
+        <Col xs={12}>
+          <div id="gantt-chart">
+            <ReactGantt options={{
+              leftBound,
+              rightBound,
+              bootstraped: true,  // sic.
+              showBorders: false,
+            }} rows={rows} />
+          </div>
+        </Col>
+      </Row>
+    );
+  },
+});
 
 export const DetailsGraph = React.createClass({
   contextTypes: {
@@ -197,6 +278,7 @@ export const DetailsComponent = React.createClass({
           <ul className="nav nav-tabs">
             <Tab to={root} onlyActiveOnIndex>Graph</Tab>
             <Tab to={`${root}/kanban`}>Kanban</Tab>
+            <Tab to={`${root}/gantt`}>Gantt</Tab>
           </ul>
         </nav>
         <div className="details-pane">
