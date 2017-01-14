@@ -7,3 +7,9 @@ div.popover.card {
     padding-left: 1em;
     padding-right: 1em;
 }
+
+/* react-gantt really doesn't believe in css classes */
+div#gantt-chart td:first-child {
+    font-size: 0.7em;
+    color: #333;
+}

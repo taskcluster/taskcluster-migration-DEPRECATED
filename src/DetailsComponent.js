@@ -82,6 +82,7 @@ export const DetailsGantt = React.createClass({
               rightBound,
               bootstraped: true,  // sic.
               showBorders: false,
+              labelWidth: '200px',
             }} rows={rows} />
           </div>
         </Col>
