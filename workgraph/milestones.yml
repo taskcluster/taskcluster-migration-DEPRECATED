@@ -102,7 +102,7 @@ no-buildbot-schedulers:
 all-releases:
     title: "Everything has been released at least once from TC (except ESR)"
     milestone: true
-    due: 2017-12-31
+    due: 2017-12-30
     description: |
         We have performed a final release for all platforms, built and tested
         on all TaskCluster.
@@ -133,7 +133,7 @@ almost-no-buildbot:
 no-buildbot:
     title: "Buildbot completely turned off"
     milestone: true
-    due: 2017-12-31
+    due: 2018-01-31
     description: |
         All Buildbot infrastructure is unused and decomissioned.
     dependencies:
