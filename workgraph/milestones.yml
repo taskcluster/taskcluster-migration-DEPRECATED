@@ -11,6 +11,8 @@ linux-android-tier1-cleanup:
         - scriptworker-iptables
         - scriptworker-ssh-alerts
         - pulse-actions-missing-talos
+        - artifact-list-changes
+        - declarative-manifests
 
 win7-testing-tier2:
     title: "Windows 7 non-hardware tests running in TC against TC builds at tier 2"
@@ -36,6 +38,20 @@ linux-android-nightlies-tier2:
         - linux64-nightlies-tier2
         - android-nightlies-tier2
         - android-x86-nightlies-tier2
+
+macosx-tier1:
+    title: "Mac OS X at tier1"
+    milestone: true
+    due: 2017-03-31
+    description: |
+        All builds and tests for Mac OS X are running in TaskCluster at tier 1, 
+        with Buildbot jobs demoted or disabled. All tasks are scheduled via TaskCluster,
+        but hardware-only tasks are executed via BBB.  Since tier-1 opt builds are what 
+        we ship to users, this also requires nightlies and preparations for making full
+        releases when they are due.
+    dependencies:
+        - taskcluster-worker-on-mac
+        - macosx-native-on-hardware
 
 taskcluster-worker-on-mac:
     title: "taskcluster-worker works reliably on a small pool of Macs"

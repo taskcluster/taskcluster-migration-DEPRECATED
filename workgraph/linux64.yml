@@ -104,6 +104,7 @@ linux64-talos-via-bbb-green:
 linux64-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
+    assigned: coop
     bug: 1330008
     dependencies:
         - linux64-nightlies-tier2
@@ -132,6 +133,7 @@ linux64-opt-tier1:
         - linux64-debug-tier1
         - linux64-talos-via-bbb-green
         - linux64-partial-updates
+        - nightly-checksum-signing
 
 linux64-partial-updates:
     title: "Generate partial updates for linux64 nightly builds using the existing funsize worker"
