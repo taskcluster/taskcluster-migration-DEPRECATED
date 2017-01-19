@@ -73,6 +73,7 @@ linux32-verify-signing-equivalence:
     dependencies:
         - linux32-signing-tier2
         - linux32-single-locale-signing-tier2
+    done: true
 
 linux32-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
@@ -102,6 +103,7 @@ linux32-nightlies-manual-test:
     bug: 1330008
     dependencies:
         - linux32-nightlies-tier2
+    done: true
 
 linux32-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
@@ -109,6 +111,7 @@ linux32-verify-build-equivalence:
     bug: 1321001
     dependencies:
         - linux32-builds-tier2
+    done: true
 
 linux32-opt-tier1:
     title: "Promote all linux32 opt and nightly tasks to tier1, demote Buildbot, start 6-12 week timer to linux32-beta-release"
