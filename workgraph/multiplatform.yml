@@ -179,11 +179,17 @@ scriptworker-tier1:
         - scriptworker-nagios
         - docker-image-sha-doesnt-match
 
-separate-make-check:
-    title: "Run `make check` actions in a separate task from builds"
-    duration: 20
-    bug: 992323
+make-check-ok-for-cross-compile:
+    title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
     assigned: mshal
+    bug: 992323
+    duration: 15
+    description: |
+        There are a few tests that check properties of binaries, which should
+        run ok in cross-compilation.  Everything else must either be moved to a
+        test task (so it can run on the target OS) or removed.
+    dependencies:
+        - split-python-unit-tests
 
 pulse-actions-backfill:
     title: "Add support for backfilling jobs"
@@ -295,21 +301,12 @@ taskcluster-worker-cancel-tasks:
 
 split-python-unit-tests:
     title: "Move Python unit tests currently run in 'make check' into a separate job"
+    assigned: ahal
+    bug: 1003417
     description: |
         Run those Python unit tests that do not require an objdir in a separate
         task, so that it can execute in parallel with the other test tasks, and
         so that it can succeed for cross-compiled builds.
-
-make-check-ok-for-cross-compile:
-    title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
-    bug: 992323
-    duration: 15
-    description: |
-        There are a few tests that check properties of binaries, which should
-        run ok in cross-compilation.  Everything else must either be moved to a
-        test task (so it can run on the target OS) or removed.
-    dependencies:
-        - split-python-unit-tests
 
 nightly-checksum-signing:
     title: "Create a nightly checksum signing task"

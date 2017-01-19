@@ -13,6 +13,8 @@ linux-android-tier1-cleanup:
         - pulse-actions-missing-talos
         - artifact-list-changes
         - declarative-manifests
+        - add-jobs-e10s
+        - trychooser-e10s
 
 win7-testing-tier2:
     title: "Windows 7 non-hardware tests running in TC against TC builds at tier 2"
@@ -38,20 +40,6 @@ linux-android-nightlies-tier2:
         - linux64-nightlies-tier2
         - android-nightlies-tier2
         - android-x86-nightlies-tier2
-
-macosx-tier1:
-    title: "Mac OS X at tier1"
-    milestone: true
-    due: 2017-03-31
-    description: |
-        All builds and tests for Mac OS X are running in TaskCluster at tier 1, 
-        with Buildbot jobs demoted or disabled. All tasks are scheduled via TaskCluster,
-        but hardware-only tasks are executed via BBB.  Since tier-1 opt builds are what 
-        we ship to users, this also requires nightlies and preparations for making full
-        releases when they are due.
-    dependencies:
-        - taskcluster-worker-on-mac
-        - macosx-native-on-hardware
 
 taskcluster-worker-on-mac:
     title: "taskcluster-worker works reliably on a small pool of Macs"
@@ -104,6 +92,24 @@ macosx-native-on-hardware:
     due: 2017-06-01
     dependencies:
         - stop-bb-macosx-test-masters
+
+macosx-all-tier1:
+    title: "Mac OS X at tier 1"
+    description: |
+        This is a "flag-day" moment where we simultaneously:
+          * enable in-tree scheduling of test/talos tasks via BBB
+          * disable sendchanges from Buildbot builds and demote to Tier 2
+          * promote TC opt and nightly builds to tier 1
+    milestone: true
+    due: 2017-06-01
+    duration: 5
+    dependencies:
+        - macosx-debug-tier1
+        - macosx-nightlies-tier1
+        - pulse-actions-backfill
+        - docker-worker-cot-gpg-keys-in-repo
+        - taskcluster-worker-cot-gpg-keys-in-repo
+        - macosx-native-on-hardware
 
 no-buildbot-schedulers:
     title: "Buildbot schedulers are disabled (except ESR)"
