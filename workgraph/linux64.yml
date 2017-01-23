@@ -105,6 +105,7 @@ linux64-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
     bug: 1330008
+    done: true
     dependencies:
         - linux64-nightlies-tier2
 
@@ -137,6 +138,7 @@ linux64-partial-updates:
     title: "Generate partial updates for linux64 nightly builds using the existing funsize worker"
     assigned: sfraser
     bug: 1319824
+    done: true
     dependencies:
         - linux64-signing-tier2
 
