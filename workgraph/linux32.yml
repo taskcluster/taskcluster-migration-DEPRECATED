@@ -70,6 +70,7 @@ linux32-verify-signing-equivalence:
     title: "Verify that the signature formats match those from BB builds"
     bug: 1321001
     assigned: Callek
+    done: true
     dependencies:
         - linux32-signing-tier2
         - linux32-single-locale-signing-tier2
@@ -91,6 +92,7 @@ linux32-debug-tier1:
     title: "Run linux32 debug builds and tests at tier1"
     assigned: buildduty
     bug: 1253312
+    done: true
     dependencies:
         - linux32-builds-tier2
         - linux32-tests-tier2
@@ -101,6 +103,7 @@ linux32-nightlies-manual-test:
     title: "Verify that the linux32 en-US+l10n nightlies and associated update methods work via manual testing"
     assigned: coop
     bug: 1330008
+    done: true
     dependencies:
         - linux32-nightlies-tier2
     done: true
@@ -109,6 +112,7 @@ linux32-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
     assigned: Callek
     bug: 1321001
+    done: true
     dependencies:
         - linux32-builds-tier2
     done: true
@@ -133,6 +137,7 @@ linux32-partial-updates:
     title: "Generate partial updates for linux32 nightly builds using the existing funsize worker"
     assigned: sfraser
     bug: 1319824
+    done: true
     dependencies:
         - linux32-signing-tier2
     done: true

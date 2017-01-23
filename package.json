@@ -10,6 +10,7 @@
     "js-yaml": "^3.6.1",
     "lodash": "^4.16.4",
     "moment": "^2.17.1",
+    "popsicle": "^9.0.0",
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
     "react-breadcrumbs": "^1.4.1",

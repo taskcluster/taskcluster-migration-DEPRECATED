@@ -5,7 +5,58 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Badge from 'react-bootstrap/lib/Badge';
 import Col from 'react-bootstrap/lib/Col';
 import { Link } from 'react-router';
+const popsicle = require('popsicle');
 
+const Bug = React.createClass({
+  propTypes: {
+    bugId: React.PropTypes.number,
+  },
+
+  getInitialState() {
+    return {
+      loading: true,
+      status: null,
+      resolution: null,
+      summary: null,
+    };
+  },
+
+  componentWillMount() {
+    const url = `https://bugzilla.mozilla.org/rest/bug/${this.props.bugId}?include_fields=status,resolution,summary`;
+    popsicle.get(url)
+      .use(popsicle.plugins.parse('json'))
+      .then(res => {
+        if (res.body.bugs.length === 1) {
+          const bug = res.body.bugs[0];
+          this.setState({
+            loading: false,
+            status: bug.status,
+            resolution: bug.resolution,
+            summary: bug.summary,
+          });
+        } else {
+          this.setState({
+            loading: false,
+            summary: '(not found)',
+          });
+        }
+      });
+  },
+
+  render() {
+    return (
+      <span title={this.state.loading ? '(loading)' : this.state.summary}>
+        <a href={`https://bugzilla.mozilla.org/show_bug.cgi?id=${this.props.bugId}`}
+           target="_blank">#{this.props.bugId}</a>
+        {this.state.loading ? '...' : (
+          <span>
+            - {this.state.status}{this.state.resolution !== '' && ` / ${this.state.resolution}`}
+          </span>
+        )}
+      </span>
+    );
+  },
+});
 export default React.createClass({
   contextTypes: {
     graph: React.PropTypes.object.isRequired,
@@ -40,8 +91,7 @@ export default React.createClass({
       <Row>
         <Col xs={6}>
           {node.bug &&
-            <a href={`https://bugzilla.mozilla.org/show_bug.cgi?id=${node.bug}`}
-               target="_blank">#{node.bug}</a>
+            <Bug bugId={node.bug} />
           }
         </Col>
         <Col className="text-right" xs={6}>
