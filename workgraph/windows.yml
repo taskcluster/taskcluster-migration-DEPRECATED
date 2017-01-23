@@ -285,8 +285,8 @@ windows-tests-web-platform-tests-reftests:
         - windows-fix-perf-issues
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
-    done: true
     bug: 1304438
+    done: true
 
 windows-tests-xpcshell:
     title: "green xpcshell test suite on Windows 7 and 10"

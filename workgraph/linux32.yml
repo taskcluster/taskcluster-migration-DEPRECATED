@@ -99,6 +99,7 @@ linux32-debug-tier1:
 linux32-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the linux32 en-US+l10n nightlies and associated update methods work via manual testing"
+    assigned: coop
     bug: 1330008
     done: true
     dependencies:
@@ -126,6 +127,7 @@ linux32-opt-tier1:
         - linux32-debug-tier1
         - scriptworker-tier1
         - linux32-partial-updates
+        - nightly-checksum-signing
 
 linux32-partial-updates:
     title: "Generate partial updates for linux32 nightly builds using the existing funsize worker"

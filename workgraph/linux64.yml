@@ -79,6 +79,7 @@ linux64-verify-signing-equivalence:
     dependencies:
         - linux64-signing-tier2
         - linux64-single-locale-signing-tier2
+    done: true
 
 linux64-nightlies-tier2:
     title: "Complete and test end-to-end nightlies on a project branch"
@@ -100,10 +101,12 @@ linux64-talos-via-bbb-green:
     dependencies:
         - in-tree-bbb-support
         - linux64-builds-tier2
+    done: true
 
 linux64-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the en-US+l10n nightlies and associated updated methods work via manual testing"
+    assigned: coop
     bug: 1330008
     done: true
     dependencies:
@@ -116,6 +119,7 @@ linux64-verify-build-equivalence:
     assigned: Callek
     dependencies:
         - linux64-builds-tier2
+    done: true
 
 linux64-opt-tier1:
     title: "Promote all Linxu64 builds to tier 1, commit for beta in 6-12 weeks"
@@ -133,6 +137,7 @@ linux64-opt-tier1:
         - linux64-debug-tier1
         - linux64-talos-via-bbb-green
         - linux64-partial-updates
+        - nightly-checksum-signing
 
 linux64-partial-updates:
     title: "Generate partial updates for linux64 nightly builds using the existing funsize worker"
@@ -141,6 +146,14 @@ linux64-partial-updates:
     done: true
     dependencies:
         - linux64-signing-tier2
+
+add-jobs-e10s:
+    title: "Add jobs for linux64 T-e10s(o) jobs fails intermittently"
+    bug: 1332349
+
+trychooser-e10s:
+    title: "Trychooser gives me wrong syntax for triggering linux64 talos-e10s other"
+    bug: 1332348
 
 linux64-disable-bb-builds:
     title: "Turn off the Linux64 builds on Buildbot"

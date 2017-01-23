@@ -121,18 +121,10 @@ android-debug-tier1:
     bug: 1269003
     done: true
 
-android-nightly-checksum-signing:
-    title: "Create an Android checksum signing task"
-    assigned: mtabara
-    bug: 1305139
-    description: |
-        In tc world we don't pass our signing token to the build job. So
-        similar to how we sign the apk with signingscript, we should create
-        another task in the nightly graph that signs the checksums artifact
-
 android-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the multilocale+en-US+l10n nightlies and associated update methods work via manual testing"
+    assigned: coop
     bug: 1330008
     done: true
     dependencies:
@@ -141,6 +133,7 @@ android-nightlies-manual-test:
 android-x86-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the Android x86 nightlies and associated update methods work via manual testing"
+    assigned: coop
     bug: 1330008
     done: true
     dependencies:
@@ -174,7 +167,7 @@ android-opt-tier1:
         - android-opt-tier2
         - android-nightlies-manual-test
         - scriptworker-tier1
-        - android-nightly-checksum-signing
+        - nightly-checksum-signing
 
 android-x86-tier1:
     title: "Promote Android x86 builds and tests to tier 1, demote in buildbot; 6-12 weeks before beta"
@@ -188,7 +181,7 @@ android-x86-tier1:
         - android-x86-tier2
         - android-x86-nightlies-manual-test
         - scriptworker-tier1
-        - android-nightly-checksum-signing
+        - nightly-checksum-signing
 
 android-beta-release:
     title: "Ship android beta releases"

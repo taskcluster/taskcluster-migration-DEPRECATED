@@ -179,10 +179,17 @@ scriptworker-tier1:
         - scriptworker-nagios
         - docker-image-sha-doesnt-match
 
-separate-make-check:
-    title: "Run `make check` actions in a separate task from builds"
-    duration: 20
+make-check-ok-for-cross-compile:
+    title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
+    assigned: mshal
     bug: 992323
+    duration: 15
+    description: |
+        There are a few tests that check properties of binaries, which should
+        run ok in cross-compilation.  Everything else must either be moved to a
+        test task (so it can run on the target OS) or removed.
+    dependencies:
+        - split-python-unit-tests
 
 pulse-actions-backfill:
     title: "Add support for backfilling jobs"
@@ -294,18 +301,30 @@ taskcluster-worker-cancel-tasks:
 
 split-python-unit-tests:
     title: "Move Python unit tests currently run in 'make check' into a separate job"
+    assigned: ahal
+    bug: 1003417
     description: |
         Run those Python unit tests that do not require an objdir in a separate
         task, so that it can execute in parallel with the other test tasks, and
         so that it can succeed for cross-compiled builds.
 
-make-check-ok-for-cross-compile:
-    title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
-    bug: 992323
-    duration: 15
+nightly-checksum-signing:
+    title: "Create a nightly checksum signing task"
+    assigned: mtabara
+    bug: 1305139
     description: |
-        There are a few tests that check properties of binaries, which should
-        run ok in cross-compilation.  Everything else must either be moved to a
-        test task (so it can run on the target OS) or removed.
-    dependencies:
-        - split-python-unit-tests
+        In TC world we don't pass our signing token to the build job. So
+        similar to how we sign the apk with signingscript, we should create
+        another task in the nightly graph that signs the checksums artifact.
+
+artifact-list-changes:
+    title: "Allow for artifact list changes without bustage"
+    bug: 1331141
+    description: |
+        Currently we have an in-tree graph with the simple names to beetmove.  We also have a bunch of yaml manifests in beetmoverscript describing the simple name -> prEtty name conversion. When we add new artifacts to the list, we need to be able to do so in a way that doesn't require simultaneous updates to both sides.  Also, if we have the manifests out-of-tree, at some point the trains' artifact lists will diverge, and beetmoverscript will have to handle all variants.  (esr vs aurora/beta/release vs nightly)
+
+declarative-manifests:
+    title: "Create a manifest with artifact names that the build system then uses to name its output files"
+    bug: 1331143
+    description: |
+        We can use a declarative manifest to generate the taskcluster graph, and the build system could use it to know what to name its artifacts.  If the names are pretty names, beetmover doesn't have to perform any name transforms at all, and can just push pretty-named artifacts to the proper s3 bucket.
