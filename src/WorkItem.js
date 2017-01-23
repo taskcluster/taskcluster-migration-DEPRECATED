@@ -50,7 +50,7 @@ const Bug = React.createClass({
            target="_blank">#{this.props.bugId}</a>
         {this.state.loading ? '...' : (
           <span>
-            - {this.state.status}{this.state.resolution !== "" && ` / ${this.state.resolution}`}
+            - {this.state.status}{this.state.resolution !== '' && ` / ${this.state.resolution}`}
           </span>
         )}
       </span>
