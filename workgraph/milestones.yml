@@ -84,8 +84,8 @@ linux64-talos-on-hardware:
 macosx-native-on-hardware:
     title: "MacOS X Talos is running via TC worker on hardware"
     description: |
-        MacOS X Tests and Talos are green in TaskCluster and (almots) all
-        buildslaves have been reimaged to run taskcluster-worker directly.
+        MacOS X Tests and Talos are green in TaskCluster and (almost) all
+        test machines have been reimaged to run taskcluster-worker directly.
         This needs to happen before the hardware begins moving in 2017Q3, as
         that move will take most of a year.
     milestone: true
@@ -101,7 +101,7 @@ macosx-all-tier1:
           * disable sendchanges from Buildbot builds and demote to Tier 2
           * promote TC opt and nightly builds to tier 1
     milestone: true
-    due: 2017-06-01
+    due: 2017-06-16
     duration: 5
     dependencies:
         - macosx-debug-tier1
