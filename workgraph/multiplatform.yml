@@ -128,7 +128,6 @@ beetmover-chain-of-trust:
     duration: 5
     done: true
     assigned: jlund
-    done: true
 
 pushapk-chain-of-trust:
     title: "Enable chain of trust verification in pushapk scriptworker script"
@@ -139,7 +138,6 @@ balrog-chain-of-trust:
     bug: 1317800
     done: true
     assigned: mtabara
-    done: true
 
 docker-image-sha-doesnt-match:
     title: "add info for scriptworker to be able to verify built docker image SHA"

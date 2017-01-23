@@ -68,7 +68,6 @@ macosx-startup-cache:
         and based on that information deciding whether to disable it for
         shipping builds or find a way to generate the startup cache within the
         build process.
-    done: true
 
 volume-icon-for-cross-compile:
     title: "Figure out how to set volume icon for DMG in Linux->Mac cross compiles"

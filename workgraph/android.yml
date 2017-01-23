@@ -84,7 +84,6 @@ android-verify-signing-equivalence:
     dependencies:
         - android-signing-tier2
         - android-single-locale-signing-tier2
-    done: true
 
 android-x86-verify-signing-equivalence:
     title: "Verify that the signature formats match those from BB builds"
@@ -93,7 +92,6 @@ android-x86-verify-signing-equivalence:
     done: true
     dependencies:
         - android-signing-tier2
-    done: true
 
 android-nightlies-tier2:
     title: "Run Android opt nightlies at tier 2"
@@ -131,7 +129,6 @@ android-nightlies-manual-test:
     done: true
     dependencies:
         - android-nightlies-tier2
-    done: true
 
 android-x86-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
@@ -141,7 +138,6 @@ android-x86-nightlies-manual-test:
     done: true
     dependencies:
         - android-x86-nightlies-tier2
-    done: true
 
 android-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
@@ -150,7 +146,6 @@ android-verify-build-equivalence:
     done: true
     dependencies:
         - android-opt-tier2
-    done: true
 
 android-x86-verify-build-equivalence:
     title: "Verify TC-dervied x86 builds are byte-for-byte equivalent to BB builds"
@@ -159,7 +154,6 @@ android-x86-verify-build-equivalence:
     done: true
     dependencies:
         - android-opt-tier2
-    done: true
 
 android-opt-tier1:
     title: "Promote Android opt builds and tests to tier 1, demote in buildbot; 6-12 weeks before beta"

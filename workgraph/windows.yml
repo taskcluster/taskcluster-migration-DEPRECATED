@@ -90,7 +90,6 @@ windows-fix-appdata:
     description: |
         Tests that try to start Firefox fail, because Firefox is trying to
         write appdata to the wrong location.
-    done: true
 
 windows-tests-win7-green:
     title: "Run Windows 7 tests on TC successfully in try"
@@ -164,7 +163,6 @@ windows-tests-crashtest:
         - windows-fix-perf-issues
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
-    done: true
 
 windows-tests-external-media-tests:
     title: "green external-media-tests test suite on Windows 7 and 10"
