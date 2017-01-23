@@ -80,6 +80,7 @@ android-verify-signing-equivalence:
     title: "Verify that the signature formats match those from BB builds"
     bug: 1321005
     assigned: Callek
+    done: true
     dependencies:
         - android-signing-tier2
         - android-single-locale-signing-tier2
@@ -88,6 +89,7 @@ android-x86-verify-signing-equivalence:
     title: "Verify that the signature formats match those from BB builds"
     bug: 1321005
     assigned: Callek
+    done: true
     dependencies:
         - android-signing-tier2
 
@@ -132,6 +134,7 @@ android-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the multilocale+en-US+l10n nightlies and associated update methods work via manual testing"
     bug: 1330008
+    done: true
     dependencies:
         - android-nightlies-tier2
 
@@ -139,6 +142,7 @@ android-x86-nightlies-manual-test:
     # this is update testing, possibly done by triggering some of QA's tests against a nightly made on date
     title: "Verify that the Android x86 nightlies and associated update methods work via manual testing"
     bug: 1330008
+    done: true
     dependencies:
         - android-x86-nightlies-tier2
 
@@ -146,6 +150,7 @@ android-verify-build-equivalence:
     title: "Verify TC-dervied builds are byte-for-byte equivalent to BB builds"
     bug: 1321006
     assigned: Callek
+    done: true
     dependencies:
         - android-opt-tier2
 
@@ -153,6 +158,7 @@ android-x86-verify-build-equivalence:
     title: "Verify TC-dervied x86 builds are byte-for-byte equivalent to BB builds"
     bug: 1321006
     assigned: Callek
+    done: true
     dependencies:
         - android-opt-tier2
 

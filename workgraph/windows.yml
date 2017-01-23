@@ -86,6 +86,7 @@ windows-fix-appdata:
     title: "Fix issues with APPDATA being set incorrectly"
     bug: 1319453
     assigned: pmoore
+    done: true
     description: |
         Tests that try to start Firefox fail, because Firefox is trying to
         write appdata to the wrong location.
@@ -157,6 +158,7 @@ windows-tests-cppunit:
 windows-tests-crashtest:
     title: "green crashtest test suite on Windows 7 and 10"
     bug: 1304435
+    done: true
     dependencies:
         - windows-fix-perf-issues
         - windows-fix-desktop-resizing
@@ -203,6 +205,7 @@ windows-tests-mochitest:
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
     bug: 1304033
+    done: true
 
 windows-tests-mochitest-browser-chrome:
     title: "green mochitest-browser-chrome test suite on Windows 7 and 10"
@@ -211,6 +214,7 @@ windows-tests-mochitest-browser-chrome:
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
     bug: 1304034
+    done: true
 
 windows-tests-mochitest-devtools-chrome:
     title: "green mochitest-devtools-chrome test suite on Windows 7 and 10"
@@ -219,6 +223,7 @@ windows-tests-mochitest-devtools-chrome:
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
     bug: 1304433
+    done: true
 
 windows-tests-mochitest-jetpack:
     title: "green mochitest-jetpack test suite on Windows 7 and 10"
@@ -227,6 +232,7 @@ windows-tests-mochitest-jetpack:
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
     bug: 1311978
+    done: true
 
 windows-tests-mochitest-media:
     title: "green mochitest-media test suite on Windows 7 and 10"
@@ -242,6 +248,7 @@ windows-tests-mochitest-webgl:
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
     bug: 1304430
+    done: true
 
 windows-tests-reftest:
     title: "green reftest test suite on Windows 7 and 10"
@@ -250,6 +257,7 @@ windows-tests-reftest:
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
     bug: 1304039
+    done: true
 
 windows-tests-reftest-no-accel:
     title: "green reftest-no-accel test suite on Windows 7 and 10"
@@ -271,6 +279,7 @@ windows-tests-web-platform-tests-reftests:
         - windows-fix-perf-issues
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
+    done: true
     bug: 1304438
 
 windows-tests-xpcshell:
@@ -280,6 +289,7 @@ windows-tests-xpcshell:
         - windows-fix-desktop-resizing
         - windows-fix-subprocess-issue
     bug: 1304040
+    done: true
 
 windows-symbol-uploads:
     title: "Symbols from Windows builds uploadd to Socorro"
