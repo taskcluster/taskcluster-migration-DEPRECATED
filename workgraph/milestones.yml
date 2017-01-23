@@ -13,14 +13,14 @@ linux-android-tier1-cleanup:
         - pulse-actions-missing-talos
 
 win7-testing-tier2:
-    title: "Windows 7 non-hardware tests running in TC against TC builds at tier 2"
+    title: "Windows 7 non-hardware tests successfully running in TC against TC builds"
     milestone: true
-    due: 2017-01-20
+    due: 2017-01-27
     description: |
-        Run test for Windows 7 builds in TaskCluster EC2 instances at tier 2,
+        Run tests for Windows 7 builds in TaskCluster EC2 instances in try,
         debugging host- and taskcluster-related issues along the way.
     dependencies:
-        - windows-tests-win7-tier2
+        - windows-tests-win7-green
 
 linux-android-nightlies-tier2:
     title: "Linux32/64 and android nightlies at tier2"

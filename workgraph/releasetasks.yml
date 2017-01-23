@@ -58,7 +58,7 @@ releasetasks-update-verification-macosx:
 releasetasks-update-verification-windows:
     title: "Implement update verification tasks that run on a Windows 10 tester workerType"
     dependencies:
-        - windows-tests-win10-tier2
+        - windows-tests-win10-green
 
 releasetasks-bouncer-submitter:
     title: "Implement a scriptworker that can communicate with the bouncer API via network ACLs"
