@@ -135,6 +135,7 @@ linux32-partial-updates:
     bug: 1319824
     dependencies:
         - linux32-signing-tier2
+    done: true
 
 linux32-disable-bb-builds:
     title: "Turn off all Linux32 builds on Buildbot"

@@ -145,6 +145,7 @@ linux64-partial-updates:
     bug: 1319824
     dependencies:
         - linux64-signing-tier2
+    done: true
 
 add-jobs-e10s:
     title: "Add jobs for linux64 T-e10s(o) jobs fails intermittently"
