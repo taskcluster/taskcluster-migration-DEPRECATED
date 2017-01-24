@@ -171,12 +171,11 @@ scriptworker-tier1:
     title: "Scriptworker is tier1-ready"
     assigned: aki
     bug: 1317789
+    done: true
     dependencies:
         - scriptworker-chain-of-trust-verification
         - beetmover-chain-of-trust
         - balrog-chain-of-trust
-        - scriptworker-queue-monitoring
-        - scriptworker-nagios
         - docker-image-sha-doesnt-match
 
 make-check-ok-for-cross-compile:
