@@ -183,6 +183,9 @@ android-x86-tier1:
         - android-x86-nightlies-manual-test
         - scriptworker-tier1
 
+new-apk-dep-key:
+    title: "Create a new android apk dep signing key, and use it in signing servers"
+
 android-beta-release:
     title: "Ship android beta releases"
     assigned: jlorenzo
