@@ -10,11 +10,20 @@ linux-android-tier1-cleanup:
     dependencies:
         - scriptworker-iptables
         - scriptworker-ssh-alerts
+        - scriptworker-nagios
+        - scriptworker-queue-monitoring
+        - scriptworker-cancel-tasks
+        - scriptworker-audit-new-instance-types
+        - new-apk-dep-key
+        - cot-rebuild-decision-task
+        - nightly-checksum-signing
         - pulse-actions-missing-talos
         - artifact-list-changes
         - declarative-manifests
         - add-jobs-e10s
         - trychooser-e10s
+        - allow-many-routes
+        - separate-tier3-gpg-keys
 
 win7-testing-tier2:
     title: "Windows 7 non-hardware tests successfully running in TC against TC builds"
@@ -70,6 +79,7 @@ linux-android-tier1:
         - linux64-opt-tier1
         - android-opt-tier1
         - android-x86-tier1
+    done: true
 
 linux64-talos-on-hardware:
     title: "Linux64 Talos is running via TC worker on hardware"

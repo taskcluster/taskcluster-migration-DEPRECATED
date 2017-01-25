@@ -106,6 +106,10 @@ docker-worker-cot-gpg-keys-in-repo:
     assigned: garndt
     done: true
 
+separate-tier3-gpg-keys:
+    title: separate the gpg keys for tier3 workers from non-tier3
+    bug: 1333650
+
 generic-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every generic-worker deployment (reimage or AMI generation)"
     description: |
@@ -162,6 +166,9 @@ scriptworker-iptables:
     duration: 5
     bug: 1308980
 
+scriptworker-audit-new-instance-types:
+    title: "audit the new scriptworker instance types for rra/pentest compliance"
+
 scriptworker-ssh-alerts:
     title: "Alerts on ssh to scriptworker instances"
     bug: 1290261
@@ -171,13 +178,39 @@ scriptworker-tier1:
     title: "Scriptworker is tier1-ready"
     assigned: aki
     bug: 1317789
+    done: true
     dependencies:
         - scriptworker-chain-of-trust-verification
         - beetmover-chain-of-trust
         - balrog-chain-of-trust
-        - scriptworker-queue-monitoring
-        - scriptworker-nagios
         - docker-image-sha-doesnt-match
+
+cot-rebuild-decision-task:
+    title: verify chain of trust by rebuilding the decision task
+    assigned: aki
+    bug: 1328719
+    dependencies:
+        - cron-tasks
+        - in-tree-docker-shas
+        - in-tree-mozilla-taskcluster
+
+cron-tasks:
+    title: allow for in-tree cron tasks
+    assigned: dustin
+    bug: 1252948
+
+in-tree-docker-shas:
+    title: move decision and docker-image docker image shas in-tree
+    bug: 1326436
+
+in-tree-mozilla-taskcluster:
+    title: move mozilla-taskcluster tree info in-tree
+    bug: 1328727
+
+allow-many-routes:
+    title: get around max 4k index routes with a dummy task
+    assigned: jonasfj
+    bug: 1333255
 
 make-check-ok-for-cross-compile:
     title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
@@ -293,6 +326,9 @@ taskcluster-worker-setup-cleanup:
         (clearing temporary directories, killing stray processes, etc.).  We
         will need similar functionality with taskcluster-worker, either by
         using runner or implementing it with some other mechanism
+
+scriptworker-cancel-tasks:
+    title: "Support for cancelling tasks in scriptworker"
 
 taskcluster-worker-cancel-tasks:
     title: "Support for cancelling tasks in taskcluster-worker"
