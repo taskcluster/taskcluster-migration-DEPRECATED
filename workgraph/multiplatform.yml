@@ -184,7 +184,6 @@ scriptworker-tier1:
         - beetmover-chain-of-trust
         - balrog-chain-of-trust
         - docker-image-sha-doesnt-match
-    done: true
 
 cot-rebuild-decision-task:
     title: verify chain of trust by rebuilding the decision task
