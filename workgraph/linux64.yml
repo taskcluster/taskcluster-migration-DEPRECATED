@@ -141,7 +141,7 @@ linux64-opt-tier1:
         - linux64-debug-tier1
         - linux64-talos-via-bbb-green
         - linux64-partial-updates
-        - nightly-checksum-signing
+    done: true
 
 linux64-partial-updates:
     title: "Generate partial updates for linux64 nightly builds using the existing funsize worker"

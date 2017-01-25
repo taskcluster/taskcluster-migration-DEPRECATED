@@ -162,6 +162,7 @@ android-x86-verify-build-equivalence:
 android-opt-tier1:
     title: "Promote Android opt builds and tests to tier 1, demote in buildbot; 6-12 weeks before beta"
     bug: 1277682
+    done: true
     dependencies:
         - android-verify-build-equivalence
         - android-verify-signing-equivalence
@@ -171,11 +172,11 @@ android-opt-tier1:
         - android-opt-tier2
         - android-nightlies-manual-test
         - scriptworker-tier1
-        - nightly-checksum-signing
 
 android-x86-tier1:
     title: "Promote Android x86 builds and tests to tier 1, demote in buildbot; 6-12 weeks before beta"
     bug: 1298894
+    done: true
     dependencies:
         - android-x86-verify-build-equivalence
         - android-x86-verify-signing-equivalence
@@ -185,7 +186,9 @@ android-x86-tier1:
         - android-x86-tier2
         - android-x86-nightlies-manual-test
         - scriptworker-tier1
-        - nightly-checksum-signing
+
+new-apk-dep-key:
+    title: "Create a new android apk dep signing key, and use it in signing servers"
 
 android-beta-release:
     title: "Ship android beta releases"
