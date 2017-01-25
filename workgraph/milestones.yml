@@ -6,7 +6,7 @@ linux-android-tier1-cleanup:
     description: |
         All the bits that don't block tier 1, but should be wrapped up immediately thereafter.
     milestone: true
-    due: 2017-02-01
+    due: 2017-02-10
     dependencies:
         - scriptworker-iptables
         - scriptworker-ssh-alerts
@@ -15,6 +15,8 @@ linux-android-tier1-cleanup:
         - declarative-manifests
         - add-jobs-e10s
         - trychooser-e10s
+        - scriptworker-queue-monitoring
+        - scriptworker-nagios
 
 win7-testing-tier2:
     title: "Windows 7 non-hardware tests successfully running in TC against TC builds"

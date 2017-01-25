@@ -5,11 +5,15 @@ android-opt-tier2:
     title: "Run Android opt builds and tests at tier 2"
     bug: 1277645
     done: true
+    dependencies:
+        - legacy-kind
 
 android-x86-tier2:
     title: "Run Android x86 builds and tests at tier 2"
     bug: 1174206
     done: true
+    dependencies:
+        - legacy-kind
 
 android-multilocale-tier2:
     title: "Android multilocale builds, tier2"

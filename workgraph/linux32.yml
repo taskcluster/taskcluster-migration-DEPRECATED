@@ -10,11 +10,14 @@ linux32-docker-container:
 linux32-builds-tier2:
     title: "Green Linux32 builds in the tree"
     done: true
+    dependencies:
+        - legacy-kind
 
 linux32-tests-tier2:
     title: "Green linux32 tests in the tree"
     done: true
     dependencies:
+        - legacy-kind
         - linux32-docker-container
         - linux32-builds-tier2
 

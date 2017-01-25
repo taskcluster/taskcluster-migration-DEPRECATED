@@ -14,17 +14,21 @@
 linux64-builds-tier2:
     title: "Implement Linux64 builds at tier2"
     done: true
+    dependencies:
+        - legacy-kind
 
 linux64-debug-tier1:
     title: "Run linux64 debug builds and tests at tier1"
     done: true
     dependencies:
+        - legacy-kind
         - linux64-builds-tier2
 
 linux64-tests-tier2:
     title: "Implement Linux64 tests at tier 2"
     done: true
     dependencies:
+        - legacy-kind
         - linux64-builds-tier2
 
 linux64-signing-tier2:

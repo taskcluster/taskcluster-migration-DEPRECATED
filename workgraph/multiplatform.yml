@@ -175,9 +175,8 @@ scriptworker-tier1:
         - scriptworker-chain-of-trust-verification
         - beetmover-chain-of-trust
         - balrog-chain-of-trust
-        - scriptworker-queue-monitoring
-        - scriptworker-nagios
         - docker-image-sha-doesnt-match
+    done: true
 
 make-check-ok-for-cross-compile:
     title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
@@ -328,3 +327,13 @@ declarative-manifests:
     bug: 1331143
     description: |
         We can use a declarative manifest to generate the taskcluster graph, and the build system could use it to know what to name its artifacts.  If the names are pretty names, beetmover doesn't have to perform any name transforms at all, and can just push pretty-named artifacts to the proper s3 bucket.
+
+legacy-kind:
+    title: "Factor existing builds out of legacy kind"
+    assigned: dustin
+    bug: 1286075
+    due: 2017-09-13
+    duration: 40
+    aescription: |
+        We already have a docker-image kind.  We now need to remove the legacy kind, replacing it with a collection of purpose-specific kinds with better characteristics, i.e. not generated from a twisty maze of yml or repetitive config files, stable task labels, and easily extended to support other OS's, etc.
+    done: true
