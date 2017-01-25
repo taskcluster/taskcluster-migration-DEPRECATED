@@ -326,6 +326,8 @@ taskcluster-worker-setup-cleanup:
         (clearing temporary directories, killing stray processes, etc.).  We
         will need similar functionality with taskcluster-worker, either by
         using runner or implementing it with some other mechanism
+    assigned: dustin
+    bug: 1333888
 
 scriptworker-cancel-tasks:
     title: "Support for cancelling tasks in scriptworker"
