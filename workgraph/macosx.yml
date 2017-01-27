@@ -228,3 +228,7 @@ macosx-release:
     title: "Ship macosx release"
     dependencies:
         - macosx-beta-release
+
+macosx-all-tier1:
+    title: "Mac OS X Buildbot jobs fully migrated over to TaskCluster"
+    bug: 1334500
