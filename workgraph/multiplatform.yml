@@ -319,15 +319,11 @@ fuzzing:
 
 taskcluster-worker-setup-cleanup:
     title: "Add support to Taskcluster-Worker for pre-task setup and post-task cleanup work"
-    duration: 20
-    description: |
-        For Buildbot jobs, runner takes care of some pre-task setup (warming
-        caches, for example, to reduce end-to-end time) and post-task cleanup
-        (clearing temporary directories, killing stray processes, etc.).  We
-        will need similar functionality with taskcluster-worker, either by
-        using runner or implementing it with some other mechanism
+    duration: 5
+    description: It turns out we didn't need this.
     assigned: dustin
     bug: 1333888
+    done: true
 
 scriptworker-cancel-tasks:
     title: "Support for cancelling tasks in scriptworker"
