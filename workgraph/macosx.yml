@@ -203,6 +203,13 @@ macosx-test-talos-on-hardware-green:
     dependencies:
         - macosx-test-talos-on-hardware-10pct
 
+macosx-taskcluster-worker-integration-testing:
+    title: "Have integration test coverage for taskcluster-worker CI for Mac OS X running in production"
+    done: false
+    bug: 1334484
+    duration: 10
+    assigned: pmoore
+
 macosx-test-talos-on-hardware-100pct:
     # This involves a gradual reimage while landing patches to switch
     # suite by suite to the taskcluster workers.  This will also require
@@ -212,6 +219,7 @@ macosx-test-talos-on-hardware-100pct:
     duration: 15
     dependencies:
         - macosx-test-talos-on-hardware-green
+        - macosx-taskcluster-worker-integration-testing
 
 stop-bb-macosx-test-masters:
     title: "Turn off the MacOS X Test Buildmasters (except one for ESR)"
