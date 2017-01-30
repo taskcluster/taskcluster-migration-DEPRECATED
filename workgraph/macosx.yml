@@ -220,6 +220,7 @@ macosx-test-talos-on-hardware-100pct:
     dependencies:
         - macosx-test-talos-on-hardware-green
         - macosx-taskcluster-worker-integration-testing
+        - macosx-nightlies-tier1
 
 stop-bb-macosx-test-masters:
     title: "Turn off the MacOS X Test Buildmasters (except one for ESR)"
