@@ -119,6 +119,7 @@ generic-worker-cot-gpg-keys-in-repo:
 taskcluster-worker-cot-gpg-keys-in-repo:
     title: "Set up a process for generating and adding keys to the cot gpg repo for every taskcluster-worker deployment (reimage or AMI generation)"
     duration: 3
+    done: true # Greg / Aki confirmed this is not required
 
 scriptworker-chain-of-trust-verification:
     title: "Enable chain of trust verification, and block on it before scriptworker jobs"
