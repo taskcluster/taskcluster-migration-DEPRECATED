@@ -193,7 +193,6 @@ macosx-test-talos-on-hardware-10pct:
         - taskcluster-worker-cancel-tasks
         - taskcluster-worker-setup-cleanup
         - macosx-worker-deployment-hardware
-        - worker-priority-support
         - macosx-builds-tier2
 
 macosx-test-talos-on-hardware-green:
@@ -221,6 +220,7 @@ macosx-test-talos-on-hardware-100pct:
     dependencies:
         - macosx-test-talos-on-hardware-green
         - macosx-taskcluster-worker-integration-testing
+        - worker-priority-support
         - macosx-nightlies-tier1
 
 stop-bb-macosx-test-masters:
