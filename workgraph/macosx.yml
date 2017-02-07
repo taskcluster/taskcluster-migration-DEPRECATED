@@ -26,7 +26,6 @@ macosx-debug-tests-via-bbb:
         will be converted to run directly via taskcluster-worker later, after
         going to tier 1.
     assigned: wcosta
-    bug: 1330310
     dependencies:
         - in-tree-bbb-support
 
@@ -35,6 +34,7 @@ macosx-tests-via-bbb:
     description: |
         Once we have debug tests running via BBB, we should do the same for opt tests.
         Note: this will likely entail being more aggresive with switchover decisions for tier 1.
+    bug: 1330310
     dependencies:
         - macosx-debug-tests-via-bbb
 
