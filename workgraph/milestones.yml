@@ -113,6 +113,7 @@ macosx-all-tier1:
           * disable sendchanges from Buildbot builds and demote to Tier 2
           * promote TC opt and nightly builds to tier 1
     milestone: true
+    bug: 1337831
     due: 2017-06-16
     duration: 5
     dependencies:

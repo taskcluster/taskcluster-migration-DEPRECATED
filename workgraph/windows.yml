@@ -81,6 +81,7 @@ windows-fix-desktop-leaks:
         eventually failing after running a few tasks.  This does not block
         greening tests, as the workers will just report "blue" jobs and fail,
         but needs to be fixed for tier 2.
+    done: true
 
 windows-fix-appdata:
     title: "Fix issues with APPDATA being set incorrectly"
@@ -296,6 +297,7 @@ windows-tests-xpcshell:
         - windows-fix-subprocess-issue
         - windows-temporary-unsigned-builds
     bug: 1304040
+    assigned: grenade
 
 windows-temporary-unsigned-builds:
     title: "Disable updater until we have signed builds"
