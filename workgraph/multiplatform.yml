@@ -199,6 +199,7 @@ cron-tasks:
     title: allow for in-tree cron tasks
     assigned: dustin
     bug: 1252948
+    done: true
 
 in-tree-docker-shas:
     title: move decision and docker-image docker image shas in-tree
