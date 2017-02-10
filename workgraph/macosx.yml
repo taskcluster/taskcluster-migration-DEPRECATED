@@ -27,6 +27,7 @@ macosx-debug-tests-via-bbb:
         reasons; potentially disabling those builds soon after).  The tests
         will be converted to run directly via taskcluster-worker later, after
         going to tier 1.
+    bug: 1330310
     assigned: wcosta
     dependencies:
         - in-tree-bbb-support
@@ -37,6 +38,7 @@ macosx-tests-via-bbb:
         Once we have debug tests running via BBB, we should do the same for opt tests.
         Note: this will likely entail being more aggresive with switchover decisions for tier 1.
     bug: 1330310
+    assigned: wcosta
     dependencies:
         - macosx-debug-tests-via-bbb
 
@@ -79,6 +81,7 @@ volume-icon-for-cross-compile:
     assigned: Callek
     bug: 1197325
     duration: 5
+    done: true
     description: |
         Right now we call `SetFile -a C <path>` to set an HFS+ attribute on the root of the DMG to
         tell it to use a custom icon. On Linux we don't have that command, and we also don't have
@@ -201,6 +204,8 @@ macosx-worker-deployment-hardware:
 macosx-test-talos-on-hardware-10pct:
     title: "Run MacOS X talos on TC on 10% of hardware"
     duration: 5
+    bug: 1298431
+    assigned: rwood
     dependencies:
         - taskcluster-worker-cancel-tasks
         - taskcluster-worker-setup-cleanup
