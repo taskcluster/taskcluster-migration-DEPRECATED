@@ -349,6 +349,17 @@ windows-nightlies-tier2:
         - windows-balrog-tier2
         - nightly-beetmover-tier2
 
+windows-nightlies-tier1:
+    title: "Land config for windows nightly builds at tier1"
+    bug: 1267427  # win64
+    # note: also 1267428 for win32..
+    dependencies:
+        - windows-nightlies-tier2
+        - windows-nightlies-manual-test
+        - windows-verify-build-equivalence
+        - windows-verify-signing-equivalence
+        - scriptworker-tier1
+
 windows-hardware-via-bbb-green:
     title: "Green up Windows hardware tests on TC builds via BBB in try"
     description: |
@@ -398,19 +409,16 @@ windows-opt-tier1:
         from TC via BBB.
     bug: 1293783
     dependencies:
-        - windows-verify-build-equivalence
-        - windows-verify-signing-equivalence
-        - scriptworker-tier1
         - generic-worker-cot-gpg-keys-in-repo
         - generic-worker-terminate-on-ami-update
         - pulse-actions-missing-talos
         - pulse-actions-backfill
+        - windows-nightlies-tier1
         - windows-debug-tier1
         - windows-talos-via-bbb-green
         - windows-hardware-via-bbb-green
         - windows-tests-win7-green
         - windows-tests-win10-green
-        - windows-nightlies-manual-test
 
 windows-disable-bb-builds:
     title: "Turn off the Windows builds on Buildbot"
@@ -445,8 +453,7 @@ stop-bb-windows-test-masters:
 windows-beta-release:
     title: "Ship windows beta release"
     dependencies:
-        - windows-nightlies-manual-test
-        - windows-opt-tier1
+        - windows-all-tier1
 
 windows-release:
     title: "Ship windows release"

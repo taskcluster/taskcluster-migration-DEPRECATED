@@ -10,8 +10,6 @@ linux-android-tier1-cleanup:
     dependencies:
         - scriptworker-iptables
         - scriptworker-ssh-alerts
-        - scriptworker-nagios
-        - scriptworker-queue-monitoring
         - scriptworker-cancel-tasks
         - scriptworker-audit-new-instance-types
         - new-apk-dep-key
@@ -123,6 +121,20 @@ macosx-all-tier1:
         - docker-worker-cot-gpg-keys-in-repo
         - taskcluster-worker-cot-gpg-keys-in-repo
         - macosx-native-on-hardware
+
+windows-all-tier1:
+    title: "Windows at tier1"
+    milestone: true
+    due: 2017-07-31
+    description: |
+        This is a "flag-day" moment where we promote opt on TC from tier 2 to
+        tier 1.  Because of the constrained hardware pools for hardware tests
+        and talos, we have to simultaneously stop running those jobs via
+        buildbot (and demote the rest to tier 2), and instead run those jobs
+        from TC via BBB.
+    bug: 1293783
+    dependencies:
+        - windows-opt-tier1
 
 no-buildbot-schedulers:
     title: "Buildbot schedulers are disabled (except ESR)"
