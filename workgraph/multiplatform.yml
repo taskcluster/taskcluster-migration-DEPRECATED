@@ -52,6 +52,12 @@ in-tree-bbb-support:
     assigned: wcosta
     done: true
 
+bbb-queue-delays:
+    title: "Investigate why BBB queues grow sometimes"
+    bug: 1340619
+    description: |
+        From time to time (multiple times a day) we have issues when the BBB reporting to TC is delayed by overgrowing queues (4-7K messages). This doesn't affect the actual scheduling and execution, but just takes time to tell TC that a job is started or finished.
+
 beetmover-worker-impl:
     # "beetworker"?
     title: "Implement and deploy a Beetmoover Worker based on scriptworker"
@@ -174,6 +180,7 @@ scriptworker-ssh-alerts:
     title: "Alerts on ssh to scriptworker instances"
     bug: 1290261
     assigned: phrozyn
+    done: true
 
 scriptworker-tier1:
     title: "Scriptworker is tier1-ready"
@@ -282,6 +289,16 @@ worker-priority-support:
     dependencies:
         - bbb-priority-support
         - script-worker-priority-support
+        - worker-sentry-statsum-support
+
+worker-sentry-statsum-support:
+    title: "statsum, sentry integration for tc-worker (tc-lib-loader equivalent)"
+    bug: 1341329
+    assigned: jopsen
+    duration: 10
+    description: |
+        Put logs, sentry and statsum into one object.
+    dependencies:
         - docker-generic-taskcluster-worker-priority-support
 
 scriptworker-hg-committer:
@@ -295,6 +312,7 @@ periodic-tasks:
         frequency should be controllable in-tree.  This is the `.cron.yml`
         proposal.  This is useful for tasks outside of the migration, too,
         such as valgrind.
+    done: true
 
 periodic-update-service:
     title: "Implement the periodic update service"
@@ -345,6 +363,7 @@ split-python-unit-tests:
         Run those Python unit tests that do not require an objdir in a separate
         task, so that it can execute in parallel with the other test tasks, and
         so that it can succeed for cross-compiled builds.
+    done: true
 
 nightly-checksum-signing:
     title: "Create a nightly checksum signing task"
