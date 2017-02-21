@@ -20,7 +20,7 @@ macosx-debug-tier2:
     done: true
 
 macosx-debug-tests-via-bbb:
-    title: "Run Mac debug tests via the buildbot bridge (bbb)"
+    title: "Run Mac debug tests via the buildbot bridge (BBB)"
     description: |
         Run tests via BBB on debug builds produced in Taskcluster, immediately
         disabling tests on the builds produced in Buildbot (for capacity
@@ -33,14 +33,25 @@ macosx-debug-tests-via-bbb:
         - in-tree-bbb-support
 
 macosx-tests-via-bbb:
-    title: "Run Mac opt tests via the buildbot bridge (bbb)"
+    title: "Run Mac opt tests via the buildbot bridge (BBB)"
     description: |
         Once we have debug tests running via BBB, we should do the same for opt tests.
         Note: this will likely entail being more aggresive with switchover decisions for tier 1.
-    bug: 1330310
+    bug: 1340606
     assigned: wcosta
     dependencies:
         - macosx-debug-tests-via-bbb
+        - bbb-queue-delays
+        - macosx-seta-support-tc
+
+macosx-seta-support-tc:
+    title: "Implement SETA support for Mac tests running in TC"
+    bug: 1339133
+    duration: 8
+    description: |
+        We learned that SETA is very valuable for managing osx resources and also when we run 
+        tasks via buildbotbridge (BBB) buildbot doesn't apply SETA rules. We need to ensure 
+        that Taskcluster applies SETA rules for OSX tasks prior to sending them over BBB.
 
 macosx-debug-tier1:
     title: "Promote Mac debug builds to tier 1, and turn off the corresponding builds in buildbot."
@@ -53,7 +64,8 @@ macosx-builds-tier2:
     title: "Support macosx builds, tier2"
     dependencies:
         - macosx-signing-tier2
-        - macosx-debug-tier2
+        - macosx-universal-builds
+        - volume-icon-for-cross-compile
 
 macosx-universal-builds:
     title: "Support cross-compiler generation of universal builds.  Or drop need for universal builds"
@@ -92,17 +104,20 @@ macosx-l10n-tier2:
     bug: 1171741
     duration: 2
     dependencies:
-        - macosx-builds-tier2
         - macosx-l10n-cross-compile
 
 macosx-l10n-cross-compile:
     title: Generate l10n repacks for Mac on Linux
     bug: 1185666
-    duration: 15
+    assigned: Callek
+    duration: 5
+    dependencies:
+        - macosx-builds-tier2
 
 macosx-mach-repackage:
     title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
     duration: 10
+    assigned: kmoir
     bug: 1318505
 
 macosx-signing-tier2:
@@ -118,6 +133,13 @@ macosx-balrog-tier2:
         - macosx-builds-tier2
         - balrog-worker-impl
 
+macosx-beetmover-tier2:
+    title: "Implement beetmover tasks for nightly Mac builds on a project branch"
+    duration: 2
+    dependencies:
+        - macosx-builds-tier2
+        - beetmover-worker-impl
+
 macosx-verify-signing-equivalence:
     title: "Verify that the signature formats match those from BB builds"
     duration: 1
@@ -131,15 +153,21 @@ macosx-nightlies-tier2:
     duration: 0
     dependencies:
         - macosx-builds-tier2
-        - macosx-universal-builds
         - macosx-l10n-tier2
         - macosx-balrog-tier2
-        - nightly-beetmover-tier2
-        - volume-icon-for-cross-compile
+        - macosx-beetmover-tier2
 
-macosx-test-talos-via-bbb-green:
-    title: "Green up MacOS X test and talos on TC builds via BBB in try"
+macosx-test-via-bbb-green:
+    title: "Green up MacOS X tests on TC builds via BBB in try"
     bug: 1184122
+    duration: 10
+    dependencies:
+        - in-tree-bbb-support
+        - macosx-debug-tests-via-bbb
+
+macosx-talos-via-bbb-green:
+    title: "Green up MacOS X talos on TC builds via BBB in try"
+    bug: 1338651
     duration: 10
     dependencies:
         - in-tree-bbb-support
@@ -169,7 +197,8 @@ macosx-nightlies-tier1:
         - macosx-verify-signing-equivalence
         - macosx-nightlies-manual-test
         - macosx-nightlies-tier2
-        - macosx-test-talos-via-bbb-green
+        - macosx-test-via-bbb-green
+        - macosx-talos-via-bbb-green
         - macosx-startup-cache
         - scriptworker-tier1
         - nightly-checksum-signing
@@ -202,15 +231,13 @@ macosx-worker-deployment-hardware:
         - macosx-taskcluster-worker
 
 macosx-test-talos-on-hardware-10pct:
-    title: "Run MacOS X talos on TC on 10% of hardware"
+    title: "Run MacOS X tests and talos on TC on 10% of hardware"
     duration: 5
-    bug: 1298431
-    assigned: rwood
+    done: true
     dependencies:
         - taskcluster-worker-cancel-tasks
         - taskcluster-worker-setup-cleanup
         - macosx-worker-deployment-hardware
-        - macosx-builds-tier2
 
 macosx-test-talos-on-hardware-green:
     title: "Green up MacOS X tests and talos on TC"
