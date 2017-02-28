@@ -55,6 +55,7 @@ in-tree-bbb-support:
 bbb-queue-delays:
     title: "Investigate why BBB queues grow sometimes"
     bug: 1340619
+    assigned: catlee
     description: |
         From time to time (multiple times a day) we have issues when the BBB reporting to TC is delayed by overgrowing queues (4-7K messages). This doesn't affect the actual scheduling and execution, but just takes time to tell TC that a job is started or finished.
 
@@ -224,8 +225,8 @@ allow-many-routes:
 make-check-ok-for-cross-compile:
     title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
     assigned: mshal
-    bug: 992323
-    duration: 15
+    bug: 1340698
+    duration: 20
     description: |
         There are a few tests that check properties of binaries, which should
         run ok in cross-compilation.  Everything else must either be moved to a
@@ -243,6 +244,7 @@ pulse-actions-missing-talos:
     title: "Add support for backfilling all talos jobs on a push"
     bug: 1289824
     assigned: bstack
+    done: true
 
 docker-generic-taskcluster-worker-priority-support:
     title: "Use queue.claimWork in {docker,generic,taskcluster}-worker, load test"
@@ -369,6 +371,7 @@ nightly-checksum-signing:
     title: "Create a nightly checksum signing task"
     assigned: mtabara
     bug: 1305139
+    done: true
     description: |
         In TC world we don't pass our signing token to the build job. So
         similar to how we sign the apk with signingscript, we should create

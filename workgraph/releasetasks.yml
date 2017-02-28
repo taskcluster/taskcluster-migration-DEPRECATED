@@ -4,6 +4,55 @@
 # Note that modifying releasetasks to be defined in-tree is *not* part of the
 # migration.
 
+nightly-graph-with-release-scopes:
+    title: "Allow nightly taskgraph to be run with release scopes"
+    bug: 1340609
+    assigned: aki
+    description: |
+        This allow CI builds to be re-signed, and hence promotable via release promotion.
+    done: true
+
+release-runner-decision-task:
+    title: "Create a release runner decision task for Android"
+    bug: 1338161
+    assigned: kmoir
+    description: |
+        Add a release runner decision task to releasetasks like we have for Firefox, but for Android. This is Graph 1.
+    dependencies:
+        - nightly-graph-with-release-scopes
+
+bbb-task-submitter:
+    title: "Create a second taskgraph for post-build actions that can be triggered via the buildbot bridge (BBB)"
+    description: |
+        Create a second taskgraph for post-build actions that can be triggered via the buildbot bridge (BBB). This is Graph 2.
+    dependencies:
+        - trigger-release-graph-via-shipit
+        - balrogscript-release
+        - beetmoverscript-release
+
+balrogscript-release:
+    title: "Balrogscript support for releases"
+    bug: 1341352
+    assigned: mtabara
+    description: |
+        As part of the TC migration train ride towards beta/release, we need to extend balrogscript functionality to include the proper bits (at least) for scopes and channels
+
+beetmoverscript-release:
+    title: "Beetmoverscript support for releases"
+    bug: 1338186
+    assigned: mtabara
+    description: |
+        As part of the TC migration train ride towards beta/release, we need to extend beetmoverscript functionality to include the proper bits (at least) for scopes, mapping manifests, and S3 creds.
+
+trigger-release-graph-via-shipit:
+    title: "Trigger Graph 1 from releasetasks via shipit"
+    bug: 1340548
+    assigned: jlorenzo
+    description: |
+        Up until now, ship-it triggers some buildbot jobs when we want to release Fennec beta/release. We should redirect the builds to release-runner.
+    dependencies:
+        - release-runner-decision-task
+
 releasetasks-l10n-repacks:
     title: "Implement l10n repack tasks using TC only in releasetasks"
 

@@ -212,6 +212,7 @@ macosx-disable-bb-builds:
 macosx-taskcluster-worker:
     title: "Build a tc-worker engine for OS X"
     assigned: wcosta
+    bug: 1244150
     done: true
     description: |
         Implement a taskcluster-worker engine that runs on OS X.
