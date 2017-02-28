@@ -196,6 +196,7 @@ android-beta-release:
     dependencies:
         - android-nightlies-manual-test
         - android-opt-tier1
+        - bbb-task-submitter
 
 android-x86-beta-release:
     title: "Ship android x86 beta releases"
@@ -203,6 +204,7 @@ android-x86-beta-release:
     dependencies:
         - android-x86-nightlies-manual-test
         - android-x86-tier1
+        - bbb-task-submitter
 
 android-release:
     title: "Ship android release"
