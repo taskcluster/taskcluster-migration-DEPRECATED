@@ -190,21 +190,29 @@ android-x86-tier1:
 new-apk-dep-key:
     title: "Create a new android apk dep signing key, and use it in signing servers"
 
-android-beta-release:
-    title: "Ship android beta releases"
-    assigned: jlorenzo
+android-staging-beta:
+    title: "Do a staging release of an Android beta on a separate channel (jamun)"
+    bug: 1343393
+    assigned: aki
     dependencies:
         - android-nightlies-manual-test
         - android-opt-tier1
+        - android-x86-tier1
         - bbb-task-submitter
+
+android-beta-release:
+    title: "Ship android beta releases"
+    assigned: jlorenzo
+    milestone: true
+    due: 2017-03-07
+    dependencies:
+        - android-staging-beta
 
 android-x86-beta-release:
     title: "Ship android x86 beta releases"
     assigned: jlorenzo
     dependencies:
-        - android-x86-nightlies-manual-test
-        - android-x86-tier1
-        - bbb-task-submitter
+        - android-staging-beta
 
 android-release:
     title: "Ship android release"

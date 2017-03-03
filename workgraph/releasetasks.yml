@@ -20,9 +20,12 @@ release-runner-decision-task:
         Add a release runner decision task to releasetasks like we have for Firefox, but for Android. This is Graph 1.
     dependencies:
         - nightly-graph-with-release-scopes
+    done: true
 
 bbb-task-submitter:
     title: "Create a second taskgraph for post-build actions that can be triggered via the buildbot bridge (BBB)"
+    assigned: kmoir
+    bug: 1343649
     description: |
         Create a second taskgraph for post-build actions that can be triggered via the buildbot bridge (BBB). This is Graph 2.
     dependencies:
@@ -43,6 +46,7 @@ beetmoverscript-release:
     assigned: mtabara
     description: |
         As part of the TC migration train ride towards beta/release, we need to extend beetmoverscript functionality to include the proper bits (at least) for scopes, mapping manifests, and S3 creds.
+    done: true
 
 trigger-release-graph-via-shipit:
     title: "Trigger Graph 1 from releasetasks via shipit"
