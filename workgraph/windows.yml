@@ -317,7 +317,7 @@ windows-single-locale-tier2:
 
 windows-mach-repackage:
     title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
-    assigned: kmoir
+    assigned: grenade
     bug: 1287881
 
 windows-signing-tier2:

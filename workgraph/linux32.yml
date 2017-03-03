@@ -146,12 +146,22 @@ linux32-disable-bb-builds:
         - linux32-debug-tier1
         - linux32-opt-tier1
 
-linux32-beta-release:
-    title: "Ship a real linux32 beta release"
-    assigned: jlorenzo
+linux32-staging-beta:
+    title: "Do a staging release of a Linux32 beta on a separate channel (jamun)"
+    bug: 1343700
+    assigned: rail
     dependencies:
         - linux32-nightlies-manual-test
         - linux32-opt-tier1
+        - bbb-task-submitter
+
+linux32-beta-release:
+    title: "Ship linux32 beta release"
+    assigned: rail
+    milestone: true
+    due: 2017-03-07
+    dependencies:
+        - linux32-staging-beta
 
 linux32-release:
     title: "Ship linux32 release"

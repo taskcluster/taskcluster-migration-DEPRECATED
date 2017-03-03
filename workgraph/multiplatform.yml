@@ -211,7 +211,7 @@ cron-tasks:
 
 in-tree-docker-shas:
     title: move decision and docker-image docker image shas in-tree
-    bug: 1326436
+    bug: 1328719
 
 in-tree-mozilla-taskcluster:
     title: move mozilla-taskcluster tree info in-tree

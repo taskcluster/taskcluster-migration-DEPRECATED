@@ -196,12 +196,22 @@ linux64-talos-on-hardware-100pct:
     dependencies:
         - linux64-talos-on-hardware-green
 
-linux64-beta-release:
-    title: "Ship linux64 beta release"
-    assigned: jlorenzo
+linux64-staging-beta:
+    title: "Do a staging release of a Linux64 beta on a separate channel (jamun)"
+    bug: 1343700
+    assigned: rail
     dependencies:
         - linux64-nightlies-manual-test
         - linux64-opt-tier1
+        - bbb-task-submitter
+
+linux64-beta-release:
+    title: "Ship linux64 beta release"
+    assigned: rail
+    milestone: true
+    due: 2017-03-07
+    dependencies:
+        - linux64-staging-beta
 
 linux64-release:
     title: "Ship linux64 release"
