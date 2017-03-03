@@ -117,7 +117,7 @@ macosx-l10n-cross-compile:
 macosx-mach-repackage:
     title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
     duration: 10
-    assigned: kmoir
+    assigned: Callek
     bug: 1318505
 
 macosx-signing-tier2:
@@ -167,6 +167,7 @@ macosx-test-via-bbb-green:
 
 macosx-talos-via-bbb-green:
     title: "Green up MacOS X talos on TC builds via BBB in try"
+    assigned: wcosta
     bug: 1338651
     duration: 10
     dependencies:
@@ -242,7 +243,6 @@ macosx-test-talos-on-hardware-10pct:
 
 macosx-test-talos-on-hardware-green:
     title: "Green up MacOS X tests and talos on TC"
-    assigned: rwood
     bug: 1298431
     duration: 5
     dependencies:
