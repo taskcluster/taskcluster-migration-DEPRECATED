@@ -58,6 +58,7 @@ bbb-queue-delays:
     assigned: catlee
     description: |
         From time to time (multiple times a day) we have issues when the BBB reporting to TC is delayed by overgrowing queues (4-7K messages). This doesn't affect the actual scheduling and execution, but just takes time to tell TC that a job is started or finished.
+    done: true
 
 beetmover-worker-impl:
     # "beetworker"?
@@ -221,6 +222,7 @@ allow-many-routes:
     title: get around max 4k index routes with a dummy task
     assigned: jonasfj
     bug: 1333255
+    done: true
 
 make-check-ok-for-cross-compile:
     title: "For each make-check check, either split it to a test task, confirm it runs in cross-compilation, or remove"
@@ -302,6 +304,7 @@ worker-sentry-statsum-support:
         Put logs, sentry and statsum into one object.
     dependencies:
         - docker-generic-taskcluster-worker-priority-support
+    done: true
 
 scriptworker-hg-committer:
     title: "Implement a scriptworker script that can safely land commits to hg"

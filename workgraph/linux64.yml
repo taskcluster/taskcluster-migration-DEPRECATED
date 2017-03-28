@@ -154,6 +154,7 @@ linux64-partial-updates:
 add-jobs-e10s:
     title: "Add jobs for linux64 T-e10s(o) jobs fails intermittently"
     bug: 1332349
+    done: true
 
 trychooser-e10s:
     title: "Trychooser gives me wrong syntax for triggering linux64 talos-e10s other"
@@ -204,6 +205,7 @@ linux64-staging-beta:
         - linux64-nightlies-manual-test
         - linux64-opt-tier1
         - bbb-task-submitter
+    done: true
 
 linux64-beta-release:
     title: "Ship linux64 beta release"
@@ -212,6 +214,7 @@ linux64-beta-release:
     due: 2017-03-07
     dependencies:
         - linux64-staging-beta
+    done: true
 
 linux64-release:
     title: "Ship linux64 release"
