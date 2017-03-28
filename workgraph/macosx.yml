@@ -31,6 +31,7 @@ macosx-debug-tests-via-bbb:
     assigned: wcosta
     dependencies:
         - in-tree-bbb-support
+    done: true
 
 macosx-tests-via-bbb:
     title: "Run Mac opt tests via the buildbot bridge (BBB)"
@@ -52,6 +53,7 @@ macosx-seta-support-tc:
         We learned that SETA is very valuable for managing osx resources and also when we run 
         tasks via buildbotbridge (BBB) buildbot doesn't apply SETA rules. We need to ensure 
         that Taskcluster applies SETA rules for OSX tasks prior to sending them over BBB.
+    done: true
 
 macosx-debug-tier1:
     title: "Promote Mac debug builds to tier 1, and turn off the corresponding builds in buildbot."
@@ -117,17 +119,21 @@ macosx-l10n-cross-compile:
 macosx-mach-repackage:
     title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
     duration: 10
-    assigned: Callek
+    assigned: kmoir
     bug: 1318505
 
 macosx-signing-tier2:
     title: "Implement macosx signing tasks for nightly builds on a project branch, using mach repackage"
-    duration: 5
+    assigned: Callek
+    bug: 1347579
+    duration: 10
     dependencies:
         - macosx-mach-repackage
 
 macosx-balrog-tier2:
     title: "Implement balrog submission tasks for nightly Mac builds on a project branch"
+    assigned: mtabara
+    bug: 1346255
     duration: 2
     dependencies:
         - macosx-builds-tier2
@@ -135,6 +141,8 @@ macosx-balrog-tier2:
 
 macosx-beetmover-tier2:
     title: "Implement beetmover tasks for nightly Mac builds on a project branch"
+    assigned: mtabara
+    bug: 1345524
     duration: 2
     dependencies:
         - macosx-builds-tier2

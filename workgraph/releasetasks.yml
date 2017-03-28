@@ -32,6 +32,7 @@ bbb-task-submitter:
         - trigger-release-graph-via-shipit
         - balrogscript-release
         - beetmoverscript-release
+    done: true
 
 balrogscript-release:
     title: "Balrogscript support for releases"
@@ -39,6 +40,7 @@ balrogscript-release:
     assigned: mtabara
     description: |
         As part of the TC migration train ride towards beta/release, we need to extend balrogscript functionality to include the proper bits (at least) for scopes and channels
+    done: true
 
 beetmoverscript-release:
     title: "Beetmoverscript support for releases"
@@ -56,6 +58,7 @@ trigger-release-graph-via-shipit:
         Up until now, ship-it triggers some buildbot jobs when we want to release Fennec beta/release. We should redirect the builds to release-runner.
     dependencies:
         - release-runner-decision-task
+    done: true
 
 releasetasks-l10n-repacks:
     title: "Implement l10n repack tasks using TC only in releasetasks"

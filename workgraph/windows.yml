@@ -306,6 +306,7 @@ windows-temporary-unsigned-builds:
         Setting `MOZ_UPDATER=0` might fix this.
     bug: 1323732
     assigned: grenade
+    done: true
 
 windows-symbol-uploads:
     title: "Symbols from Windows builds uploadd to Socorro"
@@ -319,9 +320,11 @@ windows-mach-repackage:
     title: "Separate packaging scripts from signing scripts, so that unsigned packages can be exploded and (re-)signed"
     assigned: grenade
     bug: 1287881
+    done: true
 
 windows-signing-tier2:
     title: "Implement Windows signing tasks for nightly builds on a project branch, using mach repackage"
+    assigned: kmoir
     bug: 1277591
     dependencies:
         - windows-builds-tier2

@@ -199,6 +199,7 @@ android-staging-beta:
         - android-opt-tier1
         - android-x86-tier1
         - bbb-task-submitter
+    done: true
 
 android-beta-release:
     title: "Ship android beta releases"
@@ -207,12 +208,14 @@ android-beta-release:
     due: 2017-03-07
     dependencies:
         - android-staging-beta
+    done: true
 
 android-x86-beta-release:
     title: "Ship android x86 beta releases"
     assigned: jlorenzo
     dependencies:
         - android-staging-beta
+    done: true
 
 android-release:
     title: "Ship android release"

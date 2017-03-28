@@ -154,6 +154,7 @@ linux32-staging-beta:
         - linux32-nightlies-manual-test
         - linux32-opt-tier1
         - bbb-task-submitter
+    done: true
 
 linux32-beta-release:
     title: "Ship linux32 beta release"
@@ -162,6 +163,7 @@ linux32-beta-release:
     due: 2017-03-07
     dependencies:
         - linux32-staging-beta
+    done: true
 
 linux32-release:
     title: "Ship linux32 release"
